@@ -1,0 +1,84 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ExtremePawn
+</name>
+</assembly>
+<members>
+<member name="P:ExtremePawn.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources._New">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.ColorPicker">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Compile">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Cut">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.ErrorImage">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Indent">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Open">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Paste">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Redo">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Replace">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Search">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Undo">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.WarningImage">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:ExtremePawn.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

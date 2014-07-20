@@ -1,0 +1,14 @@
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\bin\Debug\ExtremePawn.exe
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\bin\Debug\ExtremePawn.pdb
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\bin\Debug\ExtremePawn.xml
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\bin\Debug\FastColoredTextBox.dll
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Form1.resources
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Resources.resources
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.vbproj.GenerateResource.Cache
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.exe
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.xml
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.pdb
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\bin\Debug\AutocompleteMenu.dll
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.ColorChoice.resources
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Help.resources
+C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Setting.resources
