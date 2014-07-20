@@ -303,7 +303,7 @@ Public Class Form1
             If s.Contains("error") Then
                 NumOfErrors += 1
                 Type = My.Resources.ErrorImage
-            Else
+            ElseIf s.Contains("warn") Then
                 NumOfWarns += 1
                 Type = My.Resources.WarningImage
             End If
