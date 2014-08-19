@@ -11,6 +11,6 @@ It has many features, But from the main features are :
 	
 	3)Better function list.
 	
-	4)Better syntax highliting for the code.
+	4)Better syntax highlighting for the code.
 	
 Refer to the SAMP forum thread for more info here : [ First version not released yet].
