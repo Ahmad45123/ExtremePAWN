@@ -2,30 +2,30 @@
 
     Private Sub AutoBracket_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoBracket.CheckedChanged
         If AutoBracket.Checked = True Then
-            Form1.Code.AutoCompleteBrackets = True
+            MainForm.CurrentTB.AutoCompleteBrackets = True
         Else
-            Form1.Code.AutoCompleteBrackets = False
+            MainForm.CurrentTB.AutoCompleteBrackets = False
         End If
     End Sub
     Private Sub LineNumber_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LineNumber.CheckedChanged
         If LineNumber.Checked = True Then
-            Form1.Code.ShowLineNumbers = True
+            MainForm.CurrentTB.ShowLineNumbers = True
         Else
-            Form1.Code.ShowLineNumbers = False
+            MainForm.CurrentTB.ShowLineNumbers = False
         End If
     End Sub
     Private Sub AutoCompletion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoCompletion.CheckedChanged
         If AutoCompletion.Checked = True Then
-            Form1.HelpMenu.Enabled = True
+            MainForm.HelpMenu.Enabled = True
         Else
-            Form1.HelpMenu.Enabled = False
+            MainForm.HelpMenu.Enabled = False
         End If
     End Sub
     Private Sub AutoSaving_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaving.CheckedChanged
         If AutoSaving.Checked = True Then
-            Form1.AutoSaver.Start()
+            MainForm.AutoSaver.Start()
         Else
-            Form1.AutoSaver.Stop()
+            MainForm.AutoSaver.Stop()
         End If
     End Sub
 

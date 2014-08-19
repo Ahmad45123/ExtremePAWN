@@ -73,6 +73,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _property() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_property", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property class_libraries() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("class_libraries", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property ColorPicker() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ColorPicker", resourceCulture)
@@ -123,9 +143,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Indent() As System.Drawing.Bitmap
+        Friend ReadOnly Property IncreaseIndent() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Indent", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("IncreaseIndent", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -186,6 +206,26 @@ Namespace My.Resources
         Friend ReadOnly Property Search() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Search", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Split() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Split", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property text_indent_remove_icon() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("text_indent_remove_icon", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

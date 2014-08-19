@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\ExtremePAWN 1.0.0\</PublishUrl>
     <Install>true</Install>
@@ -26,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -79,6 +80,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutocompleteMenu">
       <HintPath>..\AutocompleteMenu.dll</HintPath>
@@ -96,6 +100,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TabStrip">
+      <HintPath>..\..\..\..\..\Desktop\FastColoredTextBox-master\Binary\TabStrip.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -110,6 +117,13 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Functions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectExplorerClass.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ColorChoice.Designer.vb">
       <DependentUpon>ColorChoice.vb</DependentUpon>
     </Compile>
@@ -121,12 +135,6 @@
     </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help.Designer.vb">
-      <DependentUpon>Help.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Help.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -158,9 +166,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Help.resx">
-      <DependentUpon>Help.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -172,7 +177,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ExtremePawn_TemporaryKey.pfx" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -227,7 +234,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons-Land-Vista-Chess-Pawn-Yellow.ico" />
-    <None Include="Resources\Indent.png" />
+    <None Include="Resources\text-indent-remove-icon.png" />
+    <None Include="Resources\box.png" />
+    <None Include="Resources\property.png" />
+    <None Include="Resources\lightning.png" />
+    <None Include="Resources\class_libraries.png" />
+    <None Include="Resources\Split.png" />
+    <None Include="Resources\IncreaseIndent.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

@@ -19,6 +19,14 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources._property">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.class_libraries">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.ColorPicker">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -39,7 +47,7 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:ExtremePawn.My.Resources.Resources.Indent">
+</member><member name="P:ExtremePawn.My.Resources.Resources.IncreaseIndent">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -64,6 +72,14 @@ ExtremePawn
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.Search">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.Split">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.text_indent_remove_icon">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

@@ -18,6 +18,6 @@
         Hex = String.Format("0x{0:X2}{1:X2}{2:X2}{3:X2}", ColorDialog1.Color.R, ColorDialog1.Color.G, ColorDialog1.Color.B, ColorDialog1.Color.A)
         all = "#define " + TextBox1.Text + " " + Hex
 
-        Form1.Code.InsertText(all + vbCrLf)
+        MainForm.CurrentTB.InsertText(all + vbCrLf)
     End Sub
 End Class
