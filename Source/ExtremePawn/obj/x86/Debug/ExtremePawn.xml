@@ -43,6 +43,10 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.edit_indent_icon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.ErrorImage">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
