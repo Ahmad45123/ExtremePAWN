@@ -13,4 +13,4 @@ It has many features, But from the main features are :
 	
 	4)Better syntax highlighting for the code.
 	
-Refer to the SAMP forum thread for more info here : [ First version not released in forums yet].
+Refer to the SAMP forum thread for more info here : http://forum.sa-mp.com/showthread.php?t=532627
