@@ -99,52 +99,7 @@ Public Class Functions
         Return result
     End Function
 
-    'Function ReBuildObjectExplorer to rebuild the object explorer contents.
-    Public Sub ReBuildObjectExplorer(ByVal text As String)
-        Try
-            text = text.Replace("#", "")
-            Dim list As List(Of ObjectExplorerClass.ExplorerItem) = New List(Of ObjectExplorerClass.ExplorerItem)()
-            Dim lastClassIndex As Integer = -1
-            Dim regex As Regex = New Regex("^\s*(public|stock|define)[^\n]+(\n?\s*{|;)?", RegexOptions.Multiline)
-            For Each r As Match In regex.Matches(text)
-                Try
-                    Dim s As String = r.Value
-                    Dim i As Integer = s.IndexOfAny(New Char() {"=", "{", ";"})
-                    If i >= 0 Then
-                        s = s.Substring(0, i)
-                    End If
-                    s = s.Trim()
-                    Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
-                    If regex.IsMatch(item.title, "\b(public|stock)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        item.type = ObjectExplorerClass.ExplorerItemType.[Class]
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    ElseIf regex.IsMatch(item.title, "\b(define)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        Dim tst As String() = item.title.Split(" ")
-                        item.title = tst(0)
-                        item.type = ObjectExplorerClass.ExplorerItemType.Property
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    End If
-                    list.Add(item)
-                Catch ex_2BF As Exception
-                    Console.WriteLine(ex_2BF)
-                End Try
-            Next
-            list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-            MyBase.BeginInvoke(Sub()
-                                   ObjectExplorerClass.explorerList = list
-                                   MainForm.ObjectExplorer.RowCount = ObjectExplorerClass.explorerList.Count
-                                   MainForm.ObjectExplorer.Invalidate()
-                               End Sub)
-        Catch ex_332 As Exception
-            Console.WriteLine(ex_332)
-        End Try
-    End Sub
-
-    'Function Compile, Self explantory, To copile the file.
+    'Function Compile, Self explantory, To compile the file.
     Public Sub Compile(ByVal CurrentTB As FastColoredTextBox)
         Dim NumOfErrors As Integer
         Dim NumOfWarns As Integer
@@ -178,7 +133,7 @@ Public Class Functions
         Dim errs() As String
         errs = output.Split(vbCrLf)
 
-        MainForm.DataGridView1.Rows.Clear()
+        MainForm.ErrorDataGridView.Rows.Clear()
 
         For Each s As String In errs
             Dim Type As Image
@@ -203,9 +158,9 @@ Public Class Functions
                 LineNumbers = s.Remove(s.IndexOf(")"))
                 LineNumbers = LineNumbers.Remove(0, LineNumbers.IndexOf("(") + 1)
                 Dim Row() As Object = {Type, ErrorTexte, File, LineNumbers}
-                MainForm.DataGridView1.Rows.Add(Row)
+                MainForm.ErrorDataGridView.Rows.Add(Row)
 
-                MainForm.DataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+                MainForm.ErrorDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
 
             Catch ex As Exception
                 'Do nothing on exption.
