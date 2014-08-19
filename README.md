@@ -11,6 +11,6 @@ It has many features, But from the main features are :
 	
 	3)Better function list.
 	
-	4)Better coloring for the code.
+	4)Better syntax highliting for the code.
 	
-You may use this app as you want, But just don't rerelease it.
+Refer to the SAMP forum thread for more info here : [ First version not released yet].
