@@ -90,16 +90,12 @@
     <Reference Include="FastColoredTextBox">
       <HintPath>..\FastColoredTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="TabStrip">
       <HintPath>..\..\..\..\..\Desktop\FastColoredTextBox-master\Binary\TabStrip.dll</HintPath>
     </Reference>
@@ -109,7 +105,6 @@
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Windows.Forms" />
@@ -120,6 +115,11 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Functions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ObjectExplorerClass.vb">
       <SubType>Form</SubType>
@@ -142,11 +142,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -158,6 +153,7 @@
     <Compile Include="Setting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ViewManager.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ColorChoice.resx">
@@ -191,57 +187,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ErrorImage.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\WarningImage.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\New.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Replace.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Compile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Copy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ColorPicker.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Icons-Land-Vista-Chess-Pawn-Yellow.ico" />
-    <None Include="Resources\edit-indent-icon.png" />
-    <None Include="Resources\text-indent-remove-icon.png" />
-    <None Include="Resources\box.png" />
-    <None Include="Resources\property.png" />
-    <None Include="Resources\lightning.png" />
-    <None Include="Resources\class_libraries.png" />
-    <None Include="Resources\Split.png" />
-    <None Include="Resources\IncreaseIndent.png" />
+    <Content Include="Resources\class_libraries.png" />
+    <Content Include="Resources\ColorPicker.png" />
+    <Content Include="Resources\Compile.png" />
+    <Content Include="Resources\Copy.png" />
+    <Content Include="Resources\Cut.png" />
+    <Content Include="Resources\edit-indent-icon.png" />
+    <Content Include="Resources\ErrorImage.jpg" />
+    <Content Include="Resources\IncreaseIndent.png" />
+    <None Include="Resources\NewFile.png" />
+    <Content Include="Resources\Open.png" />
+    <Content Include="Resources\Paste.png" />
+    <Content Include="Resources\property.png" />
+    <Content Include="Resources\Redo.png" />
+    <Content Include="Resources\Replace.png" />
+    <Content Include="Resources\Save.png" />
+    <Content Include="Resources\Search.png" />
+    <Content Include="Resources\Split.png" />
+    <Content Include="Resources\text-indent-remove-icon.png" />
+    <Content Include="Resources\Undo.png" />
+    <Content Include="Resources\WarningImage.jpg" />
+    <None Include="Resources\New.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

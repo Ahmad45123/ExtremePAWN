@@ -20,13 +20,18 @@ Imports FarsiLibrary.Win
 Imports System.Threading
 
 Public Class MainForm
+
+    'Used for populating a TreeView from another thread
+    Public Delegate Sub Add(ByVal i As Integer)
+
+    'Project System
+    Public CurrentProjectPath As String 'Will be nothing if there is no project loaded.
+
     'Styles :
     Dim BlueItalicStyle As Style = New TextStyle(Brushes.Blue, Nothing, FontStyle.Italic)
     Dim BlueStyle As Style = New TextStyle(Brushes.Blue, Nothing, FontStyle.Regular)
     Dim GreenStyle As Style = New TextStyle(Brushes.Green, Nothing, FontStyle.Italic)
     Dim BoldStyle As Style = New TextStyle(Brushes.Black, Nothing, FontStyle.Bold + FontStyle.Underline)
-    Dim TextStyle As Style = New TextStyle(Brushes.Indigo, Nothing, FontStyle.Regular)
-    Dim NumberStyle As Style = New TextStyle(Brushes.Fuchsia, Nothing, FontStyle.Regular)
 
     Public Property CurrentTB() As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
         Get
@@ -46,7 +51,6 @@ Public Class MainForm
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Settings
-        Functions.CreateTab(Nothing)
         Functions.LoadIncs()
         Functions.LoadSettings()
 
@@ -90,9 +94,11 @@ Public Class MainForm
 
     Public Sub Code_TextD(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) 'Text delayed event. Handled on any Instance of FastColoredTextbox created by CreateTab.
         If CurrentTB IsNot Nothing Then
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildObjectExplorer(CurrentTB.Text)
-                                         End Sub)
+            If ObjectExplorer.Visible = True Then 'If its not visible, Why bothering in filling it ?...
+                ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                                 ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
+                                             End Sub)
+            End If
         End If
     End Sub
 
@@ -184,7 +190,8 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Functions.CreateTab(Nothing)
+        CreateProjectToolStripMenuItem.PerformClick()
+
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -196,10 +203,8 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
-        If OpenFileDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Functions.CreateTab(OpenFileDialog.FileName, True)
-        End If
-        IdleMaker.Start()
+        OpenToolStripMenuItem.PerformClick()
+
     End Sub
 
     Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
@@ -238,7 +243,11 @@ Public Class MainForm
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
-        ToolStripButton2.PerformClick()
+        If TabStrip.SelectedItem.Title = "Main.pwn" Then
+            Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
+        Else
+            MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
+        End If
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
@@ -337,18 +346,23 @@ Public Class MainForm
 
     End Sub
 
+
     Private Sub PasteToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem1.Click
         CurrentTB.Paste()
 
     End Sub
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
-    Public Sub ReBuildObjectExplorer(ByVal text As String)
+    Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
+        Dim DeleteALL As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
+        ProjectExplorer.Invoke(DeleteALL)
+        Dim IsAdd As Boolean = True
+        Dim HelpMenuItems = New List(Of String)()
         Try
             text = text.Replace("#", "")
             Dim list As List(Of ObjectExplorerClass.ExplorerItem) = New List(Of ObjectExplorerClass.ExplorerItem)()
             Dim lastClassIndex As Integer = -1
-            Dim regex As Regex = New Regex("^\s*(public|stock|define)[^\n]+(\n?\s*{|;)?", RegexOptions.Multiline)
+            Dim regex As Regex = New Regex("^\s*(public|stock|define|include)[^\n]+(\n?\s*{|;)?", RegexOptions.Multiline)
             For Each r As Match In regex.Matches(text)
                 Try
                     Dim s As String = r.Value
@@ -360,6 +374,8 @@ Public Class MainForm
                     Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
+                        item.title = item.title.Remove(item.title.IndexOf("("))
+                        HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.[Class]
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -367,11 +383,21 @@ Public Class MainForm
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
                         Dim tst As String() = item.title.Split(" ")
                         item.title = tst(0)
+                        HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.Property
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
+                    ElseIf regex.IsMatch(item.title, "\b(include)\b") Then
+                        If item.title.Contains(Chr(34)) Then Continue For
+                        item.title = item.title.Replace("<", "")
+                        item.title = item.title.Replace(">", "")
+                        item.title = item.title.Substring(item.title.IndexOf(" "))
+                        item.title = item.title.Replace(" ", "")
+                        Dim action As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Add(item.title)
+                        ProjectExplorer.Invoke(action)
+                        IsAdd = False
                     End If
-                    list.Add(item)
+                    If IsAdd = True Then list.Add(item) Else IsAdd = True
                 Catch ex_2BF As Exception
                     Console.WriteLine(ex_2BF)
                 End Try
@@ -385,6 +411,8 @@ Public Class MainForm
         Catch ex_332 As Exception
             Console.WriteLine(ex_332)
         End Try
+
+        HelpMenu.SetAutocompleteItems(HelpMenuItems)
     End Sub
 
     Private Sub ObjectExplorer_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles ObjectExplorer.CellValueNeeded
@@ -457,7 +485,7 @@ Public Class MainForm
             Me.CurrentTB.Focus()
             Dim text As String = Me.CurrentTB.Text
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildObjectExplorer(text)
+                                             ReBuildObjectExplorerAndHelpMenu(text)
                                          End Sub)
             DocumentMap.Target = CurrentTB
         End If
@@ -501,7 +529,7 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
+    Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If OpenFileDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
             Functions.CreateTab(OpenFileDialog.FileName, True)
         End If
@@ -518,5 +546,104 @@ Public Class MainForm
         If CurrentTB IsNot Nothing Then
             CurrentTB.RemoveLinePrefix("//")
         End If
+    End Sub
+
+    Private Sub ObjectExplToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ObjectExplToolStripMenuItem.Click
+        ViewManager.TogObjectExplorer()
+
+    End Sub
+
+    Private Sub IncludeListDocumentMapToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IncludeListDocumentMapToolStripMenuItem.Click
+        ViewManager.TogListAndMap()
+
+    End Sub
+
+    Private Sub ErrorListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ErrorListToolStripMenuItem.Click
+        ViewManager.TogErrorList()
+
+    End Sub
+
+    Private Sub CreateProjectToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CreateProjectToolStripMenuItem.Click
+        Functions.CreateProject()
+
+    End Sub
+
+    Private Sub ProjectExplorer_NodeMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles ProjectExplorer.NodeMouseDoubleClick
+        If My.Computer.FileSystem.FileExists(Application.StartupPath + "/include/" + e.Node.Text + ".inc") Then
+            Functions.CreateTab(Application.StartupPath + "/include/" + e.Node.Text + ".inc")
+        ElseIf e.Node.Index = 2 And Not CurrentProjectPath = Nothing Then
+            Functions.CreateTab(CurrentProjectPath + "/Main.pwn")
+        ElseIf My.Computer.FileSystem.FileExists(CurrentProjectPath + "/Scripts/" + e.Node.Text + ".pwn") And Not CurrentProjectPath = Nothing Then
+            Functions.CreateTab(CurrentProjectPath + "/Scripts/" + e.Node.Text + ".pwn")
+        End If
+    End Sub
+
+    Private Sub LoadProjectToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoadProjectToolStripMenuItem.Click
+        Functions.LoadProject()
+    End Sub
+
+    Private Sub ToolStripMenuItem8_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
+        Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
+        For Each tab As FATabStripItem In TabStrip.Items
+            list.Add(tab)
+        Next
+        For Each tab As FATabStripItem In list
+            Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
+            Me.FaTabStrip1_TabStripItemClosing(args)
+            If args.Cancel Then
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
+        CurrentProjectPath = Nothing
+        ProjectExplorer.Nodes(0).Nodes.Clear()
+        ProjectExplorer.Nodes(1).Nodes.Clear()
+
+        'Saving before closing.
+        Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
+        For Each tab As FATabStripItem In TabStrip.Items
+            list.Add(tab)
+        Next
+        For Each tab As FATabStripItem In list
+            Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
+            Me.FaTabStrip1_TabStripItemClosing(args)
+            If args.Cancel Then
+                Exit For
+            End If
+            TabStrip.RemoveTab(tab)
+        Next
+    End Sub
+
+    Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
+        Functions.CreateTab(Nothing)
+    End Sub
+
+    Dim CurrentSelectedProjectExplorer As TreeNode
+
+    Private Sub ProjectExplorer_NodeMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles ProjectExplorer.NodeMouseClick
+        CurrentSelectedProjectExplorer = e.Node
+    End Sub
+
+    Private Sub ProjectExplorer_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles ProjectExplorer.KeyDown
+        If e.KeyCode = Keys.Delete Then
+            If Not CurrentProjectPath = Nothing Then
+                If MsgBox("Are you sure you want to delete this file ?") = MsgBoxResult.Yes Then
+                    If My.Computer.FileSystem.FileExists(CurrentProjectPath + "/Scripts/" + CurrentSelectedProjectExplorer.Text + ".pwn") Then
+                        Try
+                            ProjectExplorer.Nodes.Remove(CurrentSelectedProjectExplorer)
+                            My.Computer.FileSystem.DeleteFile(CurrentProjectPath + "/Scripts/" + CurrentSelectedProjectExplorer.Text + ".pwn")
+                        Catch ex As Exception
+
+                        End Try
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ProjectExplorerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProjectExplorerToolStripMenuItem.Click
+        TogProjectExplorer()
     End Sub
 End Class

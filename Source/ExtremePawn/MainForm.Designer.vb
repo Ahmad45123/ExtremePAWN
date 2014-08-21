@@ -23,6 +23,9 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.RightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,34 +59,25 @@ Partial Class MainForm
         Me.LineNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton11 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
         Me.MainMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
@@ -103,6 +97,11 @@ Partial Class MainForm
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FontToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObjectExplToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IncludeListDocumentMapToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ErrorListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CodeFont = New System.Windows.Forms.FontDialog()
@@ -114,6 +113,23 @@ Partial Class MainForm
         Me.ObjectExplorer = New System.Windows.Forms.DataGridView()
         Me.clImage = New System.Windows.Forms.DataGridViewImageColumn()
         Me.clName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FolderBrowser = New System.Windows.Forms.FolderBrowserDialog()
+        Me.ProjectExplorer = New System.Windows.Forms.TreeView()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton11 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
@@ -257,7 +273,7 @@ Partial Class MainForm
         Me.IncludeTreeView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.IncludeTreeView.Location = New System.Drawing.Point(3, 3)
         Me.IncludeTreeView.Name = "IncludeTreeView"
-        Me.IncludeTreeView.Size = New System.Drawing.Size(234, 406)
+        Me.IncludeTreeView.Size = New System.Drawing.Size(234, 242)
         Me.IncludeTreeView.TabIndex = 5
         '
         'HelpMenu
@@ -272,7 +288,7 @@ Partial Class MainForm
         Me.SplitEditorCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitEditorCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
-        Me.HelpMenu.SetAutocompleteMenu(Me.SplitEditorCode, Nothing)
+        Me.HelpMenu.SetAutocompleteMenu(Me.SplitEditorCode, Me.HelpMenu)
         Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 14)
         Me.SplitEditorCode.BackBrush = Nothing
         Me.SplitEditorCode.BookmarkColor = System.Drawing.Color.Red
@@ -281,18 +297,17 @@ Partial Class MainForm
         Me.SplitEditorCode.CharWidth = 8
         Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.SplitEditorCode.IsReplaceMode = False
         Me.SplitEditorCode.Language = FastColoredTextBoxNS.Language.CSharp
         Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
         Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
-        Me.SplitEditorCode.Location = New System.Drawing.Point(236, 146)
+        Me.SplitEditorCode.Location = New System.Drawing.Point(236, 144)
         Me.SplitEditorCode.Name = "SplitEditorCode"
         Me.SplitEditorCode.Paddings = New System.Windows.Forms.Padding(0)
         Me.SplitEditorCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
         Me.SplitEditorCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
         Me.SplitEditorCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SplitEditorCode.Size = New System.Drawing.Size(303, 238)
+        Me.SplitEditorCode.Size = New System.Drawing.Size(303, 240)
         Me.SplitEditorCode.TabIndex = 0
         Me.SplitEditorCode.Visible = False
         Me.SplitEditorCode.Zoom = 100
@@ -349,185 +364,50 @@ Partial Class MainForm
         'ToolStripButton2
         '
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.Image = Global.ExtremePawn.My.Resources.Resources.NewFile
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton2.Text = "New"
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton3.Text = "Open In Binding Mode"
-        '
-        'ToolStripButton4
-        '
-        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
-        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton4.Text = "Save"
+        Me.ToolStripButton2.Text = "New "
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripButton5
-        '
-        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
-        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton5.Text = "Search"
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton6.Image = CType(resources.GetObject("ToolStripButton6.Image"), System.Drawing.Image)
-        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton6.Text = "Replace"
-        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton7
-        '
-        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton7.Image = CType(resources.GetObject("ToolStripButton7.Image"), System.Drawing.Image)
-        Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton7.Name = "ToolStripButton7"
-        Me.ToolStripButton7.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton7.Text = "Compile"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripButton8
-        '
-        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton8.Image = Global.ExtremePawn.My.Resources.Resources.Undo
-        Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton8.Name = "ToolStripButton8"
-        Me.ToolStripButton8.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton8.Text = "Undo"
-        '
-        'ToolStripButton9
-        '
-        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton9.Image = Global.ExtremePawn.My.Resources.Resources.Redo
-        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton9.Name = "ToolStripButton9"
-        Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton9.Text = "Redo"
-        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton10
-        '
-        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton10.Image = Global.ExtremePawn.My.Resources.Resources.Copy
-        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton10.Name = "ToolStripButton10"
-        Me.ToolStripButton10.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton10.Text = "Copy"
-        '
-        'ToolStripButton11
-        '
-        Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton11.Image = Global.ExtremePawn.My.Resources.Resources.Cut
-        Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton11.Name = "ToolStripButton11"
-        Me.ToolStripButton11.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton11.Text = "Cut"
-        '
-        'ToolStripButton12
-        '
-        Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton12.Image = Global.ExtremePawn.My.Resources.Resources.Paste
-        Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton12.Name = "ToolStripButton12"
-        Me.ToolStripButton12.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton12.Text = "Paste"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripButton13
-        '
-        Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton13.Image = Global.ExtremePawn.My.Resources.Resources.ColorPicker
-        Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton13.Name = "ToolStripButton13"
-        Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton13.Text = "Colour Picker"
-        '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton14
-        '
-        Me.ToolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton14.Image = Global.ExtremePawn.My.Resources.Resources.IncreaseIndent
-        Me.ToolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton14.Name = "ToolStripButton14"
-        Me.ToolStripButton14.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton14.Text = "Increase Indent"
-        '
-        'ToolStripButton15
-        '
-        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton15.Image = Global.ExtremePawn.My.Resources.Resources.text_indent_remove_icon
-        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton15.Name = "ToolStripButton15"
-        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton15.Text = "Decrease Indent"
-        '
-        'ToolStripButton16
-        '
-        Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton16.Image = Global.ExtremePawn.My.Resources.Resources.edit_indent_icon
-        Me.ToolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton16.Name = "ToolStripButton16"
-        Me.ToolStripButton16.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton16.Text = "Auto Indent"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripButton17
-        '
-        Me.ToolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton17.Image = Global.ExtremePawn.My.Resources.Resources.Split
-        Me.ToolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton17.Name = "ToolStripButton17"
-        Me.ToolStripButton17.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton17.Text = "SplitScreen Mode"
-        '
         'MainMenu
         '
-        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.FormatToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.FormatToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MainMenu.Location = New System.Drawing.Point(0, 0)
         Me.MainMenu.Name = "MainMenu"
         Me.MainMenu.Size = New System.Drawing.Size(793, 24)
@@ -536,55 +416,89 @@ Partial Class MainForm
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem8, Me.SaveToolStripMenuItem, Me.ExitToolStripMenuItem, Me.ExitToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ExitToolStripMenuItem2})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateProjectToolStripMenuItem, Me.LoadProjectToolStripMenuItem, Me.ToolStripMenuItem11, Me.ToolStripSeparator8, Me.NewToolStripMenuItem, Me.SaveToolStripMenuItem, Me.ToolStripMenuItem8, Me.ToolStripSeparator9, Me.ToolStripMenuItem9, Me.OpenToolStripMenuItem, Me.ExitToolStripMenuItem, Me.ExitToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ExitToolStripMenuItem2})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
+        'CreateProjectToolStripMenuItem
+        '
+        Me.CreateProjectToolStripMenuItem.Name = "CreateProjectToolStripMenuItem"
+        Me.CreateProjectToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.CreateProjectToolStripMenuItem.Text = "Create Project"
+        '
+        'LoadProjectToolStripMenuItem
+        '
+        Me.LoadProjectToolStripMenuItem.Name = "LoadProjectToolStripMenuItem"
+        Me.LoadProjectToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.LoadProjectToolStripMenuItem.Text = "Load Project"
+        '
+        'ToolStripMenuItem11
+        '
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(159, 22)
+        Me.ToolStripMenuItem11.Text = "Close Project"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(156, 6)
+        '
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
-        Me.NewToolStripMenuItem.Text = "New"
-        '
-        'OpenToolStripMenuItem
-        '
-        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
-        Me.OpenToolStripMenuItem.Text = "Open In Normal Mode"
-        '
-        'ToolStripMenuItem8
-        '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(194, 22)
-        Me.ToolStripMenuItem8.Text = "Open In Binding Mode"
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.NewToolStripMenuItem.Text = "New Project File"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
-        Me.SaveToolStripMenuItem.Text = "Save"
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.SaveToolStripMenuItem.Text = "Save Project File"
+        '
+        'ToolStripMenuItem8
+        '
+        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
+        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(159, 22)
+        Me.ToolStripMenuItem8.Text = "Save All Files"
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(156, 6)
+        '
+        'ToolStripMenuItem9
+        '
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(159, 22)
+        Me.ToolStripMenuItem9.Text = "New File"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.OpenToolStripMenuItem.Text = "Open File"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(191, 6)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(156, 6)
         '
         'ExitToolStripMenuItem1
         '
         Me.ExitToolStripMenuItem1.Name = "ExitToolStripMenuItem1"
-        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(194, 22)
+        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(159, 22)
         Me.ExitToolStripMenuItem1.Text = "Options"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(191, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(156, 6)
         '
         'ExitToolStripMenuItem2
         '
         Me.ExitToolStripMenuItem2.Name = "ExitToolStripMenuItem2"
-        Me.ExitToolStripMenuItem2.Size = New System.Drawing.Size(194, 22)
+        Me.ExitToolStripMenuItem2.Size = New System.Drawing.Size(159, 22)
         Me.ExitToolStripMenuItem2.Text = "Exit"
         '
         'EditToolStripMenuItem
@@ -676,6 +590,37 @@ Partial Class MainForm
         Me.FontToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.FontToolStripMenuItem.Text = "Font"
         '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObjectExplToolStripMenuItem, Me.IncludeListDocumentMapToolStripMenuItem, Me.ErrorListToolStripMenuItem, Me.ProjectExplorerToolStripMenuItem})
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
+        'ObjectExplToolStripMenuItem
+        '
+        Me.ObjectExplToolStripMenuItem.Name = "ObjectExplToolStripMenuItem"
+        Me.ObjectExplToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.ObjectExplToolStripMenuItem.Text = "Object Explorer"
+        '
+        'IncludeListDocumentMapToolStripMenuItem
+        '
+        Me.IncludeListDocumentMapToolStripMenuItem.Name = "IncludeListDocumentMapToolStripMenuItem"
+        Me.IncludeListDocumentMapToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.IncludeListDocumentMapToolStripMenuItem.Text = "Include List / Document Map"
+        '
+        'ErrorListToolStripMenuItem
+        '
+        Me.ErrorListToolStripMenuItem.Name = "ErrorListToolStripMenuItem"
+        Me.ErrorListToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.ErrorListToolStripMenuItem.Text = "Error List"
+        '
+        'ProjectExplorerToolStripMenuItem
+        '
+        Me.ProjectExplorerToolStripMenuItem.Name = "ProjectExplorerToolStripMenuItem"
+        Me.ProjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.ProjectExplorerToolStripMenuItem.Text = "Project Explorer"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
@@ -697,7 +642,7 @@ Partial Class MainForm
         Me.TabStrip.Font = New System.Drawing.Font("Tahoma", 8.25!)
         Me.TabStrip.Location = New System.Drawing.Point(236, 52)
         Me.TabStrip.Name = "TabStrip"
-        Me.TabStrip.Size = New System.Drawing.Size(303, 332)
+        Me.TabStrip.Size = New System.Drawing.Size(307, 332)
         Me.TabStrip.TabIndex = 9
         Me.TabStrip.Text = "FaTabStrip1"
         '
@@ -707,10 +652,10 @@ Partial Class MainForm
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(545, 52)
+        Me.TabControl1.Location = New System.Drawing.Point(545, 216)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(248, 438)
+        Me.TabControl1.Size = New System.Drawing.Size(248, 274)
         Me.TabControl1.TabIndex = 11
         '
         'TabPage1
@@ -719,7 +664,7 @@ Partial Class MainForm
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(240, 412)
+        Me.TabPage1.Size = New System.Drawing.Size(240, 248)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Include List"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -730,7 +675,7 @@ Partial Class MainForm
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(240, 412)
+        Me.TabPage2.Size = New System.Drawing.Size(240, 248)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Document Map"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -741,7 +686,7 @@ Partial Class MainForm
         Me.DocumentMap.ForeColor = System.Drawing.Color.Maroon
         Me.DocumentMap.Location = New System.Drawing.Point(3, 3)
         Me.DocumentMap.Name = "DocumentMap"
-        Me.DocumentMap.Size = New System.Drawing.Size(234, 406)
+        Me.DocumentMap.Size = New System.Drawing.Size(234, 242)
         Me.DocumentMap.TabIndex = 0
         Me.DocumentMap.Target = Nothing
         '
@@ -789,6 +734,161 @@ Partial Class MainForm
         Me.clName.Name = "clName"
         Me.clName.ReadOnly = True
         '
+        'FolderBrowser
+        '
+        Me.FolderBrowser.Description = "Choose a folder for your project."
+        Me.FolderBrowser.ShowNewFolderButton = False
+        '
+        'ProjectExplorer
+        '
+        Me.ProjectExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProjectExplorer.Location = New System.Drawing.Point(545, 52)
+        Me.ProjectExplorer.Name = "ProjectExplorer"
+        TreeNode1.Name = "Node0"
+        TreeNode1.Text = "Includes"
+        TreeNode2.Name = "Node1"
+        TreeNode2.Text = "Scripts"
+        TreeNode3.Name = "Node2"
+        TreeNode3.Text = "Main.pwn"
+        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3})
+        Me.ProjectExplorer.Size = New System.Drawing.Size(241, 158)
+        Me.ProjectExplorer.TabIndex = 13
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton3.Text = "Open In Binding Mode"
+        '
+        'ToolStripButton4
+        '
+        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
+        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton4.Name = "ToolStripButton4"
+        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton4.Text = "Save"
+        '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton5.Text = "Search"
+        '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.Image = CType(resources.GetObject("ToolStripButton6.Image"), System.Drawing.Image)
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton6.Text = "Replace"
+        '
+        'ToolStripButton7
+        '
+        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton7.Image = CType(resources.GetObject("ToolStripButton7.Image"), System.Drawing.Image)
+        Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton7.Name = "ToolStripButton7"
+        Me.ToolStripButton7.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton7.Text = "Compile"
+        '
+        'ToolStripButton8
+        '
+        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton8.Image = Global.ExtremePawn.My.Resources.Resources.Undo
+        Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton8.Name = "ToolStripButton8"
+        Me.ToolStripButton8.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton8.Text = "Undo"
+        '
+        'ToolStripButton9
+        '
+        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.ExtremePawn.My.Resources.Resources.Redo
+        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton9.Name = "ToolStripButton9"
+        Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton9.Text = "Redo"
+        '
+        'ToolStripButton10
+        '
+        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton10.Image = Global.ExtremePawn.My.Resources.Resources.Copy
+        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton10.Name = "ToolStripButton10"
+        Me.ToolStripButton10.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton10.Text = "Copy"
+        '
+        'ToolStripButton11
+        '
+        Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton11.Image = Global.ExtremePawn.My.Resources.Resources.Cut
+        Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton11.Name = "ToolStripButton11"
+        Me.ToolStripButton11.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton11.Text = "Cut"
+        '
+        'ToolStripButton12
+        '
+        Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton12.Image = Global.ExtremePawn.My.Resources.Resources.Paste
+        Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton12.Name = "ToolStripButton12"
+        Me.ToolStripButton12.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton12.Text = "Paste"
+        '
+        'ToolStripButton13
+        '
+        Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton13.Image = Global.ExtremePawn.My.Resources.Resources.ColorPicker
+        Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton13.Name = "ToolStripButton13"
+        Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton13.Text = "Colour Picker"
+        '
+        'ToolStripButton14
+        '
+        Me.ToolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton14.Image = Global.ExtremePawn.My.Resources.Resources.IncreaseIndent
+        Me.ToolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton14.Name = "ToolStripButton14"
+        Me.ToolStripButton14.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton14.Text = "Increase Indent"
+        '
+        'ToolStripButton15
+        '
+        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton15.Image = Global.ExtremePawn.My.Resources.Resources.text_indent_remove_icon
+        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton15.Name = "ToolStripButton15"
+        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton15.Text = "Decrease Indent"
+        '
+        'ToolStripButton16
+        '
+        Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton16.Image = Global.ExtremePawn.My.Resources.Resources.edit_indent_icon
+        Me.ToolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton16.Name = "ToolStripButton16"
+        Me.ToolStripButton16.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton16.Text = "Auto Indent"
+        '
+        'ToolStripButton17
+        '
+        Me.ToolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton17.Image = Global.ExtremePawn.My.Resources.Resources.Split
+        Me.ToolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton17.Name = "ToolStripButton17"
+        Me.ToolStripButton17.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton17.Text = "SplitScreen Mode"
+        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -803,9 +903,10 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(793, 515)
+        Me.Controls.Add(Me.ProjectExplorer)
+        Me.Controls.Add(Me.SplitEditorCode)
         Me.Controls.Add(Me.ObjectExplorer)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.SplitEditorCode)
         Me.Controls.Add(Me.TabStrip)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.ErrorDataGridView)
@@ -915,7 +1016,6 @@ Partial Class MainForm
     Friend WithEvents SplitEditorCode As FastColoredTextBoxNS.FastColoredTextBox
     Friend WithEvents GotoToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
@@ -926,5 +1026,19 @@ Partial Class MainForm
     Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CommentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UnCommentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ViewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ObjectExplToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IncludeListDocumentMapToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ErrorListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ProjectExplorerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CreateProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoadProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FolderBrowser As System.Windows.Forms.FolderBrowserDialog
+    Friend WithEvents ProjectExplorer As System.Windows.Forms.TreeView
+    Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

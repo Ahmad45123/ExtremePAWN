@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="RightClickMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>466, 56</value>
+    <value>442, 54</value>
   </metadata>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>23, 15</value>
@@ -136,7 +136,7 @@
     <value>525, 15</value>
   </metadata>
   <metadata name="HelpMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>17, 54</value>
   </metadata>
   <metadata name="Type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -151,31 +151,18 @@
     <value>True</value>
   </metadata>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>126, 56</value>
+    <value>126, 54</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF2SURBVDhPjZE7T8JQGIb5AywmDQuJISEkTMaB/g8TI+6s
-        JXF19BewONjExRCkpWVydlMX4yIOalBupZS23AmKUD7P108DkYt9k2fq+7w559S3kGggEEhFIhHxl3A4
-        LAaD2+LWFiey7ztUWx1/IpEw7VYHrB+aVgtKNR1uH55AuroGQRAs1ls7ElNUFUpVfYE6FMsaFJ7f4Ob+
-        EfSmtXGEV/N50BrmH5pQ0QwovLxDtW5AmZ1ISCZt1t8lbR5eUfNgsGOvoqw14LVUg2KFTrW3H8eRIKkU
-        d8Bud9di2m32Jg24Y29ydHwC6JBKcQe6/cF6egNod3ru1U7PzpcHcooKg+HoX3r9IaQz2eUBOafA6OPT
-        E5KsLA9IbGA8/vIEdtEhlcJn5RxMJhNPSKyLDqkU/lKSYTp1PIFddEil8JmsBI7jeAK76JBKiV2kMzCb
-        zTyBXXRIpfgP4odm3TDdf70JnXWwiw6p80Q5jkuFQiFxE9jBLik+3zdWOWKeT9U87gAAAABJRU5ErkJg
-        gg==
-</value>
-  </data>
   <data name="ToolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE8SURBVDhPzdJNKERRFAfw/9KCLRZSJiysJFtliyQrMwt7
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE8SURBVDhPzdJNKERRFAfw/9KCLRZSJiysJFuxlSQrMwt7
         auyIUpSNhcLYiIXJLBTCQmFmymKSz7Kg2bHFiEbm+n7zjv997y0sro/Hxqlft8475/TueQ//Jlqp36Cb
-        CujLKBltRl5dQNQVZbzzEpLeh/D5EFUZFJETgdg0xL4x24hBFqYoQpOeCUiwBdfsLXQHjLP43J/omPN2
+        CujLKBltRF5dQNQVZbzzEpLeh/D5EFUZFJETgdg0xL4x24hBFqYoQpOeCUiwBdfsLXQHjLP43J/omPN2
         AXfACJNHZhavkdcOXPahKzr8YcBcGPK0BHlehrysQF5XIW9r7qnWIQ+bkMct1sRZk2BNEpLkVWoqMY+G
-        euykeL9bNmfZdMeGe8qRYqGd/dxAFxR6e5Cz+QV+I9iGPXQ0Yde0pG+dQaorMIOyYkSsEyZO/cmknCWG
-        9RJD6UUmve3+1Db/HfY26gHlg52wjmchfvSFYLG3VA/QUUftPtXSXwN4B6Ypn2Opi6O5AAAAAElFTkSu
+        euykeL9bNmfZdMeGe8qRYqGd/dxAFxR6e5Cz+QV+I9iGPXQ0Y9e0pG+dQaorMIOyYkSsEyZO/cmknCWG
+        9RJD6UUmve3+1Db/HfY26QHlg52wjmchfvSFYLG3VA/QUUftPtXSXwN4B4Icn1j4oTenAAAAAElFTkSu
         QmCC
 </value>
   </data>
@@ -247,16 +234,19 @@
 </value>
   </data>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>233, 56</value>
+    <value>227, 54</value>
   </metadata>
   <metadata name="CodeFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>348, 56</value>
+    <value>337, 54</value>
   </metadata>
   <metadata name="clImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="clName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="FolderBrowser.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>579, 54</value>
   </metadata>
   <data name="ToolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

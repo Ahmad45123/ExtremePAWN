@@ -1,6 +1,6 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-[Bb]in/
-[Oo]bj/
+/Source/ExtremePawn/[Bb]in/
+/Source/ExtremePawn/[Oo]bj/
 
 # mstest test results
 TestResults
@@ -14,8 +14,8 @@ TestResults
 *.sln.docstates
 
 # Build results
-[Dd]ebug/
-[Rr]elease/
+/Source/ExtremePawn/[Dd]ebug/
+/Source/ExtremePawn/[Rr]elease/
 x64/
 *_i.c
 *_p.c
@@ -89,8 +89,8 @@ csx
 AppPackages/
 
 # Others
-[Bb]in
-[Oo]bj
+/Source/ExtremePawn/[Bb]in
+/Source/ExtremePawn/[Oo]bj
 sql
 TestResults
 [Tt]est[Rr]esult*
