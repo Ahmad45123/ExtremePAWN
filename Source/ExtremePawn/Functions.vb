@@ -73,6 +73,7 @@ Public Class Functions
 
     'Functions Save to Save the file.
     Public Function Save(ByVal tab As FATabStripItem) As Boolean
+        'CurrentTB.Text.Replace("ï»¿", "") 'This characters are added for same reason somewhere in the script, So we are deleting them [THEY ARE INVISIBLE]
         Dim tb As FastColoredTextBox = TryCast(tab.Controls(0), FastColoredTextBox)
         Dim result As Boolean
         If tab.Tag Is Nothing Then
@@ -84,7 +85,8 @@ Public Class Functions
             tab.Tag = MainForm.SaveFileDialog.FileName
         End If
         Try
-            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), System.Text.Encoding.ASCII)
+            Dim Encoding As New System.Text.UTF8Encoding(False)
+            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), Encoding)
             tb.IsChanged = False
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
@@ -219,7 +221,7 @@ Public Class Functions
             tab.Tag = fileName
             If fileName <> Nothing Then
                 If IsBind = True Then
-                    tb.OpenBindingFile(fileName, System.Text.Encoding.ASCII)
+                    tb.OpenBindingFile(fileName, System.Text.Encoding.UTF8)
                     tb.IsChanged = False
                     tb.ClearUndo()
                     GC.Collect()
