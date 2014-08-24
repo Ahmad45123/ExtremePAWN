@@ -1,7 +1,9 @@
 ﻿Public Class Setting
 
+    Public KEY_COMPILE As Keys
+
     Private Sub AutoBracket_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoBracket.CheckedChanged
-        If MainForm.CurrentTB IsNot Nothing Then Exit Sub
+        If MainForm.CurrentTB Is Nothing Then Exit Sub
         If AutoBracket.Checked = True Then
             MainForm.CurrentTB.AutoCompleteBrackets = True
         Else
@@ -9,7 +11,7 @@
         End If
     End Sub
     Private Sub LineNumber_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LineNumber.CheckedChanged
-        If MainForm.CurrentTB IsNot Nothing Then Exit Sub
+        If MainForm.CurrentTB Is Nothing Then Exit Sub
         If LineNumber.Checked = True Then
             MainForm.CurrentTB.ShowLineNumbers = True
         Else
@@ -17,7 +19,7 @@
         End If
     End Sub
     Private Sub AutoCompletion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoCompletion.CheckedChanged
-        If MainForm.CurrentTB IsNot Nothing Then Exit Sub
+        If MainForm.CurrentTB Is Nothing Then Exit Sub
         If AutoCompletion.Checked = True Then
             MainForm.HelpMenu.Enabled = True
         Else
@@ -25,7 +27,7 @@
         End If
     End Sub
     Private Sub AutoSaving_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaving.CheckedChanged
-        If MainForm.CurrentTB IsNot Nothing Then Exit Sub
+        If MainForm.CurrentTB Is Nothing Then Exit Sub
         If AutoSaving.Checked = True Then
             MainForm.AutoSaver.Start()
         Else
@@ -34,7 +36,7 @@
     End Sub
 
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-Dim File As New TextBox
+        Dim File As New TextBox
         'Delete The Old If Exists
         If My.Computer.FileSystem.FileExists(Application.StartupPath + "\Settings.ini") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath + "\Settings.ini")
         'Start Adding Stuff
@@ -60,8 +62,15 @@ Dim File As New TextBox
         Else
             File.AppendText("AutoBracket=False" + vbCrLf)
         End If
+        File.AppendText("CompileKey=" + KEY_COMPILE.ToString + vbCrLf)
         'Save The File
         My.Computer.FileSystem.WriteAllText(Application.StartupPath + "\Settings.ini", File.Text, False)
         MsgBox("Successfully Saved", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        KeyDetector.ShowDialog()
+        KEY_COMPILE = KeyDetector.PressedKey
+        Label4.Text = KEY_COMPILE.ToString
     End Sub
 End Class

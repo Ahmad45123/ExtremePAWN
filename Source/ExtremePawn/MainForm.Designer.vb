@@ -24,9 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
         Me.RightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -131,6 +131,11 @@ Partial Class MainForm
         Me.FolderBrowser = New System.Windows.Forms.FolderBrowserDialog()
         Me.ProjectExplorer = New System.Windows.Forms.TreeView()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.AutomaticUpdater1 = New wyDay.Controls.AutomaticUpdater()
+        Me.CheckForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,6 +147,7 @@ Partial Class MainForm
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.ObjectExplorer, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AutomaticUpdater1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RightClickMenu
@@ -278,6 +284,8 @@ Partial Class MainForm
         '
         'HelpMenu
         '
+        Me.HelpMenu.AppearInterval = 1000
+        Me.HelpMenu.AutoPopup = False
         Me.HelpMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.HelpMenu.ImageList = Nothing
         Me.HelpMenu.Items = New String(-1) {}
@@ -297,6 +305,7 @@ Partial Class MainForm
         Me.SplitEditorCode.CharWidth = 8
         Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
+        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.SplitEditorCode.IsReplaceMode = False
         Me.SplitEditorCode.Language = FastColoredTextBoxNS.Language.CSharp
         Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
@@ -722,7 +731,7 @@ Partial Class MainForm
         'FontToolStripMenuItem
         '
         Me.FontToolStripMenuItem.Name = "FontToolStripMenuItem"
-        Me.FontToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FontToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.FontToolStripMenuItem.Text = "Font"
         '
         'ViewToolStripMenuItem
@@ -758,7 +767,7 @@ Partial Class MainForm
         '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.CheckForUpdatesToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "Help"
@@ -766,7 +775,7 @@ Partial Class MainForm
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'TabStrip
@@ -879,13 +888,13 @@ Partial Class MainForm
         Me.ProjectExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProjectExplorer.Location = New System.Drawing.Point(545, 52)
         Me.ProjectExplorer.Name = "ProjectExplorer"
-        TreeNode1.Name = "Node0"
-        TreeNode1.Text = "Includes"
-        TreeNode2.Name = "Node1"
-        TreeNode2.Text = "Scripts"
-        TreeNode3.Name = "Node2"
-        TreeNode3.Text = "Main.pwn"
-        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3})
+        TreeNode7.Name = "Node0"
+        TreeNode7.Text = "Includes"
+        TreeNode8.Name = "Node1"
+        TreeNode8.Text = "Scripts"
+        TreeNode9.Name = "Node2"
+        TreeNode9.Text = "Main.pwn"
+        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9})
         Me.ProjectExplorer.Size = New System.Drawing.Size(241, 158)
         Me.ProjectExplorer.TabIndex = 13
         '
@@ -898,11 +907,63 @@ Partial Class MainForm
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 471)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(793, 22)
+        Me.StatusStrip1.TabIndex = 14
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ShapeContainer1
+        '
+        Me.ShapeContainer1.Location = New System.Drawing.Point(1, 20)
+        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer1.Name = "ShapeContainer1"
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape1})
+        Me.ShapeContainer1.Size = New System.Drawing.Size(305, 311)
+        Me.ShapeContainer1.TabIndex = 0
+        Me.ShapeContainer1.TabStop = False
+        '
+        'LineShape1
+        '
+        Me.LineShape1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LineShape1.BorderWidth = 5
+        Me.LineShape1.Name = "LineShape1"
+        Me.LineShape1.Visible = False
+        Me.LineShape1.X1 = -2
+        Me.LineShape1.X2 = 306
+        Me.LineShape1.Y1 = 69
+        Me.LineShape1.Y2 = 69
+        '
+        'AutomaticUpdater1
+        '
+        Me.AutomaticUpdater1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AutomaticUpdater1.ContainerForm = Me
+        Me.AutomaticUpdater1.DaysBetweenChecks = 1
+        Me.AutomaticUpdater1.GUID = "4d4b0b86-3730-4353-9df0-b2bc46963267"
+        Me.AutomaticUpdater1.Location = New System.Drawing.Point(765, 30)
+        Me.AutomaticUpdater1.Name = "AutomaticUpdater1"
+        Me.AutomaticUpdater1.Size = New System.Drawing.Size(16, 16)
+        Me.AutomaticUpdater1.TabIndex = 15
+        Me.AutomaticUpdater1.ToolStripItem = Me.CheckForUpdatesToolStripMenuItem
+        Me.AutomaticUpdater1.wyUpdateCommandline = Nothing
+        '
+        'CheckForUpdatesToolStripMenuItem
+        '
+        Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates."
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(793, 515)
+        Me.Controls.Add(Me.AutomaticUpdater1)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ProjectExplorer)
         Me.Controls.Add(Me.SplitEditorCode)
         Me.Controls.Add(Me.ObjectExplorer)
@@ -932,6 +993,7 @@ Partial Class MainForm
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.ObjectExplorer, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AutomaticUpdater1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1040,5 +1102,10 @@ Partial Class MainForm
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
+    Friend WithEvents CheckForUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AutomaticUpdater1 As wyDay.Controls.AutomaticUpdater
 
 End Class

@@ -49,10 +49,14 @@ Public Class MainForm
         End Set
     End Property
 
+    Dim kc As ResizeableControl
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Settings
         Functions.LoadIncs()
         Functions.LoadSettings()
+
+        kc = New ResizeableControl(SplitEditorCode)
 
         'Load all files in the args.
         For Each Arg As String In My.Application.CommandLineArgs
@@ -65,7 +69,8 @@ Public Class MainForm
     Private Sub MainForm_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         If e.Control = True And e.KeyValue = Keys.S Then
             ToolStripButton4.PerformClick() 'Save
-
+        ElseIf e.KeyCode = Setting.KEY_COMPILE Then
+            ToolStripButton7.PerformClick() 'Compile
         End If
     End Sub
 
@@ -147,7 +152,7 @@ Public Class MainForm
     Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
         Dim Func As String = e.Item.Text
         Func = Func.Replace("      ", "")
-        Dim Index As Integer = Functions.SyntaxOfInc.FindString(Func, -1)
+        Dim Index As Integer = PublicSyntax.IndexOf(Func)
         If Not Index = -1 Then
             Dim Format As String = Functions.SyntaxOfInc.Items.Item(Index)
             Status.Text = Format
@@ -270,7 +275,7 @@ Public Class MainForm
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
-        MsgBox("Developed By Ahmad45123 AKA Johny Mac" + vbCrLf + vbCrLf + "For any suggestions or bug reports, Dont hesitate in emailing me at ahmad.gasser@gamil.com" + vbCrLf + vbCrLf + "Thanks for using this editor.")
+        MsgBox("Developed By Ahmad45123 AKA Johny Mac" + vbCrLf + vbCrLf + "For any suggestions or bug reports, Dont hesitate in emailing me at ahmad.gasser@gmail.com" + vbCrLf + vbCrLf + "Thanks for using this editor.")
     End Sub
 
     Private Sub FontToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FontToolStripMenuItem.Click
@@ -353,6 +358,7 @@ Public Class MainForm
     End Sub
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
+    Dim PublicSyntax As List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
         Dim DeleteALL As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
         ProjectExplorer.Invoke(DeleteALL)
@@ -374,6 +380,7 @@ Public Class MainForm
                     Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
+                        PublicSyntax.Add(item.title)
                         item.title = item.title.Remove(item.title.IndexOf("("))
                         HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.[Class]
@@ -464,12 +471,14 @@ Public Class MainForm
     Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
         If SplitEditorCode.Visible = False Then
             SplitEditorCode.Visible = True
+            LineShape1.Visible = True
             Dim Size As Size = TabStrip.Size
             Size.Height = Size.Height - 250
             TabStrip.Size = Size
             SplitEditorCode.SourceTextBox = CurrentTB
         Else
             SplitEditorCode.Visible = False
+            LineShape1.Visible = False
             Dim Size As Size = TabStrip.Size
             Size.Height = Size.Height + 250
             TabStrip.Size = Size

@@ -203,6 +203,10 @@ Public Class Functions
                     If Parts(1) = "True" Then Setting.LineNumber.Checked = True Else Setting.LineNumber.Checked = False
                 ElseIf Parts(0) = "AutoBracket" Then
                     If Parts(1) = "True" Then Setting.AutoBracket.Checked = True Else Setting.AutoBracket.Checked = False
+                ElseIf Parts(0) = "CompileKey" Then
+                    Dim Cnv As New KeysConverter
+                    Setting.KEY_COMPILE = Cnv.ConvertFromString(Parts(1))
+                    Setting.Label4.Text = Parts(1)
                 End If
             Loop
         End If
@@ -221,7 +225,8 @@ Public Class Functions
             tab.Tag = fileName
             If fileName <> Nothing Then
                 If IsBind = True Then
-                    tb.OpenBindingFile(fileName, System.Text.Encoding.UTF8)
+                    Dim Encoding As New System.Text.UTF8Encoding(False)
+                    tb.OpenBindingFile(fileName, Encoding)
                     tb.IsChanged = False
                     tb.ClearUndo()
                     GC.Collect()

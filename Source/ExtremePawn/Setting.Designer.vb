@@ -32,6 +32,9 @@ Partial Class Setting
         Me.AutoCompletion = New System.Windows.Forms.CheckBox()
         Me.AutoSaving = New System.Windows.Forms.CheckBox()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'AgrumentsTxt
@@ -118,18 +121,48 @@ Partial Class Setting
         'Button9
         '
         Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button9.Location = New System.Drawing.Point(216, 81)
+        Me.Button9.Location = New System.Drawing.Point(216, 127)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(74, 61)
         Me.Button9.TabIndex = 15
         Me.Button9.Text = "Save Settings"
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 170)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 13)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "Compile Key :"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(84, 170)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(19, 13)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "F5"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(117, 165)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(40, 23)
+        Me.Button1.TabIndex = 18
+        Me.Button1.Text = "Edit"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Setting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(302, 169)
+        Me.ClientSize = New System.Drawing.Size(302, 195)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.AutoBracket)
         Me.Controls.Add(Me.LineNumber)
@@ -158,4 +191,7 @@ Partial Class Setting
     Friend WithEvents AutoCompletion As System.Windows.Forms.CheckBox
     Friend WithEvents AutoSaving As System.Windows.Forms.CheckBox
     Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
