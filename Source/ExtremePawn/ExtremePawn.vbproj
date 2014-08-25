@@ -93,7 +93,9 @@
     <Reference Include="FastColoredTextBox">
       <HintPath>..\FastColoredTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -118,6 +120,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="ClsCapture.vb" />
+    <Compile Include="DialogCreator.Designer.vb">
+      <DependentUpon>DialogCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DialogCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Functions.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -158,7 +167,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ResizeableControl.vb" />
     <Compile Include="Setting.Designer.vb">
       <DependentUpon>Setting.vb</DependentUpon>
     </Compile>
@@ -170,6 +178,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ColorChoice.resx">
       <DependentUpon>ColorChoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogCreator.resx">
+      <DependentUpon>DialogCreator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyDetector.resx">
       <DependentUpon>KeyDetector.vb</DependentUpon>
@@ -207,6 +218,7 @@
     <Content Include="Resources\ColorPicker.png" />
     <Content Include="Resources\Compile.png" />
     <Content Include="Resources\Copy.png" />
+    <None Include="Resources\CreateDialog.png" />
     <Content Include="Resources\Cut.png" />
     <Content Include="Resources\edit-indent-icon.png" />
     <Content Include="Resources\ErrorImage.jpg" />
@@ -240,6 +252,11 @@
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.VisualBasic.PowerPacks.10.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Visual Basic PowerPacks 10.0</ProductName>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>

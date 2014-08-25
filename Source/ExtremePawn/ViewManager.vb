@@ -1,5 +1,5 @@
 ﻿Module ViewManager
-    Private Sub EditSize(ByVal Type As String, ByVal Value As Integer, ByVal Opr As String, ByVal Obj As Control)
+    Public Sub EditSize(ByVal Type As String, ByVal Value As Integer, ByVal Opr As String, ByVal Obj As Control)
         Dim ObjectSize As New Size
         ObjectSize = Obj.Size
         If Type = "width" Then

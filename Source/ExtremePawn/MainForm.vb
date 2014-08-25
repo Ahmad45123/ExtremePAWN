@@ -49,14 +49,10 @@ Public Class MainForm
         End Set
     End Property
 
-    Dim kc As ResizeableControl
-
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Settings
         Functions.LoadIncs()
         Functions.LoadSettings()
-
-        kc = New ResizeableControl(SplitEditorCode)
 
         'Load all files in the args.
         For Each Arg As String In My.Application.CommandLineArgs
@@ -64,6 +60,9 @@ Public Class MainForm
                 Functions.CreateTab(Arg)
             End If
         Next
+
+        'Add the resizer
+        ClsCapture.CaptureMe(TextBox1)
     End Sub
 
     Private Sub MainForm_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
@@ -380,9 +379,9 @@ Public Class MainForm
                     Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        PublicSyntax.Add(item.title)
+                        'PublicSyntax.Add(item.title)
                         item.title = item.title.Remove(item.title.IndexOf("("))
-                        HelpMenuItems.Add(item.title)
+                        'HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.[Class]
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -390,7 +389,7 @@ Public Class MainForm
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
                         Dim tst As String() = item.title.Split(" ")
                         item.title = tst(0)
-                        HelpMenuItems.Add(item.title)
+                        'HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.Property
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -471,17 +470,33 @@ Public Class MainForm
     Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
         If SplitEditorCode.Visible = False Then
             SplitEditorCode.Visible = True
-            LineShape1.Visible = True
-            Dim Size As Size = TabStrip.Size
-            Size.Height = Size.Height - 250
-            TabStrip.Size = Size
+            TextBox1.Visible = True
+            Dim Y As Integer = TabStrip.Location.Y
+            Y += TabStrip.Size.Height
+            Dim AY As Integer = TextBox1.Location.Y
+            AY += TextBox1.Size.Height - 5
+            If Y > AY Then
+                Dim Dif As Integer = Y - AY
+                EditSize("height", Dif, "-", TabStrip)
+            Else
+                Dim Dif As Integer = AY - Y
+                EditSize("height", Dif, "+", TabStrip)
+            End If
             SplitEditorCode.SourceTextBox = CurrentTB
         Else
             SplitEditorCode.Visible = False
-            LineShape1.Visible = False
-            Dim Size As Size = TabStrip.Size
-            Size.Height = Size.Height + 250
-            TabStrip.Size = Size
+            TextBox1.Visible = False
+            Dim Y As Integer = TabStrip.Location.Y
+            Y += TabStrip.Size.Height
+            Dim AY As Integer = ObjectExplorer.Location.Y
+            AY += ObjectExplorer.Size.Height
+            If Y > AY Then
+                Dim Dif As Integer = Y - AY
+                EditSize("height", Dif, "-", TabStrip)
+            Else
+                Dim Dif As Integer = AY - Y
+                EditSize("height", Dif, "+", TabStrip)
+            End If
         End If
     End Sub
 
@@ -654,5 +669,22 @@ Public Class MainForm
 
     Private Sub ProjectExplorerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProjectExplorerToolStripMenuItem.Click
         TogProjectExplorer()
+    End Sub
+
+    Private Sub ColorPickerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ColorPickerToolStripMenuItem.Click
+        ColorChoice.Show()
+
+    End Sub
+
+    Private Sub DialogMakerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DialogMakerToolStripMenuItem.Click
+        Dim Dlg As New DialogCreator
+        Dlg.Show()
+
+    End Sub
+
+    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
+        Dim Dlg As New DialogCreator
+        Dlg.Show()
+
     End Sub
 End Class

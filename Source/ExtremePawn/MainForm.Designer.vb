@@ -24,9 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
         Me.RightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,6 +52,7 @@ Partial Class MainForm
         Me.IncludeTreeView = New System.Windows.Forms.TreeView()
         Me.HelpMenu = New AutocompleteMenuNS.AutocompleteMenu()
         Me.SplitEditorCode = New FastColoredTextBoxNS.FastColoredTextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ErrorDataGridView = New System.Windows.Forms.DataGridView()
         Me.Type = New System.Windows.Forms.DataGridViewImageColumn()
         Me.ErrorText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,6 +76,7 @@ Partial Class MainForm
         Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton18 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
@@ -117,8 +119,12 @@ Partial Class MainForm
         Me.IncludeListDocumentMapToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ErrorListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColorPickerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DialogMakerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CodeFont = New System.Windows.Forms.FontDialog()
         Me.TabStrip = New FarsiLibrary.Win.FATabStrip()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -131,11 +137,11 @@ Partial Class MainForm
         Me.FolderBrowser = New System.Windows.Forms.FolderBrowserDialog()
         Me.ProjectExplorer = New System.Windows.Forms.TreeView()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.AutomaticUpdater1 = New wyDay.Controls.AutomaticUpdater()
-        Me.CheckForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.ShapeContainer2 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -305,21 +311,34 @@ Partial Class MainForm
         Me.SplitEditorCode.CharWidth = 8
         Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.SplitEditorCode.IsReplaceMode = False
         Me.SplitEditorCode.Language = FastColoredTextBoxNS.Language.CSharp
         Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
         Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
-        Me.SplitEditorCode.Location = New System.Drawing.Point(236, 144)
+        Me.SplitEditorCode.Location = New System.Drawing.Point(195, 145)
         Me.SplitEditorCode.Name = "SplitEditorCode"
         Me.SplitEditorCode.Paddings = New System.Windows.Forms.Padding(0)
         Me.SplitEditorCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
         Me.SplitEditorCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
         Me.SplitEditorCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SplitEditorCode.Size = New System.Drawing.Size(303, 240)
+        Me.SplitEditorCode.Size = New System.Drawing.Size(344, 239)
         Me.SplitEditorCode.TabIndex = 0
         Me.SplitEditorCode.Visible = False
         Me.SplitEditorCode.Zoom = 100
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.HelpMenu.SetAutocompleteMenu(Me.TextBox1, Nothing)
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.MenuText
+        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.HSplit
+        Me.TextBox1.Location = New System.Drawing.Point(194, 135)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(347, 9)
+        Me.TextBox1.TabIndex = 16
+        Me.TextBox1.Visible = False
         '
         'ErrorDataGridView
         '
@@ -329,7 +348,7 @@ Partial Class MainForm
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ErrorDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ErrorDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Type, Me.ErrorText, Me.File, Me.LineNum})
-        Me.ErrorDataGridView.Location = New System.Drawing.Point(0, 390)
+        Me.ErrorDataGridView.Location = New System.Drawing.Point(2, 390)
         Me.ErrorDataGridView.Name = "ErrorDataGridView"
         Me.ErrorDataGridView.ReadOnly = True
         Me.ErrorDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -362,7 +381,7 @@ Partial Class MainForm
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripSeparator2, Me.ToolStripButton7, Me.ToolStripSeparator3, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator4, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator5, Me.ToolStripButton13, Me.ToolStripSeparator6, Me.ToolStripButton14, Me.ToolStripButton15, Me.ToolStripButton16, Me.ToolStripSeparator7, Me.ToolStripButton17})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripSeparator2, Me.ToolStripButton7, Me.ToolStripSeparator3, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator4, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator5, Me.ToolStripButton13, Me.ToolStripButton18, Me.ToolStripSeparator6, Me.ToolStripButton14, Me.ToolStripButton15, Me.ToolStripButton16, Me.ToolStripSeparator7, Me.ToolStripButton17})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -503,6 +522,15 @@ Partial Class MainForm
         Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton13.Text = "Colour Picker"
         '
+        'ToolStripButton18
+        '
+        Me.ToolStripButton18.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton18.Image = Global.ExtremePawn.My.Resources.Resources.CreateDialog
+        Me.ToolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton18.Name = "ToolStripButton18"
+        Me.ToolStripButton18.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton18.Text = "ToolStripButton18"
+        '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
@@ -551,7 +579,7 @@ Partial Class MainForm
         '
         'MainMenu
         '
-        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.FormatToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.FormatToolStripMenuItem, Me.ViewToolStripMenuItem, Me.ToolsStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MainMenu.Location = New System.Drawing.Point(0, 0)
         Me.MainMenu.Name = "MainMenu"
         Me.MainMenu.Size = New System.Drawing.Size(793, 24)
@@ -765,6 +793,25 @@ Partial Class MainForm
         Me.ProjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.ProjectExplorerToolStripMenuItem.Text = "Project Explorer"
         '
+        'ToolsStripMenuItem
+        '
+        Me.ToolsStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorPickerToolStripMenuItem, Me.DialogMakerToolStripMenuItem})
+        Me.ToolsStripMenuItem.Name = "ToolsStripMenuItem"
+        Me.ToolsStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ToolsStripMenuItem.Text = "Tools"
+        '
+        'ColorPickerToolStripMenuItem
+        '
+        Me.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem"
+        Me.ColorPickerToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.ColorPickerToolStripMenuItem.Text = "Color Picker"
+        '
+        'DialogMakerToolStripMenuItem
+        '
+        Me.DialogMakerToolStripMenuItem.Name = "DialogMakerToolStripMenuItem"
+        Me.DialogMakerToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.DialogMakerToolStripMenuItem.Text = "Dialog Maker"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.CheckForUpdatesToolStripMenuItem})
@@ -778,15 +825,21 @@ Partial Class MainForm
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
+        'CheckForUpdatesToolStripMenuItem
+        '
+        Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates."
+        '
         'TabStrip
         '
         Me.TabStrip.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabStrip.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        Me.TabStrip.Location = New System.Drawing.Point(236, 52)
+        Me.TabStrip.Location = New System.Drawing.Point(195, 52)
         Me.TabStrip.Name = "TabStrip"
-        Me.TabStrip.Size = New System.Drawing.Size(307, 332)
+        Me.TabStrip.Size = New System.Drawing.Size(344, 332)
         Me.TabStrip.TabIndex = 9
         Me.TabStrip.Text = "FaTabStrip1"
         '
@@ -847,9 +900,8 @@ Partial Class MainForm
         Me.ObjectExplorer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ObjectExplorer.ColumnHeadersVisible = False
         Me.ObjectExplorer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clImage, Me.clName})
-        Me.ObjectExplorer.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ObjectExplorer.GridColor = System.Drawing.Color.White
-        Me.ObjectExplorer.Location = New System.Drawing.Point(0, 52)
+        Me.ObjectExplorer.Location = New System.Drawing.Point(2, 52)
         Me.ObjectExplorer.MultiSelect = False
         Me.ObjectExplorer.Name = "ObjectExplorer"
         Me.ObjectExplorer.ReadOnly = True
@@ -859,7 +911,7 @@ Partial Class MainForm
         Me.ObjectExplorer.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Green
         Me.ObjectExplorer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.ObjectExplorer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ObjectExplorer.Size = New System.Drawing.Size(230, 332)
+        Me.ObjectExplorer.Size = New System.Drawing.Size(186, 332)
         Me.ObjectExplorer.TabIndex = 12
         Me.ObjectExplorer.VirtualMode = True
         '
@@ -888,13 +940,13 @@ Partial Class MainForm
         Me.ProjectExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProjectExplorer.Location = New System.Drawing.Point(545, 52)
         Me.ProjectExplorer.Name = "ProjectExplorer"
-        TreeNode7.Name = "Node0"
-        TreeNode7.Text = "Includes"
-        TreeNode8.Name = "Node1"
-        TreeNode8.Text = "Scripts"
-        TreeNode9.Name = "Node2"
-        TreeNode9.Text = "Main.pwn"
-        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9})
+        TreeNode4.Name = "Node0"
+        TreeNode4.Text = "Includes"
+        TreeNode5.Name = "Node1"
+        TreeNode5.Text = "Scripts"
+        TreeNode6.Name = "Node2"
+        TreeNode6.Text = "Main.pwn"
+        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode4, TreeNode5, TreeNode6})
         Me.ProjectExplorer.Size = New System.Drawing.Size(241, 158)
         Me.ProjectExplorer.TabIndex = 13
         '
@@ -906,14 +958,6 @@ Partial Class MainForm
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 471)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(793, 22)
-        Me.StatusStrip1.TabIndex = 14
-        Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ShapeContainer1
         '
@@ -951,19 +995,32 @@ Partial Class MainForm
         Me.AutomaticUpdater1.ToolStripItem = Me.CheckForUpdatesToolStripMenuItem
         Me.AutomaticUpdater1.wyUpdateCommandline = Nothing
         '
-        'CheckForUpdatesToolStripMenuItem
+        'LineShape2
         '
-        Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
-        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
-        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates."
+        Me.LineShape2.BorderWidth = 3
+        Me.LineShape2.Name = "LineShape2"
+        Me.LineShape2.X1 = 0
+        Me.LineShape2.X2 = 304
+        Me.LineShape2.Y1 = 69
+        Me.LineShape2.Y2 = 69
+        '
+        'ShapeContainer2
+        '
+        Me.ShapeContainer2.Location = New System.Drawing.Point(1, 20)
+        Me.ShapeContainer2.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer2.Name = "ShapeContainer2"
+        Me.ShapeContainer2.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2})
+        Me.ShapeContainer2.Size = New System.Drawing.Size(305, 311)
+        Me.ShapeContainer2.TabIndex = 0
+        Me.ShapeContainer2.TabStop = False
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(793, 515)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.AutomaticUpdater1)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ProjectExplorer)
         Me.Controls.Add(Me.SplitEditorCode)
         Me.Controls.Add(Me.ObjectExplorer)
@@ -1102,10 +1159,16 @@ Partial Class MainForm
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents CheckForUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AutomaticUpdater1 As wyDay.Controls.AutomaticUpdater
+    Friend WithEvents ToolsStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ColorPickerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DialogMakerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripButton18 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
+    Friend WithEvents ShapeContainer2 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 
 End Class

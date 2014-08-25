@@ -39,6 +39,10 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.CreateDialog">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.Cut">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
