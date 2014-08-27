@@ -102,9 +102,9 @@ Partial Class Setting
         Me.AutoCompletion.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutoCompletion.Location = New System.Drawing.Point(12, 116)
         Me.AutoCompletion.Name = "AutoCompletion"
-        Me.AutoCompletion.Size = New System.Drawing.Size(137, 17)
+        Me.AutoCompletion.Size = New System.Drawing.Size(175, 17)
         Me.AutoCompletion.TabIndex = 12
-        Me.AutoCompletion.Text = "Enable AutoCompletion"
+        Me.AutoCompletion.Text = "Enable Synced AutoCompletion"
         Me.AutoCompletion.UseVisualStyleBackColor = True
         '
         'AutoSaving

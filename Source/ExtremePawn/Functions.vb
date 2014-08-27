@@ -9,9 +9,6 @@ Public Class Functions
     'Used In Bookmark Navigating.
     Private lastNavigatedDateTime As DateTime = DateTime.Now
 
-    'Used In Loading Incs And In AutoComplete.
-    Public SyntaxOfInc As New ListBox 'Includes all the syntax's to be shown in the status strip.
-
     'Start of Bookmark functions.
     Public Function NavigateBackward() As Boolean
         Dim max As DateTime = Nothing
@@ -259,20 +256,21 @@ Public Class Functions
     End Function
 
     'Includes List Loading
-    Dim PathsOfInc As New ListBox 'Used while loading the inc.
+    Dim PathsOfInc As New List(Of String) 'Used while loading the inc.
     Public Sub LoadIncs()
+        MainForm.IncludeTreeView.Nodes.Clear()
         Dim di As New IO.DirectoryInfo(Application.StartupPath + "\include")
         Dim diar1 As IO.FileInfo() = di.GetFiles()
         Dim dra As IO.FileInfo
 
         For Each dra In diar1
             If dra.FullName.Contains(".inc") Then
-                PathsOfInc.Items.Add(dra.ToString)
+                PathsOfInc.Add(dra.ToString)
             End If
         Next
         Dim Num As Integer = 0
 
-        For Each FILE_NAME As String In PathsOfInc.Items
+        For Each FILE_NAME As String In PathsOfInc
             MainForm.IncludeTreeView.Nodes.Add(FILE_NAME)
 
             Dim objReader As New System.IO.StreamReader(Application.StartupPath + "/include/" + FILE_NAME)
@@ -284,8 +282,9 @@ Public Class Functions
                     Dim tmp As String = Line
                     If Line.Contains("native ") And Line.Length > 8 Then
                         Line = Line.Replace("native ", "").Trim()
-                        SyntaxOfInc.Items.Add(Line)
+                        MainForm.SyntaxOfInc.Add(Line)
                         Line = Line.Remove(Line.IndexOf("("))
+                        MainForm.Includes.Add(Line)
                         If Line.Contains(":") Then
                             Line = Line.Remove(0, Line.IndexOf(":") + 1)
                         End If

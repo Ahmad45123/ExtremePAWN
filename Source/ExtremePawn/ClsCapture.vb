@@ -71,7 +71,7 @@ Public Class ClsCapture
                         EditSize("height", Dif, "+", MainForm.SplitEditorCode)
                     End If
 
-                End If
+                    End If
 
             End If
         Catch

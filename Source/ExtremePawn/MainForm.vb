@@ -131,9 +131,9 @@ Public Class MainForm
     Private Sub TreeView1_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IncludeTreeView.DoubleClick
         Dim Func As String = IncludeTreeView.SelectedNode.Text
         Func = Func.Replace("      ", "")
-        Dim Index As Integer = Functions.SyntaxOfInc.FindString(Func, -1)
+        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
         If Not Index = -1 Then
-            Dim Format As String = Functions.SyntaxOfInc.Items.Item(Index)
+            Dim Format As String = PublicSyntax.Items.Item(Index)
             CurrentTB.InsertText(Format)
         End If
     End Sub
@@ -141,9 +141,9 @@ Public Class MainForm
     Private Sub TreeView1_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles IncludeTreeView.AfterSelect
         Dim Func As String = IncludeTreeView.SelectedNode.Text
         Func = Func.Replace("      ", "")
-        Dim Index As Integer = Functions.SyntaxOfInc.FindString(Func, -1)
+        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
         If Not Index = -1 Then
-            Dim Format As String = Functions.SyntaxOfInc.Items.Item(Index)
+            Dim Format As String = PublicSyntax.Items.Item(Index)
             Status.Text = Format
         End If
     End Sub
@@ -151,9 +151,9 @@ Public Class MainForm
     Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
         Dim Func As String = e.Item.Text
         Func = Func.Replace("      ", "")
-        Dim Index As Integer = PublicSyntax.IndexOf(Func)
+        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
         If Not Index = -1 Then
-            Dim Format As String = Functions.SyntaxOfInc.Items.Item(Index)
+            Dim Format As String = PublicSyntax.Items.Item(Index)
             Status.Text = Format
         End If
     End Sub
@@ -357,10 +357,13 @@ Public Class MainForm
     End Sub
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
-    Dim PublicSyntax As List(Of String)
+    Public PublicSyntax As New ListBox
+    Public SyntaxOfInc As New List(Of String)
+    Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
-        Dim DeleteALL As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
-        ProjectExplorer.Invoke(DeleteALL)
+        Dim DeleteProjectExplorer As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
+        ProjectExplorer.Invoke(DeleteProjectExplorer)
+        PublicSyntax.Items.Clear()
         Dim IsAdd As Boolean = True
         Dim HelpMenuItems = New List(Of String)()
         Try
@@ -379,9 +382,9 @@ Public Class MainForm
                     Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        'PublicSyntax.Add(item.title)
+                        PublicSyntax.Items.Add(item.title)
                         item.title = item.title.Remove(item.title.IndexOf("("))
-                        'HelpMenuItems.Add(item.title)
+                        HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.[Class]
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -389,7 +392,7 @@ Public Class MainForm
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
                         Dim tst As String() = item.title.Split(" ")
                         item.title = tst(0)
-                        'HelpMenuItems.Add(item.title)
+                        HelpMenuItems.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.Property
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -417,7 +420,12 @@ Public Class MainForm
         Catch ex_332 As Exception
             Console.WriteLine(ex_332)
         End Try
-
+        For Each Str As String In Includes
+            HelpMenuItems.Add(Str)
+        Next
+        For Each Str As String In SyntaxOfInc
+            PublicSyntax.Items.Add(Str)
+        Next
         HelpMenu.SetAutocompleteItems(HelpMenuItems)
     End Sub
 
