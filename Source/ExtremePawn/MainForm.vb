@@ -27,12 +27,6 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String 'Will be nothing if there is no project loaded.
 
-    'Styles :
-    Dim BlueItalicStyle As Style = New TextStyle(Brushes.Blue, Nothing, FontStyle.Italic)
-    Dim BlueStyle As Style = New TextStyle(Brushes.Blue, Nothing, FontStyle.Regular)
-    Dim GreenStyle As Style = New TextStyle(Brushes.Green, Nothing, FontStyle.Italic)
-    Dim BoldStyle As Style = New TextStyle(Brushes.Black, Nothing, FontStyle.Bold + FontStyle.Underline)
-
     Public Property CurrentTB() As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
         Get
             Dim result As FastColoredTextBox
@@ -106,21 +100,22 @@ Public Class MainForm
         End If
     End Sub
 
+    Public MulinLineGreenStyle As Style = New TextStyle(Brushes.Green, Nothing, FontStyle.Italic)
     Public Sub Code_TextChanged(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) Handles SplitEditorCode.TextChanged
         Dim range As Range = TryCast(sender, FastColoredTextBox).VisibleRange
-        range.ClearStyle(GreenStyle)
-        range.SetStyle(GreenStyle, "(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline)
-        range.SetStyle(GreenStyle, "(/\*.*?\*/)|(.*\*/)", RegexOptions.Singleline And RegexOptions.RightToLeft)
+        range.ClearStyle(MulinLineGreenStyle)
+        range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline)
+        range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(.*\*/)", RegexOptions.Singleline + RegexOptions.RightToLeft)
 
-        'Start syntax highliting code : ((Currently some of them are commented as we use
-        'the C# builtin highlighter temporary untill we create our own.))
-
-        e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle})
+        e.ChangedRange.SetFoldingMarkers("{", "}") 'Bracket Folding
+        e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle, BlueStyle, TextStyle, GreenStyle, NumberStyle})
+        e.ChangedRange.SetStyle(GreenStyle, "//.*$", RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(GreenStyle, "\/\*[\s\S]*?\*\/", RegexOptions.Multiline) 'For multiline comments in one line :P
         e.ChangedRange.SetStyle(BlueItalicStyle, "#.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(BoldStyle, "\b(public|stock|enum)\s+(?<range>[\w_]+?)\b")
-        'e.ChangedRange.SetStyle(GreenStyle, "//.*$", RegexOptions.Multiline)
-        'e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue)\b", RegexOptions.Multiline)
-        'e.ChangedRange.SetStyle(TextStyle, Chr(34) + ".*" + Chr(34), RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case)\b", RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(TextStyle, Chr(34) + ".*" + Chr(34), RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(NumberStyle, "([0-9])", RegexOptions.Multiline)
     End Sub
 
     Private Sub AutoSaver_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaver.Tick
@@ -146,6 +141,7 @@ Public Class MainForm
             Dim Format As String = PublicSyntax.Items.Item(Index)
             Status.Text = Format
         End If
+
     End Sub
 
     Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
@@ -362,8 +358,11 @@ Public Class MainForm
     Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
         Dim DeleteProjectExplorer As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
-        ProjectExplorer.Invoke(DeleteProjectExplorer)
-        PublicSyntax.Items.Clear()
+        Try
+            PublicSyntax.Items.Clear()
+            ProjectExplorer.Invoke(DeleteProjectExplorer)
+        Catch ex As Exception
+        End Try
         Dim IsAdd As Boolean = True
         Dim HelpMenuItems = New List(Of String)()
         Try
@@ -694,5 +693,15 @@ Public Class MainForm
         Dim Dlg As New DialogCreator
         Dlg.Show()
 
+    End Sub
+
+    Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ErrorDataGridView.CellDoubleClick
+        If Me.CurrentTB IsNot Nothing Then
+            Dim RowNumber As Integer = ErrorDataGridView.Rows(e.RowIndex).Cells(3).Value
+            Me.CurrentTB.GoEnd()
+            Me.CurrentTB.SelectionStart = CurrentTB.Text.IndexOf(CurrentTB.GetLineText(RowNumber)) - 1
+            Me.CurrentTB.DoSelectionVisible()
+            Me.CurrentTB.Focus()
+        End If
     End Sub
 End Class

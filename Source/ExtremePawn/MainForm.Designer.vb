@@ -24,9 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
+        Dim TreeNode19 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
+        Dim TreeNode20 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
+        Dim TreeNode21 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
         Me.RightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -303,16 +303,18 @@ Partial Class MainForm
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitEditorCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
         Me.HelpMenu.SetAutocompleteMenu(Me.SplitEditorCode, Me.HelpMenu)
-        Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 14)
+        Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 15)
         Me.SplitEditorCode.BackBrush = Nothing
         Me.SplitEditorCode.BookmarkColor = System.Drawing.Color.Red
         Me.SplitEditorCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2
-        Me.SplitEditorCode.CharHeight = 14
+        Me.SplitEditorCode.CharHeight = 15
         Me.SplitEditorCode.CharWidth = 8
         Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.SplitEditorCode.DelayedTextChangedInterval = 1000
         Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
+        Me.SplitEditorCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2
+        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 10.0!)
         Me.SplitEditorCode.IsReplaceMode = False
-        Me.SplitEditorCode.Language = FastColoredTextBoxNS.Language.CSharp
         Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
         Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
         Me.SplitEditorCode.Location = New System.Drawing.Point(195, 145)
@@ -529,7 +531,7 @@ Partial Class MainForm
         Me.ToolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton18.Name = "ToolStripButton18"
         Me.ToolStripButton18.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton18.Text = "ToolStripButton18"
+        Me.ToolStripButton18.Text = "Dialog Creator"
         '
         'ToolStripSeparator6
         '
@@ -940,13 +942,13 @@ Partial Class MainForm
         Me.ProjectExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProjectExplorer.Location = New System.Drawing.Point(545, 52)
         Me.ProjectExplorer.Name = "ProjectExplorer"
-        TreeNode4.Name = "Node0"
-        TreeNode4.Text = "Includes"
-        TreeNode5.Name = "Node1"
-        TreeNode5.Text = "Scripts"
-        TreeNode6.Name = "Node2"
-        TreeNode6.Text = "Main.pwn"
-        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode4, TreeNode5, TreeNode6})
+        TreeNode19.Name = "Node0"
+        TreeNode19.Text = "Includes"
+        TreeNode20.Name = "Node1"
+        TreeNode20.Text = "Scripts"
+        TreeNode21.Name = "Node2"
+        TreeNode21.Text = "Main.pwn"
+        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode19, TreeNode20, TreeNode21})
         Me.ProjectExplorer.Size = New System.Drawing.Size(241, 158)
         Me.ProjectExplorer.TabIndex = 13
         '

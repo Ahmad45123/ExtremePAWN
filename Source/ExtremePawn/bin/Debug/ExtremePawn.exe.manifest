@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2037248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2038784">
       <assemblyIdentity name="ExtremePawn" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>fORakiw643JAFfsJUJrLA2XCozI=</dsig:DigestValue>
+        <dsig:DigestValue>ysL+fwWchQb3ge7GhPuFagEMM7U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

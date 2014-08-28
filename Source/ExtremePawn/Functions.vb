@@ -213,11 +213,11 @@ Public Class Functions
     Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False)
         Try
             Dim tb As FastColoredTextBox = New FastColoredTextBox()
+            tb = MainForm.SplitEditorCode
+            tb.Visible = True
             tb.Dock = DockStyle.Fill
             tb.LeftPadding = 17
-            tb.Language = Language.CSharp
             tb.ContextMenuStrip = MainForm.RightClickMenu
-            tb.BookmarkColor = Color.Red
             Dim tab As FATabStripItem = New FATabStripItem(If(fileName IsNot Nothing, Path.GetFileName(fileName), "[new]"), tb)
             tab.Tag = fileName
             If fileName <> Nothing Then
