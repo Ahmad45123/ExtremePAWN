@@ -692,7 +692,6 @@ Public Class MainForm
     Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
         Dim Dlg As New DialogCreator
         Dlg.Show()
-
     End Sub
 
     Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ErrorDataGridView.CellDoubleClick

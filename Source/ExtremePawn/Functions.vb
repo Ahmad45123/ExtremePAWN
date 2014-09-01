@@ -209,15 +209,26 @@ Public Class Functions
         End If
     End Sub
 
+    'Sub SetDefaultSettings To set the default values.
+    Public Sub SetDefaultSettings(ByVal tb As FastColoredTextBox)
+        tb.Dock = DockStyle.Fill
+        tb.LeftPadding = 17
+        tb.ContextMenuStrip = MainForm.RightClickMenu
+        tb.BookmarkColor = Color.Red
+        tb.BracketsHighlightStrategy = BracketsHighlightStrategy.Strategy2
+        tb.FindEndOfFoldingBlockStrategy = FindEndOfFoldingBlockStrategy.Strategy2
+        tb.DelayedTextChangedInterval = 1000
+        tb.DelayedEventsInterval = 1000
+        MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
+        AddHandler tb.TextChangedDelayed, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextD)
+        AddHandler tb.TextChanged, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextChanged)
+    End Sub
+
     'Function CreateTab to create a new file and add it to the TabStrip.
     Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False)
         Try
             Dim tb As FastColoredTextBox = New FastColoredTextBox()
-            tb = MainForm.SplitEditorCode
-            tb.Visible = True
-            tb.Dock = DockStyle.Fill
-            tb.LeftPadding = 17
-            tb.ContextMenuStrip = MainForm.RightClickMenu
+            SetDefaultSettings(tb)
             Dim tab As FATabStripItem = New FATabStripItem(If(fileName IsNot Nothing, Path.GetFileName(fileName), "[new]"), tb)
             tab.Tag = fileName
             If fileName <> Nothing Then
@@ -240,11 +251,6 @@ Public Class Functions
             MainForm.TabStrip.AddTab(tab)
             MainForm.TabStrip.SelectedItem = tab
             tb.Focus()
-            tb.DelayedTextChangedInterval = 1000
-            tb.DelayedEventsInterval = 1000
-            MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
-            AddHandler tb.TextChangedDelayed, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextD)
-            AddHandler tb.TextChanged, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextChanged)
             tb.OnTextChanged(tb.Range)
             Return tb
         Catch ex As Exception
