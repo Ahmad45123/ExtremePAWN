@@ -27,6 +27,10 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.ClosePrj">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.ColorPicker">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -63,7 +67,19 @@ ExtremePawn
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.NewFileAb">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.NewPrjFile">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.Open">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.OpenPrj">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -80,6 +96,14 @@ ExtremePawn
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member><member name="P:ExtremePawn.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.SaveAllPrj">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ExtremePawn.My.Resources.Resources.SavePrj">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

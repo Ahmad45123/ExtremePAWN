@@ -26,6 +26,7 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Ta
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\AutomaticUpdater.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.ColorChoice.resources
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.DialogCreator.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.KeyDetector.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.MainForm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.Resources.resources
@@ -36,5 +37,3 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.exe
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.pdb
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbprojResolveAssemblyReference.cache
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.DialogCreator.resources

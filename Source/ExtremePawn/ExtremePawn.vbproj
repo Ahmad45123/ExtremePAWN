@@ -104,7 +104,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="TabStrip">
-      <HintPath>..\..\..\..\..\Desktop\FastColoredTextBox-master\Binary\TabStrip.dll</HintPath>
+      <HintPath>..\TabStrip.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +216,7 @@
   <ItemGroup>
     <Content Include="Icons-Land-Vista-Chess-Pawn-Yellow.ico" />
     <Content Include="Resources\class_libraries.png" />
+    <None Include="Resources\ClosePrj.png" />
     <Content Include="Resources\ColorPicker.png" />
     <Content Include="Resources\Compile.png" />
     <Content Include="Resources\Copy.png" />
@@ -225,12 +226,17 @@
     <Content Include="Resources\ErrorImage.jpg" />
     <Content Include="Resources\IncreaseIndent.png" />
     <None Include="Resources\NewFile.png" />
+    <None Include="Resources\NewFileAb.png" />
+    <None Include="Resources\NewPrjFile.png" />
     <Content Include="Resources\Open.png" />
+    <None Include="Resources\OpenPrj.png" />
     <Content Include="Resources\Paste.png" />
     <Content Include="Resources\property.png" />
     <Content Include="Resources\Redo.png" />
     <Content Include="Resources\Replace.png" />
     <Content Include="Resources\Save.png" />
+    <None Include="Resources\SaveAllPrj.png" />
+    <None Include="Resources\SavePrj.png" />
     <Content Include="Resources\Search.png" />
     <Content Include="Resources\Split.png" />
     <Content Include="Resources\text-indent-remove-icon.png" />

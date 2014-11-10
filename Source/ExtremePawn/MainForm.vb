@@ -25,7 +25,7 @@ Public Class MainForm
     Public Delegate Sub Add(ByVal i As Integer)
 
     'Project System
-    Public CurrentProjectPath As String 'Will be nothing if there is no project loaded.
+    Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
     Public Property CurrentTB() As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
         Get
@@ -108,6 +108,7 @@ Public Class MainForm
         range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(.*\*/)", RegexOptions.Singleline + RegexOptions.RightToLeft)
 
         e.ChangedRange.SetFoldingMarkers("{", "}") 'Bracket Folding
+        e.ChangedRange.SetFoldingMarkers("///StartFold", "///EndFold") 'Custom Folding
         e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle, BlueStyle, TextStyle, GreenStyle, NumberStyle})
         e.ChangedRange.SetStyle(GreenStyle, "//.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(GreenStyle, "\/\*[\s\S]*?\*\/", RegexOptions.Multiline) 'For multiline comments in one line :P
@@ -190,8 +191,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        CreateProjectToolStripMenuItem.PerformClick()
-
+        Functions.CreateTab(Nothing)
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -243,10 +243,14 @@ Public Class MainForm
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
-        If TabStrip.SelectedItem.Title = "Main.pwn" Then
-            Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
+        If (TabStrip.SelectedItem IsNot Nothing) And (Not CurrentProjectPath = Nothing) Then
+            If TabStrip.SelectedItem.Title = "Main.pwn" Then
+                Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
+            Else
+                MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
+            End If
         Else
-            MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
+            MsgBox("You don't have any project loaded.")
         End If
     End Sub
 
@@ -628,23 +632,28 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
-        CurrentProjectPath = Nothing
-        ProjectExplorer.Nodes(0).Nodes.Clear()
-        ProjectExplorer.Nodes(1).Nodes.Clear()
+        If CurrentProjectPath = Nothing Then
+            MsgBox("You don't have any project opened to close.")
+        Else
+            CurrentProjectPath = Nothing
+            ProjectExplorer.Nodes(0).Nodes.Clear()
+            ProjectExplorer.Nodes(1).Nodes.Clear()
 
-        'Saving before closing.
-        Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
-        For Each tab As FATabStripItem In TabStrip.Items
-            list.Add(tab)
-        Next
-        For Each tab As FATabStripItem In list
-            Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
-            Me.FaTabStrip1_TabStripItemClosing(args)
-            If args.Cancel Then
-                Exit For
-            End If
-            TabStrip.RemoveTab(tab)
-        Next
+            'Saving before closing.
+            Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
+            For Each tab As FATabStripItem In TabStrip.Items
+                list.Add(tab)
+            Next
+
+            For Each tab As FATabStripItem In list
+                Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
+                Me.FaTabStrip1_TabStripItemClosing(args)
+                If args.Cancel Then
+                    Exit For
+                End If
+                TabStrip.RemoveTab(tab)
+            Next
+        End If
     End Sub
 
     Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
@@ -702,5 +711,34 @@ Public Class MainForm
             Me.CurrentTB.DoSelectionVisible()
             Me.CurrentTB.Focus()
         End If
+    End Sub
+
+    Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click
+        CreateProjectToolStripMenuItem.PerformClick()
+
+    End Sub
+
+    Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
+        Functions.LoadProject()
+    End Sub
+
+    Private Sub ToolStripButton21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton21.Click
+        NewToolStripMenuItem.PerformClick()
+
+    End Sub
+
+    Private Sub ToolStripButton22_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton22.Click
+        SaveToolStripMenuItem.PerformClick()
+
+    End Sub
+
+    Private Sub ToolStripButton23_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton23.Click
+        ToolStripMenuItem8.PerformClick()
+
+    End Sub
+
+    Private Sub ToolStripButton24_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton24.Click
+        ToolStripMenuItem11.PerformClick()
+
     End Sub
 End Class
