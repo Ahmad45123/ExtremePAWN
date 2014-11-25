@@ -64,6 +64,9 @@ Public Class MainForm
             ToolStripButton4.PerformClick() 'Save
         ElseIf e.KeyCode = Setting.KEY_COMPILE Then
             ToolStripButton7.PerformClick() 'Compile
+        ElseIf e.Control = True And e.KeyValue = Keys.R Then
+            RefreshAutocomAndExpToolStripMenuItem.PerformClick()
+
         End If
     End Sub
 
@@ -90,17 +93,6 @@ Public Class MainForm
         Next
     End Sub
 
-    Public Sub Code_TextD(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) 'Text delayed event. Handled on any Instance of FastColoredTextbox created by CreateTab.
-        If CurrentTB IsNot Nothing Then
-            If ObjectExplorer.Visible = True Then 'If its not visible, Why bothering in filling it ?...
-                ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                                 ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
-                                             End Sub)
-            End If
-        End If
-    End Sub
-
-    Public MulinLineGreenStyle As Style = New TextStyle(Brushes.Green, Nothing, FontStyle.Italic)
     Public Sub Code_TextChanged(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) Handles SplitEditorCode.TextChanged
         Dim range As Range = TryCast(sender, FastColoredTextBox).VisibleRange
         range.ClearStyle(MulinLineGreenStyle)
@@ -109,14 +101,20 @@ Public Class MainForm
 
         e.ChangedRange.SetFoldingMarkers("{", "}") 'Bracket Folding
         e.ChangedRange.SetFoldingMarkers("///StartFold", "///EndFold") 'Custom Folding
-        e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle, BlueStyle, TextStyle, GreenStyle, NumberStyle})
+
+        e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle, BlueStyle, TextStyle, GreenStyle, NumberStyle, DefineStyle, FuncStyle})
+
         e.ChangedRange.SetStyle(GreenStyle, "//.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(GreenStyle, "\/\*[\s\S]*?\*\/", RegexOptions.Multiline) 'For multiline comments in one line :P
         e.ChangedRange.SetStyle(BlueItalicStyle, "#.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(BoldStyle, "\b(public|stock|enum)\s+(?<range>[\w_]+?)\b")
-        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case)\b", RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case|forward)\b", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(TextStyle, Chr(34) + ".*" + Chr(34), RegexOptions.Multiline)
         e.ChangedRange.SetStyle(NumberStyle, "([0-9])", RegexOptions.Multiline)
+
+        'Function/Defines colors
+        e.ChangedRange.SetStyle(DefineStyle, "\b(" + SyntaxHyDefinesList + ")\b", RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(FuncStyle, "\b(" + SyntaxHyFuncsList + ")\b", RegexOptions.Multiline)
     End Sub
 
     Private Sub AutoSaver_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaver.Tick
@@ -356,15 +354,45 @@ Public Class MainForm
 
     End Sub
 
+
+    'Defines & Funcs Syntax highlighting.
+    Public t_SyntaxHyDefinesList As New List(Of String)
+    Public t_SyntaxHyFuncsList As New List(Of String)
+    Public SyntaxHyDefinesList As String
+    Public SyntaxHyFuncsList As String
+
+    Public Sub ReBuildAutoCompleteMenu()
+        'Empty
+        SyntaxHyDefinesList = Nothing
+        SyntaxHyFuncsList = Nothing
+
+        For Each Str As String In t_SyntaxHyDefinesList
+            SyntaxHyDefinesList = SyntaxHyDefinesList + "|" + Str
+        Next
+
+        For Each Str As String In t_SyntaxHyFuncsList
+            SyntaxHyFuncsList = SyntaxHyFuncsList + "|" + Str
+        Next
+
+        Try
+            SyntaxHyDefinesList = SyntaxHyDefinesList.Remove(0, 1)
+            SyntaxHyFuncsList = SyntaxHyFuncsList.Remove(0, 1)
+        Catch ex As Exception
+        End Try
+    End Sub
+
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
     Public PublicSyntax As New ListBox
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
         Dim DeleteProjectExplorer As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
+
         Try
             PublicSyntax.Items.Clear()
             ProjectExplorer.Invoke(DeleteProjectExplorer)
+            t_SyntaxHyDefinesList.Clear()
+            t_SyntaxHyFuncsList.Clear()
         Catch ex As Exception
         End Try
         Dim IsAdd As Boolean = True
@@ -388,6 +416,7 @@ Public Class MainForm
                         PublicSyntax.Items.Add(item.title)
                         item.title = item.title.Remove(item.title.IndexOf("("))
                         HelpMenuItems.Add(item.title)
+                        t_SyntaxHyFuncsList.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.[Class]
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -396,6 +425,7 @@ Public Class MainForm
                         Dim tst As String() = item.title.Split(" ")
                         item.title = tst(0)
                         HelpMenuItems.Add(item.title)
+                        t_SyntaxHyDefinesList.Add(item.title)
                         item.type = ObjectExplorerClass.ExplorerItemType.Property
                         list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
                         lastClassIndex = list.Count
@@ -425,10 +455,12 @@ Public Class MainForm
         End Try
         For Each Str As String In Includes
             HelpMenuItems.Add(Str)
+            t_SyntaxHyFuncsList.Add(Str)
         Next
         For Each Str As String In SyntaxOfInc
             PublicSyntax.Items.Add(Str)
         Next
+        ReBuildAutoCompleteMenu()
         HelpMenu.SetAutocompleteItems(HelpMenuItems)
     End Sub
 
@@ -518,10 +550,10 @@ Public Class MainForm
 
         If Me.CurrentTB IsNot Nothing Then
             Me.CurrentTB.Focus()
-            Dim text As String = Me.CurrentTB.Text
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildObjectExplorerAndHelpMenu(text)
-                                         End Sub)
+            'Dim text As String = Me.CurrentTB.Text
+            'ThreadPool.QueueUserWorkItem(Sub(o As Object)
+            'ReBuildObjectExplorerAndHelpMenu(Text)
+            '                             End Sub)
             DocumentMap.Target = CurrentTB
         End If
     End Sub
@@ -739,6 +771,21 @@ Public Class MainForm
 
     Private Sub ToolStripButton24_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton24.Click
         ToolStripMenuItem11.PerformClick()
+
+    End Sub
+
+    Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
+        If CurrentTB IsNot Nothing Then
+            If ObjectExplorer.Visible = True Then 'If its not visible, Why bothering in filling it ?...
+                ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                                 ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
+                                             End Sub)
+            End If
+        End If
+    End Sub
+
+    Private Sub CodeSnipptesToolStripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeSnipptesToolStripItem.Click
+        CodeSnipptes.Show()
 
     End Sub
 End Class

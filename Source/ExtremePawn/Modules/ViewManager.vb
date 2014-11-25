@@ -22,16 +22,16 @@
     Public Sub TogObjectExplorer()
         If MainForm.ObjectExplorer.Visible = True Then
             MainForm.ObjectExplorer.Visible = False
-            EditSize("width", 236, "+", MainForm.TabStrip)
-            EditSize("width", 236, "+", MainForm.SplitEditorCode)
-            MainForm.TabStrip.Left = MainForm.TabStrip.Left - 236
-            MainForm.SplitEditorCode.Left = MainForm.SplitEditorCode.Left - 236
+            EditSize("width", 190, "+", MainForm.TabStrip)
+            EditSize("width", 190, "+", MainForm.SplitEditorCode)
+            MainForm.TabStrip.Left = MainForm.TabStrip.Left - 190
+            MainForm.SplitEditorCode.Left = MainForm.SplitEditorCode.Left - 190
         Else
             MainForm.ObjectExplorer.Visible = True
-            EditSize("width", 236, "-", MainForm.TabStrip)
-            EditSize("width", 236, "-", MainForm.SplitEditorCode)
-            MainForm.TabStrip.Left = MainForm.TabStrip.Left + 236
-            MainForm.SplitEditorCode.Left = MainForm.SplitEditorCode.Left + 236
+            EditSize("width", 190, "-", MainForm.TabStrip)
+            EditSize("width", 190, "-", MainForm.SplitEditorCode)
+            MainForm.TabStrip.Left = MainForm.TabStrip.Left + 190
+            MainForm.SplitEditorCode.Left = MainForm.SplitEditorCode.Left + 190
         End If
     End Sub
 
@@ -90,14 +90,22 @@
     Public Sub TogErrorList()
         If MainForm.ErrorDataGridView.Visible = True Then '106
             MainForm.ErrorDataGridView.Visible = False
-            EditSize("height", 106, "+", MainForm.ObjectExplorer)
-            EditSize("height", 106, "+", MainForm.SplitEditorCode)
-
+            If MainForm.SplitEditorCode.Visible Then
+                EditSize("height", 106, "+", MainForm.ObjectExplorer)
+                EditSize("height", 106, "+", MainForm.SplitEditorCode)
+            Else
+                EditSize("height", 106, "+", MainForm.ObjectExplorer)
+                EditSize("height", 106, "+", MainForm.TabStrip)
+            End If
         Else
             MainForm.ErrorDataGridView.Visible = True
-            EditSize("height", 106, "-", MainForm.ObjectExplorer)
-            EditSize("height", 106, "-", MainForm.SplitEditorCode)
-
+            If MainForm.SplitEditorCode.Visible Then
+                EditSize("height", 106, "-", MainForm.ObjectExplorer)
+                EditSize("height", 106, "-", MainForm.SplitEditorCode)
+            Else
+                EditSize("height", 106, "-", MainForm.ObjectExplorer)
+                EditSize("height", 106, "-", MainForm.TabStrip)
+            End If
         End If
     End Sub
 End Module

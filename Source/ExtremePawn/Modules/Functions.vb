@@ -2,9 +2,11 @@
 Imports FarsiLibrary.Win
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Threading
 
 Public Class Functions
     Inherits Form
+
 
     'Used In Bookmark Navigating.
     Private lastNavigatedDateTime As DateTime = DateTime.Now
@@ -220,7 +222,6 @@ Public Class Functions
         tb.DelayedTextChangedInterval = 1000
         tb.DelayedEventsInterval = 1000
         MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
-        AddHandler tb.TextChangedDelayed, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextD)
         AddHandler tb.TextChanged, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextChanged)
     End Sub
 
@@ -234,7 +235,7 @@ Public Class Functions
             If fileName <> Nothing Then
                 If IsBind = True Then
                     Dim Encoding As New System.Text.UTF8Encoding(False)
-                    tb.OpenBindingFile(fileName, Encoding)
+                    tb.OpenFile(fileName, Encoding)
                     tb.IsChanged = False
                     tb.ClearUndo()
                     GC.Collect()
@@ -251,6 +252,10 @@ Public Class Functions
             MainForm.TabStrip.AddTab(tab)
             MainForm.TabStrip.SelectedItem = tab
             tb.Focus()
+
+
+            MainForm.ReBuildObjectExplorerAndHelpMenu(tb.Text)
+
             tb.OnTextChanged(tb.Range)
             Return tb
         Catch ex As Exception
@@ -342,5 +347,16 @@ Public Class Functions
         Else
             MsgBox("You don't have a project loaded to add a new file.")
         End If
+    End Sub
+
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'Functions
+        '
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Name = "Functions"
+        Me.ResumeLayout(False)
+
     End Sub
 End Class

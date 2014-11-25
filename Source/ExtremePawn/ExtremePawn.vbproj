@@ -119,15 +119,27 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="ClsCapture.vb" />
-    <Compile Include="DialogCreator.Designer.vb">
-      <DependentUpon>DialogCreator.vb</DependentUpon>
+    <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.Designer.vb">
+      <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
     </Compile>
-    <Compile Include="DialogCreator.vb">
+    <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Functions.vb">
+    <Compile Include="Modules\ApplicationEvents.vb" />
+    <Compile Include="Modules\ClsCapture.vb" />
+    <Compile Include="Tools\CodeSnipptes\CodeSnipptes.Designer.vb">
+      <DependentUpon>CodeSnipptes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CodeSnipptes\CodeSnipptes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\DialogCreator.Designer.vb">
+      <DependentUpon>DialogCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DialogCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Functions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KeyDetector.Designer.vb">
@@ -141,13 +153,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ObjectExplorerClass.vb">
+    <Compile Include="Modules\ObjectExplorerClass.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorChoice.Designer.vb">
+    <Compile Include="Tools\ColorChoice.Designer.vb">
       <DependentUpon>ColorChoice.vb</DependentUpon>
     </Compile>
-    <Compile Include="ColorChoice.vb">
+    <Compile Include="Tools\ColorChoice.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.vb">
@@ -173,21 +185,33 @@
     <Compile Include="Setting.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Styles.vb" />
-    <Compile Include="ViewManager.vb" />
+    <Compile Include="Modules\Styles.vb" />
+    <Compile Include="Modules\ViewManager.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ColorChoice.resx">
+    <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptes.resx">
+      <DependentUpon>CodeSnipptes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptesAdd.resx">
+      <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ColorChoice.resx">
       <DependentUpon>ColorChoice.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DialogCreator.resx">
+    <EmbeddedResource Include="Tools\DialogCreator.resx">
       <DependentUpon>DialogCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Functions.resx">
+      <DependentUpon>Functions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyDetector.resx">
       <DependentUpon>KeyDetector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ObjectExplorerClass.resx">
+      <DependentUpon>ObjectExplorerClass.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -271,6 +295,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
