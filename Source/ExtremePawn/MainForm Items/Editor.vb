@@ -36,7 +36,7 @@ Public Class Editor
         ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                          MainForm.ReBuildObjectExplorerAndHelpMenu(text)
                                      End Sub)
-        MainForm.DocumentMap.Target = MainForm.CurrentTB
+        DocumentMapFrm.DocumentMap.Target = MainForm.CurrentTB
     End Sub
 
     Private Sub Editor_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing

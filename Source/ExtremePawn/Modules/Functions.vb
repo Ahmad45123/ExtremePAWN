@@ -18,7 +18,7 @@ Public Class Functions
                 Return result
             End If
             tab.TabText = Path.GetFileName(MainForm.SaveFileDialog.FileName)
-            tab.Tag = MainForm.SaveFileDialog.FileName
+            tab.SplitEditorCode.Tag = MainForm.SaveFileDialog.FileName
 
         End If
         Try
@@ -72,7 +72,7 @@ Public Class Functions
         Dim errs() As String
         errs = output.Split(vbCrLf)
 
-        MainForm.ErrorDataGridView.Rows.Clear()
+        ErrorsFrm.ErrorDataGridView.Rows.Clear()
 
         For Each s As String In errs
             Dim Type As Image = Nothing
@@ -97,9 +97,9 @@ Public Class Functions
                 LineNumbers = s.Remove(s.IndexOf(")"))
                 LineNumbers = LineNumbers.Remove(0, LineNumbers.IndexOf("(") + 1)
                 Dim Row() As Object = {Type, ErrorTexte, File, LineNumbers}
-                MainForm.ErrorDataGridView.Rows.Add(Row)
+                ErrorsFrm.ErrorDataGridView.Rows.Add(Row)
 
-                MainForm.ErrorDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+                ErrorsFrm.ErrorDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
 
             Catch ex As Exception
                 'Do nothing on exption.
@@ -215,7 +215,7 @@ Public Class Functions
     'Includes List Loading
     Dim PathsOfInc As New List(Of String) 'Used while loading the inc.
     Public Sub LoadIncs()
-        MainForm.IncludeTreeView.Nodes.Clear()
+        IncludeListFrm.IncludeTreeView.Nodes.Clear()
         Dim di As New IO.DirectoryInfo(Application.StartupPath + "\include")
         Dim diar1 As IO.FileInfo() = di.GetFiles()
         Dim dra As IO.FileInfo
@@ -228,7 +228,7 @@ Public Class Functions
         Dim Num As Integer = 0
 
         For Each FILE_NAME As String In PathsOfInc
-            MainForm.IncludeTreeView.Nodes.Add(FILE_NAME)
+            IncludeListFrm.IncludeTreeView.Nodes.Add(FILE_NAME)
 
             Dim objReader As New System.IO.StreamReader(Application.StartupPath + "/include/" + FILE_NAME)
 
@@ -245,7 +245,7 @@ Public Class Functions
                         If Line.Contains(":") Then
                             Line = Line.Remove(0, Line.IndexOf(":") + 1)
                         End If
-                        MainForm.IncludeTreeView.Nodes.Item(Num).Nodes.Add(Line)
+                        IncludeListFrm.IncludeTreeView.Nodes.Item(Num).Nodes.Add(Line)
                     End If
                 Catch ex As Exception
 
@@ -276,7 +276,7 @@ Public Class Functions
                 MainForm.CurrentProjectPath = MainForm.FolderBrowser.SelectedPath
                 For Each File As String In My.Computer.FileSystem.GetFiles(MainForm.CurrentProjectPath + "/Scripts")
                     Dim FileName As String = Path.GetFileNameWithoutExtension(File)
-                    MainForm.ProjectExplorer.Nodes(1).Nodes.Add(FileName)
+                    ProjectExplorerFrm.ProjectExplorer.Nodes(1).Nodes.Add(FileName)
                 Next
                 CreateTab(MainForm.CurrentProjectPath + "/Main.pwn")
             Else
@@ -288,7 +288,7 @@ Public Class Functions
     Public Sub CreateFile(ByVal Name As String)
         If Not MainForm.CurrentProjectPath = Nothing Then
             My.Computer.FileSystem.CopyFile(Application.StartupPath + "/gamemodes/new.pwn", MainForm.CurrentProjectPath + "/Scripts/" + Name + ".pwn")
-            MainForm.ProjectExplorer.Nodes(1).Nodes.Add(Name)
+            ProjectExplorerFrm.ProjectExplorer.Nodes(1).Nodes.Add(Name)
             MainForm.CurrentTB.InsertText("#include " + Chr(34) + "Scripts/" + Name + ".pwn" + Chr(34))
         Else
             MsgBox("You don't have a project loaded to add a new file.")

@@ -18,6 +18,7 @@ Imports FastColoredTextBoxNS
 Imports System.Text.RegularExpressions
 Imports FarsiLibrary.Win
 Imports System.Threading
+Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class MainForm
 
@@ -30,6 +31,22 @@ Public Class MainForm
     Public Property CurrentTB As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
     Public Property CurrentOpenedTab As Editor
 
+    Dim m_deserlise As DeserializeDockContent
+    Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
+        If persistString = GetType(DocumentMapFrm).ToString Then
+            Return DocumentMapFrm
+        ElseIf persistString = GetType(ErrorsFrm).ToString Then
+            Return ErrorsFrm
+        ElseIf persistString = GetType(IncludeListFrm).ToString Then
+            Return IncludeListFrm
+        ElseIf persistString = GetType(ObjectExplorerFrm).ToString Then
+            Return ObjectExplorerFrm
+        ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
+            Return ProjectExplorerFrm
+        End If
+    End Function
+
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Settings
         Functions.LoadIncs()
@@ -41,6 +58,10 @@ Public Class MainForm
                 Functions.CreateTab(Arg)
             End If
         Next
+
+        'Load Saved Docks
+        m_deserlise = New DeserializeDockContent(AddressOf GetContentFromPersistString)
+        MainDockPanel.LoadFromXml(Application.StartupPath + "/SavedDocks.xml", m_deserlise)
     End Sub
 
     Private Sub MainForm_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
@@ -65,8 +86,8 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub TreeView1_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IncludeTreeView.DoubleClick
-        Dim Func As String = IncludeTreeView.SelectedNode.Text
+    Private Sub TreeView1_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Dim Func As String = IncludeListFrm.IncludeTreeView.SelectedNode.Text
         Func = Func.Replace("      ", "")
         Dim Index As Integer = PublicSyntax.FindString(Func, -1)
         If Not Index = -1 Then
@@ -75,8 +96,8 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub TreeView1_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles IncludeTreeView.AfterSelect
-        Dim Func As String = IncludeTreeView.SelectedNode.Text
+    Private Sub TreeView1_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs)
+        Dim Func As String = IncludeListFrm.IncludeTreeView.SelectedNode.Text
         Func = Func.Replace("      ", "")
         Dim Index As Integer = PublicSyntax.FindString(Func, -1)
         If Not Index = -1 Then
@@ -133,7 +154,7 @@ Public Class MainForm
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
         Dim tab = Functions.CreateTab(Nothing)
-        tab.Show(FilesDockPanel.DockPanel)
+        tab.Show(MainDockPanel)
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -155,51 +176,22 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub ToolsBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim OldSize As Size
-        If ToolStrip.Visible = True Then
-            ToolStrip.Visible = False
-
-            OldSize = CurrentTB.Size
-            OldSize.Height += 28
-            CurrentTB.Size = OldSize
-            CurrentTB.Top -= 30
-
-            OldSize = IncludeTreeView.Size
-            OldSize.Height += 28
-            IncludeTreeView.Size = OldSize
-            IncludeTreeView.Top -= 30
-        Else
-            ToolStrip.Visible = True
-
-            OldSize = CurrentTB.Size
-            OldSize.Height -= 28
-            CurrentTB.Size = OldSize
-            CurrentTB.Top += 30
-
-            OldSize = IncludeTreeView.Size
-            OldSize.Height -= 28
-            IncludeTreeView.Size = OldSize
-            IncludeTreeView.Top += 30
-        End If
-    End Sub
-
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
-        'If (TabStrip.SelectedItem IsNot Nothing) And (Not CurrentProjectPath = Nothing) Then
-        'If TabStrip.SelectedItem.Title = "Main.pwn" Then
-        ' Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
-        ' Else
-        'MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
-        ' End If
-        ' Else
-        '     MsgBox("You don't have any project loaded.")
-        '   End If
+        If (CurrentTB IsNot Nothing) And (Not CurrentProjectPath = Nothing) Then
+            If CurrentTB.Tag.contains("Main.pwn") Then
+                Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
+            Else
+                MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
+            End If
+        Else
+            MsgBox("You don't have any project loaded.")
+        End If
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
         If OpenFileDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
             Dim tab = Functions.CreateTab(OpenFileDialog.FileName)
-            tab.Show(FilesDockPanel.DockPanel)
+            tab.Show(MainDockPanel)
         End If
         IdleMaker.Start()
     End Sub
@@ -222,9 +214,7 @@ Public Class MainForm
 
     Private Sub FontToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FontToolStripMenuItem.Click
         If CodeFont.ShowDialog = DialogResult.OK Then
-            CurrentTB.Font = CodeFont.Font
-            'SplitEditorCode.Font = CodeFont.Font
-
+            Editor.Font = CodeFont.Font
         End If
     End Sub
 
@@ -331,11 +321,11 @@ Public Class MainForm
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
-        Dim DeleteProjectExplorer As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Clear()
+        Dim DeleteProjectExplorer As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
 
         Try
             PublicSyntax.Items.Clear()
-            ProjectExplorer.Invoke(DeleteProjectExplorer)
+            ProjectExplorerFrm.ProjectExplorer.Invoke(DeleteProjectExplorer)
             t_SyntaxHyDefinesList.Clear()
             t_SyntaxHyFuncsList.Clear()
         Catch ex As Exception
@@ -380,8 +370,8 @@ Public Class MainForm
                         item.title = item.title.Replace(">", "")
                         item.title = item.title.Substring(item.title.IndexOf(" "))
                         item.title = item.title.Replace(" ", "")
-                        Dim action As Action = Sub() ProjectExplorer.Nodes(0).Nodes.Add(item.title)
-                        ProjectExplorer.Invoke(action)
+                        Dim action As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Add(item.title)
+                        ProjectExplorerFrm.ProjectExplorer.Invoke(action)
                         IsAdd = False
                     End If
                     If IsAdd = True Then list.Add(item) Else IsAdd = True
@@ -392,8 +382,8 @@ Public Class MainForm
             list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
             MyBase.BeginInvoke(Sub()
                                    ObjectExplorerClass.explorerList = list
-                                   ObjectExplorer.DataGridView1.RowCount = ObjectExplorerClass.explorerList.Count
-                                   ObjectExplorer.DataGridView1.Invalidate()
+                                   ObjectExplorerFrm.DataGridView1.RowCount = ObjectExplorerClass.explorerList.Count
+                                   ObjectExplorerFrm.DataGridView1.Invalidate()
                                End Sub)
         Catch ex_332 As Exception
             Console.WriteLine(ex_332)
@@ -407,33 +397,6 @@ Public Class MainForm
         Next
         ReBuildAutoCompleteMenu()
         HelpMenu.SetAutocompleteItems(HelpMenuItems)
-    End Sub
-
-    Private Sub ObjectExplorer_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs)
-        Try
-            Dim item As ObjectExplorerClass.ExplorerItem = ObjectExplorerClass.explorerList(e.RowIndex)
-            If e.ColumnIndex = 1 Then
-                e.Value = item.title
-            Else
-                Select Case item.type
-                    Case ObjectExplorerClass.ExplorerItemType.[Class]
-                        e.Value = My.Resources.class_libraries
-                    Case ObjectExplorerClass.ExplorerItemType.[Property]
-                        e.Value = My.Resources._property
-                End Select
-            End If
-        Catch ex_8D As Exception
-        End Try
-    End Sub
-
-    Private Sub ObjectExplorer_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs)
-        If Me.CurrentTB IsNot Nothing Then
-            Dim item As ObjectExplorerClass.ExplorerItem = ObjectExplorerClass.explorerList(e.RowIndex)
-            Me.CurrentTB.GoEnd()
-            Me.CurrentTB.SelectionStart = item.position
-            Me.CurrentTB.DoSelectionVisible()
-            Me.CurrentTB.Focus()
-        End If
     End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
@@ -489,7 +452,7 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub ProjectExplorer_NodeMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles ProjectExplorer.NodeMouseDoubleClick
+    Private Sub ProjectExplorer_NodeMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
         If My.Computer.FileSystem.FileExists(Application.StartupPath + "/include/" + e.Node.Text + ".inc") Then
             Functions.CreateTab(Application.StartupPath + "/include/" + e.Node.Text + ".inc")
         ElseIf e.Node.Index = 2 And Not CurrentProjectPath = Nothing Then
@@ -544,22 +507,22 @@ Public Class MainForm
 
     Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
         Dim tab = Functions.CreateTab(Nothing)
-        tab.show(FilesDockPanel.DockPanel)
+        tab.show(MainDockPanel)
     End Sub
 
     Dim CurrentSelectedProjectExplorer As TreeNode
 
-    Private Sub ProjectExplorer_NodeMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles ProjectExplorer.NodeMouseClick
+    Private Sub ProjectExplorer_NodeMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
         CurrentSelectedProjectExplorer = e.Node
     End Sub
 
-    Private Sub ProjectExplorer_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles ProjectExplorer.KeyDown
+    Private Sub ProjectExplorer_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Delete Then
             If Not CurrentProjectPath = Nothing Then
                 If MsgBox("Are you sure you want to delete this file ?") = MsgBoxResult.Yes Then
                     If My.Computer.FileSystem.FileExists(CurrentProjectPath + "/Scripts/" + CurrentSelectedProjectExplorer.Text + ".pwn") Then
                         Try
-                            ProjectExplorer.Nodes.Remove(CurrentSelectedProjectExplorer)
+                            ProjectExplorerFrm.ProjectExplorer.Nodes.Remove(CurrentSelectedProjectExplorer)
                             My.Computer.FileSystem.DeleteFile(CurrentProjectPath + "/Scripts/" + CurrentSelectedProjectExplorer.Text + ".pwn")
                         Catch ex As Exception
 
@@ -586,9 +549,9 @@ Public Class MainForm
         Dlg.Show()
     End Sub
 
-    Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ErrorDataGridView.CellDoubleClick
+    Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
         If Me.CurrentTB IsNot Nothing Then
-            Dim RowNumber As Integer = ErrorDataGridView.Rows(e.RowIndex).Cells(3).Value
+            Dim RowNumber As Integer = ErrorsFrm.ErrorDataGridView.Rows(e.RowIndex).Cells(3).Value
             Me.CurrentTB.GoEnd()
             Me.CurrentTB.SelectionStart = CurrentTB.Text.IndexOf(CurrentTB.GetLineText(RowNumber)) - 1
             Me.CurrentTB.DoSelectionVisible()
@@ -627,7 +590,7 @@ Public Class MainForm
 
     Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            If ObjectExplorer.Visible = True Then 'If its not visible, Why bothering in filling it ?...
+            If ObjectExplorerFrm.Visible = True Then 'If its not visible, Why bothering in filling it ?...
                 ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                                  ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
                                              End Sub)
@@ -643,29 +606,66 @@ Public Class MainForm
     Private Sub CloneInAnotherTabToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloneInAnotherTabToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
             Dim tab = Functions.CreateTab(CurrentTB.Tag, False, CurrentTB)
-            tab.show(FilesDockPanel.DockPanel)
+            tab.show(MainDockPanel)
         End If
     End Sub
 
     Dim IsObjectExplorerShowen As Boolean = False
     Private Sub ObjectExplToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ObjectExplToolStripMenuItem.Click
         If IsObjectExplorerShowen = True Then
-            ObjectExplorer.Close()
+            ObjectExplorerFrm.Close()
             IsObjectExplorerShowen = False
         Else
-            ObjectExplorer.Show(MainDockPanel)
+            ObjectExplorerFrm.Show(MainDockPanel)
             IsObjectExplorerShowen = True
         End If
     End Sub
 
-    Dim IsCodeShown As Boolean = False
-    Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem7.Click
-        If IsCodeShown = True Then
-            FilesDockPanel.Close()
-            IsCodeShown = False
+    Dim IsProjectExplorerShowen As Boolean = False
+    Private Sub ProjectExplorerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProjectExplorerToolStripMenuItem.Click
+        If IsProjectExplorerShowen = True Then
+            ProjectExplorerFrm.Close()
+            IsProjectExplorerShowen = False
         Else
-            FilesDockPanel.Show(MainDockPanel)
-            IsCodeShown = True
+            ProjectExplorerFrm.Show(MainDockPanel)
+            IsProjectExplorerShowen = True
         End If
+    End Sub
+
+    Dim IsIncludeListShowen As Boolean = False
+    Private Sub IncludeListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IncludeListToolStripMenuItem.Click
+        If IsIncludeListShowen = True Then
+            IncludeListFrm.Close()
+            IsIncludeListShowen = False
+        Else
+            IncludeListFrm.Show(MainDockPanel)
+            IsIncludeListShowen = True
+        End If
+    End Sub
+
+    Dim IsDocumentMapShown As Boolean = False
+    Private Sub DocumentMapToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DocumentMapToolStripMenuItem.Click
+        If IsDocumentMapShown = True Then
+            DocumentMapFrm.Close()
+            IsDocumentMapShown = False
+        Else
+            DocumentMapFrm.Show(MainDockPanel)
+            IsDocumentMapShown = True
+        End If
+    End Sub
+
+    Dim IsErrorListSHowen As Boolean = False
+    Private Sub ErrorListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ErrorListToolStripMenuItem.Click
+        If IsErrorListSHowen = True Then
+            ErrorsFrm.Close()
+            IsErrorListSHowen = False
+        Else
+            ErrorsFrm.Show(MainDockPanel)
+            IsErrorListSHowen = True
+        End If
+    End Sub
+
+    Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        MainDockPanel.SaveAsXml(Application.StartupPath + "/SavedDocks.xml")
     End Sub
 End Class
