@@ -7,71 +7,8 @@ Imports System.Threading
 Public Class Functions
     Inherits Form
 
-
-    'Used In Bookmark Navigating.
-    Private lastNavigatedDateTime As DateTime = DateTime.Now
-
-    'Start of Bookmark functions.
-    Public Function NavigateBackward() As Boolean
-        Dim max As DateTime = Nothing
-        Dim iLine As Integer = -1
-        Dim tb As FastColoredTextBox = Nothing
-        For iTab As Integer = 0 To MainForm.TabStrip.Items.Count - 1
-            Dim t As FastColoredTextBox = TryCast(MainForm.TabStrip.Items(iTab).Controls(0), FastColoredTextBox)
-            For i As Integer = 0 To t.LinesCount - 1
-                If t(i).LastVisit < Me.lastNavigatedDateTime AndAlso t(i).LastVisit > max Then
-                    max = t(i).LastVisit
-                    iLine = i
-                    tb = t
-                End If
-            Next
-        Next
-        Dim result As Boolean
-        If iLine >= 0 Then
-            MainForm.TabStrip.SelectedItem = TryCast(tb.Parent, FATabStripItem)
-            tb.Navigate(iLine)
-            lastNavigatedDateTime = tb(iLine).LastVisit
-            Console.WriteLine("Backward: " + lastNavigatedDateTime)
-            tb.Focus()
-            tb.Invalidate()
-            result = True
-        Else
-            result = False
-        End If
-        Return result
-    End Function
-    Public Function NavigateForward() As Boolean
-        Dim min As DateTime = DateTime.Now
-        Dim iLine As Integer = -1
-        Dim tb As FastColoredTextBox = Nothing
-        For iTab As Integer = 0 To MainForm.TabStrip.Items.Count - 1
-            Dim t As FastColoredTextBox = TryCast(MainForm.TabStrip.Items(iTab).Controls(0), FastColoredTextBox)
-            For i As Integer = 0 To t.LinesCount - 1
-                If t(i).LastVisit > Me.lastNavigatedDateTime AndAlso t(i).LastVisit < min Then
-                    min = t(i).LastVisit
-                    iLine = i
-                    tb = t
-                End If
-            Next
-        Next
-        Dim result As Boolean
-        If iLine >= 0 Then
-            MainForm.TabStrip.SelectedItem = TryCast(tb.Parent, FATabStripItem)
-            tb.Navigate(iLine)
-            lastNavigatedDateTime = tb(iLine).LastVisit
-            Console.WriteLine("Forward: " + lastNavigatedDateTime)
-            tb.Focus()
-            tb.Invalidate()
-            result = True
-        Else
-            result = False
-        End If
-        Return result
-    End Function
-    'End of bookmark functions.
-
     'Functions Save to Save the file.
-    Public Function Save(ByVal tab As FATabStripItem) As Boolean
+    Public Function Save(ByVal tab As Editor) As Boolean
         'CurrentTB.Text.Replace("ï»¿", "") 'This characters are added for same reason somewhere in the script, So we are deleting them [THEY ARE INVISIBLE]
         Dim tb As FastColoredTextBox = TryCast(tab.Controls(0), FastColoredTextBox)
         Dim result As Boolean
@@ -80,8 +17,9 @@ Public Class Functions
                 result = False
                 Return result
             End If
-            tab.Title = Path.GetFileName(MainForm.SaveFileDialog.FileName)
+            tab.TabText = Path.GetFileName(MainForm.SaveFileDialog.FileName)
             tab.Tag = MainForm.SaveFileDialog.FileName
+
         End If
         Try
             Dim Encoding As New System.Text.UTF8Encoding(False)
@@ -112,8 +50,8 @@ Public Class Functions
 
         MainForm.Status.Text = "Compiling"
 
-        Dim FileName As String = System.IO.Path.GetFileName(MainForm.TabStrip.SelectedItem.Tag.ToString)
-        Dim path As String = System.IO.Path.GetDirectoryName(MainForm.TabStrip.SelectedItem.Tag.ToString)
+        Dim FileName As String = System.IO.Path.GetFileName(CurrentTB.Tag.ToString)
+        Dim path As String = System.IO.Path.GetDirectoryName(CurrentTB.Tag.ToString)
 
         Dim Args As String = Setting.AgrumentsTxt.Text.Replace("[FILE]", FileName)
         Dim pawncc As String = Setting.PawnccPath.Text.Replace("[APP]", Application.StartupPath)
@@ -222,41 +160,49 @@ Public Class Functions
         tb.DelayedTextChangedInterval = 1000
         tb.DelayedEventsInterval = 1000
         MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
-        AddHandler tb.TextChanged, New EventHandler(Of TextChangedEventArgs)(AddressOf MainForm.Code_TextChanged)
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.
-    Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False)
+    Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False, Optional ByVal SourceText As FastColoredTextBox = Nothing)
         Try
-            Dim tb As FastColoredTextBox = New FastColoredTextBox()
-            SetDefaultSettings(tb)
-            Dim tab As FATabStripItem = New FATabStripItem(If(fileName IsNot Nothing, Path.GetFileName(fileName), "[new]"), tb)
-            tab.Tag = fileName
+            Dim tb As New Editor
+            SetDefaultSettings(tb.SplitEditorCode)
+            If fileName IsNot Nothing Then
+                tb.TabText = Path.GetFileName(fileName)
+            Else
+                tb.TabText = "[new]"
+            End If
+            tb.Tag = fileName
             If fileName <> Nothing Then
                 If IsBind = True Then
                     Dim Encoding As New System.Text.UTF8Encoding(False)
-                    tb.OpenFile(fileName, Encoding)
-                    tb.IsChanged = False
-                    tb.ClearUndo()
+                    tb.SplitEditorCode.OpenFile(fileName, Encoding)
+                    tb.SplitEditorCode.Tag = fileName
+                    tb.SplitEditorCode.IsChanged = False
+                    tb.SplitEditorCode.ClearUndo()
+
                     GC.Collect()
                     GC.GetTotalMemory(True)
                 Else
-                    tb.OpenFile(fileName)
+                    tb.SplitEditorCode.OpenFile(fileName)
                 End If
             Else
-                tb.OpenFile(Application.StartupPath + "\gamemodes\new.pwn")
-                tb.IsChanged = False
+                tb.SplitEditorCode.OpenFile(Application.StartupPath + "\gamemodes\new.pwn")
+                tb.SplitEditorCode.IsChanged = False
             End If
-            tb.ClearUndo()
-            tb.IsChanged = False
-            MainForm.TabStrip.AddTab(tab)
-            MainForm.TabStrip.SelectedItem = tab
+            tb.SplitEditorCode.ClearUndo()
+            tb.SplitEditorCode.IsChanged = False
+
             tb.Focus()
 
+            MainForm.ReBuildObjectExplorerAndHelpMenu(tb.SplitEditorCode.Text)
 
-            MainForm.ReBuildObjectExplorerAndHelpMenu(tb.Text)
+            tb.SplitEditorCode.OnTextChanged(tb.SplitEditorCode.Range)
 
-            tb.OnTextChanged(tb.Range)
+            If SourceText IsNot Nothing Then
+                tb.SplitEditorCode.SourceTextBox = SourceText
+            End If
+
             Return tb
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then

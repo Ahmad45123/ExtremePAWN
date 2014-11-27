@@ -27,6 +27,21 @@ Partial Class MainForm
         Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
         Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
         Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
+        Dim DockPanelSkin1 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin()
+        Dim AutoHideStripSkin1 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin()
+        Dim DockPanelGradient1 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient1 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPaneStripSkin1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin()
+        Dim DockPaneStripGradient1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient()
+        Dim TabGradient2 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPanelGradient2 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient3 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPaneStripToolWindowGradient1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient()
+        Dim TabGradient4 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim TabGradient5 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPanelGradient3 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient6 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim TabGradient7 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
         Me.RightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,8 +49,6 @@ Partial Class MainForm
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripSeparator()
         Me.AddBookmarkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RemoveBookmarkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GotoBookmarkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
         Me.FindToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReplaceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -43,6 +56,8 @@ Partial Class MainForm
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripSeparator()
         Me.CommentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnCommentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CloneInAnotherTabToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.Status = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
@@ -51,8 +66,6 @@ Partial Class MainForm
         Me.AutoSaver = New System.Windows.Forms.Timer(Me.components)
         Me.IncludeTreeView = New System.Windows.Forms.TreeView()
         Me.HelpMenu = New AutocompleteMenuNS.AutocompleteMenu()
-        Me.SplitEditorCode = New FastColoredTextBoxNS.FastColoredTextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ErrorDataGridView = New System.Windows.Forms.DataGridView()
         Me.Type = New System.Windows.Forms.DataGridViewImageColumn()
         Me.ErrorText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,8 +94,6 @@ Partial Class MainForm
         Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
         Me.MainMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreateProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -130,14 +141,10 @@ Partial Class MainForm
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.CodeSnipptesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CodeFont = New System.Windows.Forms.FontDialog()
-        Me.TabStrip = New FarsiLibrary.Win.FATabStrip()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.DocumentMap = New FastColoredTextBoxNS.DocumentMap()
-        Me.ObjectExplorer = New System.Windows.Forms.DataGridView()
-        Me.clImage = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.clName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FolderBrowser = New System.Windows.Forms.FolderBrowserDialog()
         Me.ProjectExplorer = New System.Windows.Forms.TreeView()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
@@ -153,112 +160,110 @@ Partial Class MainForm
         Me.ToolStripButton22 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton23 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.MainDockPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
-        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip.SuspendLayout()
         Me.MainMenu.SuspendLayout()
-        CType(Me.TabStrip, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.ObjectExplorer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'RightClickMenu
         '
-        Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.GotoBookmarkToolStripMenuItem, Me.ToolStripMenuItem7, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem})
+        Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem, Me.ToolStripSeparator7, Me.CloneInAnotherTabToolStripMenuItem})
         Me.RightClickMenu.Name = "ContextMenuStrip1"
-        Me.RightClickMenu.Size = New System.Drawing.Size(185, 286)
+        Me.RightClickMenu.Size = New System.Drawing.Size(183, 270)
         '
         'CopyToolStripMenuItem1
         '
         Me.CopyToolStripMenuItem1.Name = "CopyToolStripMenuItem1"
-        Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.CopyToolStripMenuItem1.Text = "Copy"
         '
         'CutToolStripMenuItem1
         '
         Me.CutToolStripMenuItem1.Name = "CutToolStripMenuItem1"
-        Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.CutToolStripMenuItem1.Text = "Cut"
         '
         'PasteToolStripMenuItem1
         '
         Me.PasteToolStripMenuItem1.Name = "PasteToolStripMenuItem1"
-        Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.PasteToolStripMenuItem1.Text = "Paste"
         '
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(181, 6)
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(179, 6)
         '
         'AddBookmarkToolStripMenuItem
         '
         Me.AddBookmarkToolStripMenuItem.Name = "AddBookmarkToolStripMenuItem"
-        Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.AddBookmarkToolStripMenuItem.Text = "Add Bookmark"
         '
         'RemoveBookmarkToolStripMenuItem
         '
         Me.RemoveBookmarkToolStripMenuItem.Name = "RemoveBookmarkToolStripMenuItem"
-        Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.RemoveBookmarkToolStripMenuItem.Text = "Remove Bookmark"
-        '
-        'GotoBookmarkToolStripMenuItem
-        '
-        Me.GotoBookmarkToolStripMenuItem.Name = "GotoBookmarkToolStripMenuItem"
-        Me.GotoBookmarkToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.GotoBookmarkToolStripMenuItem.Text = "Goto Next Bookmark"
-        '
-        'ToolStripMenuItem7
-        '
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(184, 22)
-        Me.ToolStripMenuItem7.Text = "Goto Prev Bookmark"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(181, 6)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(179, 6)
         '
         'FindToolStripMenuItem1
         '
         Me.FindToolStripMenuItem1.Name = "FindToolStripMenuItem1"
-        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.FindToolStripMenuItem1.Text = "Find"
         '
         'ReplaceToolStripMenuItem1
         '
         Me.ReplaceToolStripMenuItem1.Name = "ReplaceToolStripMenuItem1"
-        Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.ReplaceToolStripMenuItem1.Text = "Replace"
         '
         'GotoToolStripMenuItem1
         '
         Me.GotoToolStripMenuItem1.Name = "GotoToolStripMenuItem1"
-        Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(184, 22)
+        Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.GotoToolStripMenuItem1.Text = "Goto"
         '
         'ToolStripMenuItem10
         '
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(181, 6)
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(179, 6)
         '
         'CommentToolStripMenuItem
         '
         Me.CommentToolStripMenuItem.Name = "CommentToolStripMenuItem"
-        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.CommentToolStripMenuItem.Text = "Comment"
         '
         'UnCommentToolStripMenuItem
         '
         Me.UnCommentToolStripMenuItem.Name = "UnCommentToolStripMenuItem"
-        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.UnCommentToolStripMenuItem.Text = "UnComment"
+        '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(179, 6)
+        '
+        'CloneInAnotherTabToolStripMenuItem
+        '
+        Me.CloneInAnotherTabToolStripMenuItem.Name = "CloneInAnotherTabToolStripMenuItem"
+        Me.CloneInAnotherTabToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.CloneInAnotherTabToolStripMenuItem.Text = "Clone in another tab"
         '
         'StatusStrip
         '
@@ -308,51 +313,6 @@ Partial Class MainForm
         Me.HelpMenu.Items = New String(-1) {}
         Me.HelpMenu.TargetControlWrapper = Nothing
         '
-        'SplitEditorCode
-        '
-        Me.SplitEditorCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitEditorCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
-        Me.HelpMenu.SetAutocompleteMenu(Me.SplitEditorCode, Me.HelpMenu)
-        Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 15)
-        Me.SplitEditorCode.BackBrush = Nothing
-        Me.SplitEditorCode.BookmarkColor = System.Drawing.Color.Red
-        Me.SplitEditorCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2
-        Me.SplitEditorCode.CharHeight = 15
-        Me.SplitEditorCode.CharWidth = 8
-        Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.SplitEditorCode.DelayedTextChangedInterval = 1000
-        Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.SplitEditorCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2
-        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 10.0!)
-        Me.SplitEditorCode.IsReplaceMode = False
-        Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
-        Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
-        Me.SplitEditorCode.Location = New System.Drawing.Point(195, 239)
-        Me.SplitEditorCode.Name = "SplitEditorCode"
-        Me.SplitEditorCode.Paddings = New System.Windows.Forms.Padding(0)
-        Me.SplitEditorCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
-        Me.SplitEditorCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
-        Me.SplitEditorCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SplitEditorCode.Size = New System.Drawing.Size(458, 239)
-        Me.SplitEditorCode.TabIndex = 0
-        Me.SplitEditorCode.Visible = False
-        Me.SplitEditorCode.Zoom = 100
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.HelpMenu.SetAutocompleteMenu(Me.TextBox1, Nothing)
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.MenuText
-        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.HSplit
-        Me.TextBox1.Location = New System.Drawing.Point(194, 229)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(461, 9)
-        Me.TextBox1.TabIndex = 16
-        Me.TextBox1.Visible = False
-        '
         'ErrorDataGridView
         '
         Me.ErrorDataGridView.AllowUserToAddRows = False
@@ -394,7 +354,7 @@ Partial Class MainForm
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripSeparator2, Me.ToolStripButton7, Me.ToolStripSeparator3, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator4, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator5, Me.ToolStripButton13, Me.ToolStripButton18, Me.ToolStripSeparator6, Me.ToolStripButton14, Me.ToolStripButton15, Me.ToolStripButton16, Me.ToolStripSeparator7, Me.ToolStripButton17})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripSeparator2, Me.ToolStripButton7, Me.ToolStripSeparator3, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator4, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator5, Me.ToolStripButton13, Me.ToolStripButton18, Me.ToolStripSeparator6, Me.ToolStripButton14, Me.ToolStripButton15, Me.ToolStripButton16})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -575,20 +535,6 @@ Partial Class MainForm
         Me.ToolStripButton16.Name = "ToolStripButton16"
         Me.ToolStripButton16.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton16.Text = "Auto Indent"
-        '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton17
-        '
-        Me.ToolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton17.Image = Global.ExtremePawn.My.Resources.Resources.Split
-        Me.ToolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton17.Name = "ToolStripButton17"
-        Me.ToolStripButton17.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton17.Text = "SplitScreen Mode"
         '
         'MainMenu
         '
@@ -777,7 +723,7 @@ Partial Class MainForm
         '
         'ViewToolStripMenuItem
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObjectExplToolStripMenuItem, Me.IncludeListDocumentMapToolStripMenuItem, Me.ErrorListToolStripMenuItem, Me.ProjectExplorerToolStripMenuItem})
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem7, Me.ObjectExplToolStripMenuItem, Me.IncludeListDocumentMapToolStripMenuItem, Me.ErrorListToolStripMenuItem, Me.ProjectExplorerToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
@@ -866,18 +812,6 @@ Partial Class MainForm
         Me.CodeSnipptesToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.CodeSnipptesToolStripMenuItem.Text = "Keyboard shortcuts"
         '
-        'TabStrip
-        '
-        Me.TabStrip.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabStrip.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        Me.TabStrip.Location = New System.Drawing.Point(195, 77)
-        Me.TabStrip.Name = "TabStrip"
-        Me.TabStrip.Size = New System.Drawing.Size(458, 401)
-        Me.TabStrip.TabIndex = 9
-        Me.TabStrip.Text = "FaTabStrip1"
-        '
         'TabControl1
         '
         Me.TabControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -921,49 +855,6 @@ Partial Class MainForm
         Me.DocumentMap.Size = New System.Drawing.Size(234, 336)
         Me.DocumentMap.TabIndex = 0
         Me.DocumentMap.Target = Nothing
-        '
-        'ObjectExplorer
-        '
-        Me.ObjectExplorer.AllowUserToAddRows = False
-        Me.ObjectExplorer.AllowUserToDeleteRows = False
-        Me.ObjectExplorer.AllowUserToResizeColumns = False
-        Me.ObjectExplorer.AllowUserToResizeRows = False
-        Me.ObjectExplorer.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ObjectExplorer.BackgroundColor = System.Drawing.Color.White
-        Me.ObjectExplorer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.ObjectExplorer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ObjectExplorer.ColumnHeadersVisible = False
-        Me.ObjectExplorer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clImage, Me.clName})
-        Me.ObjectExplorer.GridColor = System.Drawing.Color.White
-        Me.ObjectExplorer.Location = New System.Drawing.Point(2, 77)
-        Me.ObjectExplorer.MultiSelect = False
-        Me.ObjectExplorer.Name = "ObjectExplorer"
-        Me.ObjectExplorer.ReadOnly = True
-        Me.ObjectExplorer.RowHeadersVisible = False
-        Me.ObjectExplorer.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black
-        Me.ObjectExplorer.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White
-        Me.ObjectExplorer.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Green
-        Me.ObjectExplorer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.ObjectExplorer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ObjectExplorer.Size = New System.Drawing.Size(186, 401)
-        Me.ObjectExplorer.TabIndex = 12
-        Me.ObjectExplorer.VirtualMode = True
-        '
-        'clImage
-        '
-        Me.clImage.HeaderText = "Column2"
-        Me.clImage.MinimumWidth = 32
-        Me.clImage.Name = "clImage"
-        Me.clImage.ReadOnly = True
-        Me.clImage.Width = 32
-        '
-        'clName
-        '
-        Me.clName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.clName.HeaderText = "Column1"
-        Me.clName.Name = "clName"
-        Me.clName.ReadOnly = True
         '
         'FolderBrowser
         '
@@ -1104,23 +995,85 @@ Partial Class MainForm
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
         '
+        'MainDockPanel
+        '
+        Me.MainDockPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MainDockPanel.DocumentTabStripLocation = WeifenLuo.WinFormsUI.Docking.DocumentTabStripLocation.Bottom
+        Me.MainDockPanel.Location = New System.Drawing.Point(0, 74)
+        Me.MainDockPanel.Name = "MainDockPanel"
+        Me.MainDockPanel.Size = New System.Drawing.Size(907, 513)
+        DockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight
+        AutoHideStripSkin1.DockStripGradient = DockPanelGradient1
+        TabGradient1.EndColor = System.Drawing.SystemColors.Control
+        TabGradient1.StartColor = System.Drawing.SystemColors.Control
+        TabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        AutoHideStripSkin1.TabGradient = TabGradient1
+        AutoHideStripSkin1.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
+        DockPanelSkin1.AutoHideStripSkin = AutoHideStripSkin1
+        TabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient2.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient1.ActiveTabGradient = TabGradient2
+        DockPanelGradient2.EndColor = System.Drawing.SystemColors.Control
+        DockPanelGradient2.StartColor = System.Drawing.SystemColors.Control
+        DockPaneStripGradient1.DockStripGradient = DockPanelGradient2
+        TabGradient3.EndColor = System.Drawing.SystemColors.ControlLight
+        TabGradient3.StartColor = System.Drawing.SystemColors.ControlLight
+        TabGradient3.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient1.InactiveTabGradient = TabGradient3
+        DockPaneStripSkin1.DocumentGradient = DockPaneStripGradient1
+        DockPaneStripSkin1.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
+        TabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption
+        TabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient4.StartColor = System.Drawing.SystemColors.GradientActiveCaption
+        TabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText
+        DockPaneStripToolWindowGradient1.ActiveCaptionGradient = TabGradient4
+        TabGradient5.EndColor = System.Drawing.SystemColors.Control
+        TabGradient5.StartColor = System.Drawing.SystemColors.Control
+        TabGradient5.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient1.ActiveTabGradient = TabGradient5
+        DockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight
+        DockPaneStripToolWindowGradient1.DockStripGradient = DockPanelGradient3
+        TabGradient6.EndColor = System.Drawing.SystemColors.InactiveCaption
+        TabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient6.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient6.TextColor = System.Drawing.SystemColors.InactiveCaptionText
+        DockPaneStripToolWindowGradient1.InactiveCaptionGradient = TabGradient6
+        TabGradient7.EndColor = System.Drawing.Color.Transparent
+        TabGradient7.StartColor = System.Drawing.Color.Transparent
+        TabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        DockPaneStripToolWindowGradient1.InactiveTabGradient = TabGradient7
+        DockPaneStripSkin1.ToolWindowGradient = DockPaneStripToolWindowGradient1
+        DockPanelSkin1.DockPaneStripSkin = DockPaneStripSkin1
+        Me.MainDockPanel.Skin = DockPanelSkin1
+        Me.MainDockPanel.TabIndex = 21
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(228, 22)
+        Me.ToolStripMenuItem7.Text = "Code"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.AppWorkspace
         Me.ClientSize = New System.Drawing.Size(907, 609)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ProjectExplorer)
-        Me.Controls.Add(Me.SplitEditorCode)
-        Me.Controls.Add(Me.ObjectExplorer)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.TabStrip)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.ErrorDataGridView)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.MainMenu)
+        Me.Controls.Add(Me.MainDockPanel)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.MainMenu
         Me.Name = "MainForm"
@@ -1129,17 +1082,14 @@ Partial Class MainForm
         Me.RightClickMenu.ResumeLayout(False)
         Me.StatusStrip.ResumeLayout(False)
         Me.StatusStrip.PerformLayout()
-        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
         Me.MainMenu.ResumeLayout(False)
         Me.MainMenu.PerformLayout()
-        CType(Me.TabStrip, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
-        CType(Me.ObjectExplorer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -1216,23 +1166,14 @@ Partial Class MainForm
     Friend WithEvents ToolStripMenuItem6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents AddBookmarkToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RemoveBookmarkToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GotoBookmarkToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents FindToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReplaceToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TabStrip As FarsiLibrary.Win.FATabStrip
-    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents SplitEditorCode As FastColoredTextBoxNS.FastColoredTextBox
     Friend WithEvents GotoToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents DocumentMap As FastColoredTextBoxNS.DocumentMap
-    Private WithEvents clImage As System.Windows.Forms.DataGridViewImageColumn
-    Private WithEvents clName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents ObjectExplorer As System.Windows.Forms.DataGridView
     Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CommentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UnCommentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1258,7 +1199,6 @@ Partial Class MainForm
     Friend WithEvents ToolStripButton18 As System.Windows.Forms.ToolStripButton
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents ShapeContainer2 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripButton19 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton20 As System.Windows.Forms.ToolStripButton
@@ -1272,5 +1212,9 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator12 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CodeSnipptesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CodeSnipptesToolStripItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents CloneInAnotherTabToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MainDockPanel As WeifenLuo.WinFormsUI.Docking.DockPanel
+    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -106,6 +106,9 @@
     <Reference Include="TabStrip">
       <HintPath>..\TabStrip.dll</HintPath>
     </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -119,6 +122,24 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm Items\Editor.Designer.vb">
+      <DependentUpon>Editor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\Editor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\FilesDockPanel.Designer.vb">
+      <DependentUpon>FilesDockPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\FilesDockPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer.Designer.vb">
+      <DependentUpon>ObjectExplorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.Designer.vb">
       <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
     </Compile>
@@ -126,7 +147,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\ApplicationEvents.vb" />
-    <Compile Include="Modules\ClsCapture.vb" />
     <Compile Include="Tools\CodeSnipptes\CodeSnipptes.Designer.vb">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
     </Compile>
@@ -186,9 +206,17 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Styles.vb" />
-    <Compile Include="Modules\ViewManager.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MainForm Items\Editor.resx">
+      <DependentUpon>Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\FilesDockPanel.resx">
+      <DependentUpon>FilesDockPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ObjectExplorer.resx">
+      <DependentUpon>ObjectExplorer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptes.resx">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
     </EmbeddedResource>

@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2062336">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2056704">
       <assemblyIdentity name="ExtremePawn" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rvd7BFBVFmurQXQRzOiqBUMcqC0=</dsig:DigestValue>
+        <dsig:DigestValue>RXPPCzWF+1S9vVi+ozc4g47AKzQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -111,6 +111,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
         <dsig:DigestValue>35OEQOP3E65BdQKVC3UQ7KeYPQI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeifenLuo.WinFormsUI.Docking.dll" size="428032">
+      <assemblyIdentity name="WeifenLuo.WinFormsUI.Docking" version="2.9.0.0" publicKeyToken="5CDED1A1A0A7B481" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>j10+NvPMxaocrliyv4guACu7kZk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
