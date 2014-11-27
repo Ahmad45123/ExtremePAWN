@@ -44,6 +44,7 @@ Public Class MainForm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
             Return ProjectExplorerFrm
         End If
+        Return Nothing
     End Function
 
 
@@ -83,27 +84,6 @@ Public Class MainForm
 
     Private Sub AutoSaver_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaver.Tick
         ToolStripButton4.PerformClick()
-
-    End Sub
-
-    Private Sub TreeView1_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim Func As String = IncludeListFrm.IncludeTreeView.SelectedNode.Text
-        Func = Func.Replace("      ", "")
-        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
-        If Not Index = -1 Then
-            Dim Format As String = PublicSyntax.Items.Item(Index)
-            CurrentTB.InsertText(Format)
-        End If
-    End Sub
-
-    Private Sub TreeView1_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs)
-        Dim Func As String = IncludeListFrm.IncludeTreeView.SelectedNode.Text
-        Func = Func.Replace("      ", "")
-        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
-        If Not Index = -1 Then
-            Dim Format As String = PublicSyntax.Items.Item(Index)
-            Status.Text = Format
-        End If
 
     End Sub
 
@@ -153,8 +133,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Dim tab = Functions.CreateTab(Nothing)
-        tab.Show(MainDockPanel)
+        Functions.CreateTab(Nothing)
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -178,7 +157,7 @@ Public Class MainForm
 
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
         If (CurrentTB IsNot Nothing) And (Not CurrentProjectPath = Nothing) Then
-            If CurrentTB.Tag.contains("Main.pwn") Then
+            If CurrentOpenedTab.Tag.contains("Main.pwn") Then
                 Functions.CreateFile(InputBox("Please enter a name for the new file." + vbCrLf + "NOTE: Pressing cancel willn't cancel the operation."))
             Else
                 MsgBox("Make sure you have Main.pwn file open." + vbCrLf + "And also make sure you placed your cursor you want to place the include.")
@@ -190,8 +169,7 @@ Public Class MainForm
 
     Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
         If OpenFileDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim tab = Functions.CreateTab(OpenFileDialog.FileName)
-            tab.Show(MainDockPanel)
+            Functions.CreateTab(OpenFileDialog.FileName)
         End If
         IdleMaker.Start()
     End Sub
@@ -452,62 +430,31 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub ProjectExplorer_NodeMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
-        If My.Computer.FileSystem.FileExists(Application.StartupPath + "/include/" + e.Node.Text + ".inc") Then
-            Functions.CreateTab(Application.StartupPath + "/include/" + e.Node.Text + ".inc")
-        ElseIf e.Node.Index = 2 And Not CurrentProjectPath = Nothing Then
-            Functions.CreateTab(CurrentProjectPath + "/Main.pwn")
-        ElseIf My.Computer.FileSystem.FileExists(CurrentProjectPath + "/Scripts/" + e.Node.Text + ".pwn") And Not CurrentProjectPath = Nothing Then
-            Functions.CreateTab(CurrentProjectPath + "/Scripts/" + e.Node.Text + ".pwn")
-        End If
-    End Sub
-
     Private Sub LoadProjectToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoadProjectToolStripMenuItem.Click
         Functions.LoadProject()
     End Sub
 
-    'Private Sub ToolStripMenuItem8_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
-    'Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
-    'For Each tab As FATabStripItem In TabStrip.Items
-    '   list.Add(tab)
-    'Next
-    ' For Each tab As FATabStripItem In list
-    '  Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
-    '   Me.FaTabStrip1_TabStripItemClosing(args)
-    '    If args.Cancel Then
-    '         Exit For
-    '      End If
-    '   Next
-    'End Sub
+    Private Sub ToolStripMenuItem8_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
+        For Each tab As Editor In OwnedForms
+            tab.Close()
+        Next
+    End Sub
 
-    'Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
-    '    If CurrentProjectPath = Nothing Then
-    '        MsgBox("You don't have any project opened to close.")
-    '    Else
-    '        CurrentProjectPath = Nothing
-    '        ProjectExplorer.Nodes(0).Nodes.Clear()
-    '        ProjectExplorer.Nodes(1).Nodes.Clear()
+    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
+        If CurrentProjectPath = Nothing Then
+            MsgBox("You don't have any project opened to close.")
+        Else
+            CurrentProjectPath = Nothing
+            ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
+            ProjectExplorerFrm.ProjectExplorer.Nodes(1).Nodes.Clear()
 
-    '        'Saving before closing.
-    '        Dim list As List(Of FATabStripItem) = New List(Of FATabStripItem)()
-    '        For Each tab As FATabStripItem In TabStrip.Items
-    '            list.Add(tab)
-    '        Next
-
-    '        For Each tab As FATabStripItem In list
-    '            Dim args As TabStripItemClosingEventArgs = New TabStripItemClosingEventArgs(tab)
-    '            Me.FaTabStrip1_TabStripItemClosing(args)
-    '            If args.Cancel Then
-    '                Exit For
-    '            End If
-    '            TabStrip.RemoveTab(tab)
-    '        Next
-    '    End If
-    'End Sub
+            'Saving before closing.
+            ToolStripMenuItem8_Click_1(Me, New EventArgs) 'just to save space :D, This is the Save All function.
+        End If
+    End Sub
 
     Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
-        Dim tab = Functions.CreateTab(Nothing)
-        tab.show(MainDockPanel)
+        Functions.CreateTab(Nothing)
     End Sub
 
     Dim CurrentSelectedProjectExplorer As TreeNode
@@ -605,8 +552,7 @@ Public Class MainForm
 
     Private Sub CloneInAnotherTabToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloneInAnotherTabToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            Dim tab = Functions.CreateTab(CurrentTB.Tag, False, CurrentTB)
-            tab.show(MainDockPanel)
+            Functions.CreateTab(CurrentTB.Tag, False, CurrentTB)
         End If
     End Sub
 

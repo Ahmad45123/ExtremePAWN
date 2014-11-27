@@ -18,7 +18,7 @@ Public Class Functions
                 Return result
             End If
             tab.TabText = Path.GetFileName(MainForm.SaveFileDialog.FileName)
-            tab.SplitEditorCode.Tag = MainForm.SaveFileDialog.FileName
+            tab.Tag = MainForm.SaveFileDialog.FileName
 
         End If
         Try
@@ -50,8 +50,8 @@ Public Class Functions
 
         MainForm.Status.Text = "Compiling"
 
-        Dim FileName As String = System.IO.Path.GetFileName(CurrentTB.Tag.ToString)
-        Dim path As String = System.IO.Path.GetDirectoryName(CurrentTB.Tag.ToString)
+        Dim FileName As String = System.IO.Path.GetFileName(MainForm.CurrentOpenedTab.Tag.ToString)
+        Dim path As String = System.IO.Path.GetDirectoryName(MainForm.CurrentOpenedTab.Tag.ToString)
 
         Dim Args As String = Setting.AgrumentsTxt.Text.Replace("[FILE]", FileName)
         Dim pawncc As String = Setting.PawnccPath.Text.Replace("[APP]", Application.StartupPath)
@@ -202,6 +202,8 @@ Public Class Functions
             If SourceText IsNot Nothing Then
                 tb.SplitEditorCode.SourceTextBox = SourceText
             End If
+
+            tb.Show(MainForm.MainDockPanel)
 
             Return tb
         Catch ex As Exception

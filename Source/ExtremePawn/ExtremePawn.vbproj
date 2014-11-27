@@ -87,9 +87,6 @@
     <Reference Include="AutocompleteMenu">
       <HintPath>..\AutocompleteMenu.dll</HintPath>
     </Reference>
-    <Reference Include="AutomaticUpdater">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\wyBuild\AutomaticUpdater\AutomaticUpdater.dll</HintPath>
-    </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>..\FastColoredTextBox.dll</HintPath>
     </Reference>
@@ -103,9 +100,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TabStrip">
-      <HintPath>..\TabStrip.dll</HintPath>
-    </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>..\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>

@@ -20,7 +20,7 @@ Public Class Editor
         e.ChangedRange.SetStyle(BlueItalicStyle, "#.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(BoldStyle, "\b(public|stock|enum)\s+(?<range>[\w_]+?)\b")
         e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case|forward)\b", RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(TextStyle, Chr(34) + ".*" + Chr(34), RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(TextStyle, Chr(34) + "([^" + Chr(34) + "]*)" + Chr(34), RegexOptions.Multiline) 'Chr(34) is the char "double quote"
         e.ChangedRange.SetStyle(NumberStyle, "([0-9])", RegexOptions.Multiline)
 
         'Function/Defines colors

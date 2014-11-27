@@ -24,9 +24,9 @@ Partial Class ProjectExplorerFrm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Includes")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Scripts")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main.pwn")
         Me.ProjectExplorer = New System.Windows.Forms.TreeView()
         Me.SuspendLayout()
         '
@@ -35,13 +35,13 @@ Partial Class ProjectExplorerFrm
         Me.ProjectExplorer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProjectExplorer.Location = New System.Drawing.Point(0, 0)
         Me.ProjectExplorer.Name = "ProjectExplorer"
-        TreeNode7.Name = "Node0"
-        TreeNode7.Text = "Includes"
-        TreeNode8.Name = "Node1"
-        TreeNode8.Text = "Scripts"
-        TreeNode9.Name = "Node2"
-        TreeNode9.Text = "Main.pwn"
-        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9})
+        TreeNode1.Name = "Node0"
+        TreeNode1.Text = "Includes"
+        TreeNode2.Name = "Node1"
+        TreeNode2.Text = "Scripts"
+        TreeNode3.Name = "Node2"
+        TreeNode3.Text = "Main.pwn"
+        Me.ProjectExplorer.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3})
         Me.ProjectExplorer.Size = New System.Drawing.Size(234, 213)
         Me.ProjectExplorer.TabIndex = 14
         '
