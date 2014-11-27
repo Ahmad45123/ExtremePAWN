@@ -106,6 +106,9 @@
     <Reference Include="TabStrip">
       <HintPath>..\TabStrip.dll</HintPath>
     </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -119,6 +122,42 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm Items\DocumentMapFrm.Designer.vb">
+      <DependentUpon>DocumentMapFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\DocumentMapFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\Editor.Designer.vb">
+      <DependentUpon>Editor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\Editor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\ErrorsFrm.Designer.vb">
+      <DependentUpon>ErrorsFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ErrorsFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\IncludeListFrm.Designer.vb">
+      <DependentUpon>IncludeListFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\IncludeListFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorerFrm.Designer.vb">
+      <DependentUpon>ObjectExplorerFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorerFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\ProjectExplorerFrm.Designer.vb">
+      <DependentUpon>ProjectExplorerFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ProjectExplorerFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.Designer.vb">
       <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
     </Compile>
@@ -126,7 +165,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\ApplicationEvents.vb" />
-    <Compile Include="Modules\ClsCapture.vb" />
     <Compile Include="Tools\CodeSnipptes\CodeSnipptes.Designer.vb">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
     </Compile>
@@ -186,9 +224,26 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Styles.vb" />
-    <Compile Include="Modules\ViewManager.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MainForm Items\DocumentMapFrm.resx">
+      <DependentUpon>DocumentMapFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\Editor.resx">
+      <DependentUpon>Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ErrorsFrm.resx">
+      <DependentUpon>ErrorsFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\IncludeListFrm.resx">
+      <DependentUpon>IncludeListFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ObjectExplorerFrm.resx">
+      <DependentUpon>ObjectExplorerFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ProjectExplorerFrm.resx">
+      <DependentUpon>ProjectExplorerFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptes.resx">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
     </EmbeddedResource>
