@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2060288">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePawn.exe" size="2066944">
       <assemblyIdentity name="ExtremePawn" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9hxgskovgHMLnrBNU0FJxiT56Oo=</dsig:DigestValue>
+        <dsig:DigestValue>wTYdulmKEq+c/wTkV19H4AS7O30=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,13 +102,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ExtremePawn.exe.config" size="1323">
+  <file name="ExtremePawn.exe.config" size="1346">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>lfB6deNxxuuXDXnA2SICZuECJ1k=</dsig:DigestValue>
+      <dsig:DigestValue>YhZQ+fSY4HsNvgDSvkCB4S6O60o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icons-Land-Vista-Chess-Pawn-Yellow.ico" size="372526">

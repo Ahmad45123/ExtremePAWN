@@ -1,5 +1,4 @@
 ﻿Imports FastColoredTextBoxNS
-Imports FarsiLibrary.Win
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Threading
@@ -132,6 +131,10 @@ Public Class Functions
                     Setting.AgrumentsTxt.Text = Parts(1)
                 ElseIf Parts(0) = "PawnCC" Then
                     Setting.PawnccPath.Text = Parts(1)
+                ElseIf Parts(0) = "SAMPSrvrFldr" Then
+                    Setting.TextBox1.Text = Parts(1)
+                ElseIf Parts(0) = "SAMPClient" Then
+                    Setting.TextBox2.Text = Parts(1)
                 ElseIf Parts(0) = "AutoSaving" Then
                     If Parts(1) = "True" Then Setting.AutoSaving.Checked = True Else Setting.AutoSaving.Checked = False
                 ElseIf Parts(0) = "AutoComplete" Then

@@ -16,7 +16,6 @@
 Imports System.IO
 Imports FastColoredTextBoxNS
 Imports System.Text.RegularExpressions
-Imports FarsiLibrary.Win
 Imports System.Threading
 Imports WeifenLuo.WinFormsUI.Docking
 
@@ -613,5 +612,67 @@ Public Class MainForm
 
     Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         MainDockPanel.SaveAsXml(Application.StartupPath + "/SavedDocks.xml")
+    End Sub
+
+    Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
+        If CurrentOpenedTab IsNot Nothing Then
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                If Setting.TextBox1.Text = "None" Or Setting.TextBox2.Text = "None" Then
+                    MsgBox("Please head to settings and set SAMP server's path and SAMP client's.")
+                Else
+                    'Prepare
+                    Dim ServerPort As Integer = 0 'Server Port
+                    Dim AMXFile As String = Path.ChangeExtension(CurrentOpenedTab.Tag, ".amx")
+                    Dim SAMPSrvr As String
+                    If Setting.TextBox1.Text.EndsWith("\") Or Setting.TextBox1.Text.EndsWith("/") Then
+                        SAMPSrvr = Setting.TextBox1.Text.Remove(Setting.TextBox1.Text.Count - 1, 1)
+                    Else
+                        SAMPSrvr = Setting.TextBox1.Text
+                    End If
+
+                    Dim objReader As New System.IO.StreamReader(SAMPSrvr + "\server.cfg") 'Read the settings
+                    Do While objReader.Peek() <> -1
+                        Dim Line As String
+                        Line = objReader.ReadLine()
+
+                        If Line.Contains("port") Then
+                            Line = Line.Remove(0, 5)
+                            ServerPort = Convert.ToInt16(Line)
+                            Exit Do
+                        End If
+                    Loop
+                    objReader.Close()
+
+                    ToolStripButton7.PerformClick() 'Compile
+
+                    Try
+                        My.Computer.FileSystem.CopyFile(AMXFile, SAMPSrvr + "/gamemodes/" + Path.GetFileName(AMXFile), True) 'Copy the amx file.
+                        Dim server As New Process 'Run the server.
+                        With server
+                            .StartInfo.UseShellExecute = False
+                            .StartInfo.FileName = SAMPSrvr + "/samp-server.exe"
+                            .StartInfo.WorkingDirectory = SAMPSrvr
+                            .Start()
+                        End With
+
+                        Dim game As New Process 'Run the game.
+                        With game
+                            .StartInfo.UseShellExecute = False
+                            .StartInfo.FileName = Setting.TextBox2.Text
+                            .StartInfo.Arguments = "localhost:" + ServerPort.ToString
+                            .Start()
+                            .WaitForExit()
+                        End With
+
+                        If MsgBox("Do you wish to close the server ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                            server.CloseMainWindow() 'Dont KILL...
+                        End If
+                    Catch ex As Exception
+                        MsgBox("An error has occured, Check for any compile errors.")
+                    End Try
+
+                End If
+            End If
+        End If
     End Sub
 End Class

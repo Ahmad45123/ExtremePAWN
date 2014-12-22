@@ -39,9 +39,12 @@
         Dim File As New TextBox
         'Delete The Old If Exists
         If My.Computer.FileSystem.FileExists(Application.StartupPath + "\Settings.ini") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath + "\Settings.ini")
+
         'Start Adding Stuff
         File.Text = "Args=" + AgrumentsTxt.Text + vbCrLf
         File.AppendText("PawnCC=" + PawnccPath.Text + vbCrLf)
+        File.AppendText("SAMPSrvrFldr=" + TextBox1.Text)
+        File.AppendText("SAMPClient=" + TextBox2.Text)
         If AutoSaving.Checked = True Then
             File.AppendText("AutoSaving=True" + vbCrLf)
         Else
@@ -72,5 +75,17 @@
         KeyDetector.ShowDialog()
         KEY_COMPILE = KeyDetector.PressedKey
         Label4.Text = KEY_COMPILE.ToString
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If FolderBrowserDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
+            TextBox1.Text = FolderBrowserDialog1.SelectedPath
+        End If
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        If OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
+            TextBox2.Text = OpenFileDialog1.FileName
+        End If
     End Sub
 End Class
