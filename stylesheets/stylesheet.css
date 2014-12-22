@@ -335,7 +335,11 @@ Full-Width Styles
   background: url(../images/sprite_download.png) no-repeat bottom left;
 }
 
+<<<<<<< HEAD
 .tar_download_link {
+=======
+.exe_download_link {
+>>>>>>> parent of 45a62f4... Edited the site
   display: block;
   float: right;
   width: 90px;
@@ -350,7 +354,11 @@ Full-Width Styles
   background: url(../images/sprite_download.png) no-repeat top left;
 }
 
+<<<<<<< HEAD
 .tar_download_link:hover {
+=======
+.exe_download_link:hover {
+>>>>>>> parent of 45a62f4... Edited the site
   background: url(../images/sprite_download.png) no-repeat top right;
 }
 
