@@ -43,8 +43,8 @@
         'Start Adding Stuff
         File.Text = "Args=" + AgrumentsTxt.Text + vbCrLf
         File.AppendText("PawnCC=" + PawnccPath.Text + vbCrLf)
-        File.AppendText("SAMPSrvrFldr=" + TextBox1.Text)
-        File.AppendText("SAMPClient=" + TextBox2.Text)
+        File.AppendText("SAMPSrvrFldr=" + TextBox1.Text + vbCrLf)
+        File.AppendText("SAMPClient=" + TextBox2.Text + vbCrLf)
         If AutoSaving.Checked = True Then
             File.AppendText("AutoSaving=True" + vbCrLf)
         Else

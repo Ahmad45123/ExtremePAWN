@@ -28,7 +28,7 @@ Public Class MainForm
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
     Public Property CurrentTB As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
-    Public Property CurrentOpenedTab As Editor
+    Public Property CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
@@ -42,6 +42,8 @@ Public Class MainForm
             Return ObjectExplorerFrm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
             Return ProjectExplorerFrm
+        ElseIf persistString = GetType(SavedPositions).ToString Then
+            Return SavedPositions
         End If
         Return Nothing
     End Function
@@ -102,32 +104,32 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton12.Click
-        CurrentTB.Paste()
+        If CurrentTB IsNot Nothing Then CurrentTB.Paste()
     End Sub
 
     Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton11.Click
-        CurrentTB.Cut()
+        If CurrentTB IsNot Nothing Then CurrentTB.Cut()
     End Sub
 
     Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton10.Click
-        CurrentTB.Copy()
+        If CurrentTB IsNot Nothing Then CurrentTB.Copy()
     End Sub
 
     Private Sub ToolStripButton9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton9.Click
-        CurrentTB.Redo()
+        If CurrentTB IsNot Nothing Then CurrentTB.Redo()
     End Sub
 
     Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
-        CurrentTB.Undo()
+        If CurrentTB IsNot Nothing Then CurrentTB.Undo()
     End Sub
 
     Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
-        CurrentTB.ShowFindDialog()
+        If CurrentTB IsNot Nothing Then CurrentTB.ShowFindDialog()
 
     End Sub
 
     Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
-        CurrentTB.ShowReplaceDialog()
+        If CurrentTB IsNot Nothing Then CurrentTB.ShowReplaceDialog()
 
     End Sub
 
@@ -286,11 +288,8 @@ Public Class MainForm
             SyntaxHyFuncsList = SyntaxHyFuncsList + "|" + Str
         Next
 
-        Try
-            SyntaxHyDefinesList = SyntaxHyDefinesList.Remove(0, 1)
-            SyntaxHyFuncsList = SyntaxHyFuncsList.Remove(0, 1)
-        Catch ex As Exception
-        End Try
+        If SyntaxHyDefinesList IsNot Nothing Then SyntaxHyDefinesList = SyntaxHyDefinesList.Remove(0, 1)
+        If SyntaxHyFuncsList IsNot Nothing Then SyntaxHyFuncsList = SyntaxHyFuncsList.Remove(0, 1)
     End Sub
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
@@ -298,15 +297,17 @@ Public Class MainForm
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
-        Dim DeleteProjectExplorer As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
+        'Dim DeleteProjectExplorer As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
 
         Try
             PublicSyntax.Items.Clear()
-            ProjectExplorerFrm.ProjectExplorer.Invoke(DeleteProjectExplorer)
+            'ProjectExplorerFrm.ProjectExplorer.Invoke(DeleteProjectExplorer)
+            ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
             t_SyntaxHyDefinesList.Clear()
             t_SyntaxHyFuncsList.Clear()
         Catch ex As Exception
         End Try
+
         Dim IsAdd As Boolean = True
         Dim HelpMenuItems = New List(Of String)()
         Try
@@ -353,7 +354,6 @@ Public Class MainForm
                     End If
                     If IsAdd = True Then list.Add(item) Else IsAdd = True
                 Catch ex_2BF As Exception
-                    Console.WriteLine(ex_2BF)
                 End Try
             Next
             list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
@@ -363,7 +363,6 @@ Public Class MainForm
                                    ObjectExplorerFrm.DataGridView1.Invalidate()
                                End Sub)
         Catch ex_332 As Exception
-            Console.WriteLine(ex_332)
         End Try
         For Each Str As String In Includes
             HelpMenuItems.Add(Str)
@@ -534,13 +533,19 @@ Public Class MainForm
 
     End Sub
 
+    Dim WithEvents ReColorTimer As New Windows.Forms.Timer
+    Public Sub Timer_Tick() Handles ReColorTimer.Tick
+        CurrentTB.OnTextChanged(CurrentTB.Range)
+        ReColorTimer.Stop()
+    End Sub
+
     Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            If ObjectExplorerFrm.Visible = True Then 'If its not visible, Why bothering in filling it ?...
-                ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                                 ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
-                                             End Sub)
-            End If
+            ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                             ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
+                                         End Sub)
+            ReColorTimer.Interval = 300 'Using a timer so that it only refreshes when all the code is done.
+            ReColorTimer.Start()
         End If
     End Sub
 
@@ -673,6 +678,17 @@ Public Class MainForm
 
                 End If
             End If
+        End If
+    End Sub
+
+    Dim IsSavedPositionsSaved As Boolean = False
+    Private Sub SavedPositionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        If IsSavedPositionsSaved = True Then
+            SavedPositions.Close()
+            IsSavedPositionsSaved = False
+        Else
+            SavedPositions.Show(MainDockPanel)
+            IsSavedPositionsSaved = True
         End If
     End Sub
 End Class

@@ -152,6 +152,12 @@
     <Compile Include="MainForm Items\ProjectExplorerFrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MainForm Items\SavedPositions.Designer.vb">
+      <DependentUpon>SavedPositions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\SavedPositions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.Designer.vb">
       <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
     </Compile>
@@ -238,6 +244,9 @@
     <EmbeddedResource Include="MainForm Items\ProjectExplorerFrm.resx">
       <DependentUpon>ProjectExplorerFrm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\SavedPositions.resx">
+      <DependentUpon>SavedPositions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptes.resx">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +301,7 @@
     <None Include="Resources\ClosePrj.png" />
     <Content Include="Resources\ColorPicker.png" />
     <Content Include="Resources\Compile.png" />
+    <None Include="Resources\CompileRun.png" />
     <Content Include="Resources\Copy.png" />
     <None Include="Resources\CreateDialog.png" />
     <Content Include="Resources\Cut.png" />

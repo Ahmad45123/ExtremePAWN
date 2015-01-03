@@ -46,3 +46,4 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.pdb
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbprojResolveAssemblyReference.cache
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.SavedPositions.resources
