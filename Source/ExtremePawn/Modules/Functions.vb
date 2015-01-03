@@ -21,8 +21,7 @@ Public Class Functions
 
         End If
         Try
-            Dim Encoding As New System.Text.UTF8Encoding(False)
-            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), Encoding)
+            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), System.Text.Encoding.Default)
             tb.IsChanged = False
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
@@ -178,8 +177,7 @@ Public Class Functions
             tb.Tag = fileName
             If fileName <> Nothing Then
                 If IsBind = True Then
-                    Dim Encoding As New System.Text.UTF8Encoding(False)
-                    tb.SplitEditorCode.OpenFile(fileName, Encoding)
+                    tb.SplitEditorCode.OpenFile(fileName, System.Text.Encoding.Default)
                     tb.SplitEditorCode.Tag = fileName
                     tb.SplitEditorCode.IsChanged = False
                     tb.SplitEditorCode.ClearUndo()
