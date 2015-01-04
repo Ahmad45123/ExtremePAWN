@@ -112,9 +112,9 @@ Public Class Functions
             MainForm.IdleMaker.Start()
         End If
 
-        If CurrentTB IsNot Nothing Then
-            CurrentTB.OnTextChanged() 'Fix for the text being black.
-        End If
+        'If CurrentTB IsNot Nothing Then
+        '    CurrentTB.OnTextChanged() 'Fix for the text being black.
+        'End If
     End Sub
 
     'Functions LoadSettings to load the settings.
@@ -160,12 +160,15 @@ Public Class Functions
         tb.BracketsHighlightStrategy = BracketsHighlightStrategy.Strategy2
         tb.FindEndOfFoldingBlockStrategy = FindEndOfFoldingBlockStrategy.Strategy2
         tb.DelayedTextChangedInterval = 1000
-        tb.DelayedEventsInterval = 1000
+        tb.DelayedEventsInterval = 100
         MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.
     Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False, Optional ByVal SourceText As FastColoredTextBox = Nothing)
+        GC.Collect()
+        GC.GetTotalMemory(True)
+
         Try
             Dim tb As New Editor
             SetDefaultSettings(tb.SplitEditorCode)
@@ -181,9 +184,6 @@ Public Class Functions
                     tb.SplitEditorCode.Tag = fileName
                     tb.SplitEditorCode.IsChanged = False
                     tb.SplitEditorCode.ClearUndo()
-
-                    GC.Collect()
-                    GC.GetTotalMemory(True)
                 Else
                     tb.SplitEditorCode.OpenFile(fileName)
                 End If
@@ -196,22 +196,23 @@ Public Class Functions
 
             tb.Focus()
 
-            MainForm.ReBuildObjectExplorerAndHelpMenu(tb.SplitEditorCode.Text)
-
-            tb.SplitEditorCode.OnTextChanged(tb.SplitEditorCode.Range)
-
             If SourceText IsNot Nothing Then
                 tb.SplitEditorCode.SourceTextBox = SourceText
             End If
 
             tb.Show(MainForm.MainDockPanel)
 
-            Return tb
+            MainForm.RefreshAutocomAndExpToolStripMenuItem.PerformClick()
+
+            Return (tb)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
                 CreateTab(fileName)
             End If
         End Try
+
+        GC.Collect()
+        GC.GetTotalMemory(True)
         Return 1
     End Function
 

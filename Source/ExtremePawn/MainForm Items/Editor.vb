@@ -19,7 +19,7 @@ Public Class Editor
         e.ChangedRange.SetStyle(GreenStyle, "\/\*[\s\S]*?\*\/", RegexOptions.Multiline) 'For multiline comments in one line :P
         e.ChangedRange.SetStyle(BlueItalicStyle, "#.*$", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(BoldStyle, "\b(public|stock|enum)\s+(?<range>[\w_]+?)\b")
-        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case|forward)\b", RegexOptions.Multiline)
+        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case|forward|static)\b", RegexOptions.Multiline)
         e.ChangedRange.SetStyle(TextStyle, Chr(34) + "([^" + Chr(34) + "]*)" + Chr(34), RegexOptions.Multiline) 'Chr(34) is the char "double quote"
         e.ChangedRange.SetStyle(NumberStyle, "([0-9])", RegexOptions.Multiline)
 
@@ -44,6 +44,8 @@ Public Class Editor
             Dim dialogResult As DialogResult = MessageBox.Show("Do you want save " + Me.TabText + " ?", "Save", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk)
             If dialogResult <> dialogResult.Cancel Then
                 If dialogResult = dialogResult.Yes Then
+                    GC.Collect()
+                    GC.GetTotalMemory(True)
                     If Not Functions.Save(Me) Then
                         e.Cancel = True
                     End If
@@ -52,5 +54,9 @@ Public Class Editor
                 e.Cancel = True
             End If
         End If
+    End Sub
+
+    Private Sub SplitEditorCode_VisibleRangeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.VisibleRangeChangedDelayed
+        SplitEditorCode.OnTextChanged(SplitEditorCode.VisibleRange)
     End Sub
 End Class

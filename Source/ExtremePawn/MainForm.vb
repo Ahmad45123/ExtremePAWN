@@ -64,6 +64,9 @@ Public Class MainForm
         'Load Saved Docks
         m_deserlise = New DeserializeDockContent(AddressOf GetContentFromPersistString)
         MainDockPanel.LoadFromXml(Application.StartupPath + "/SavedDocks.xml", m_deserlise)
+
+        GC.Collect()
+        GC.GetTotalMemory(False)
     End Sub
 
     Private Sub MainForm_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
@@ -130,7 +133,6 @@ Public Class MainForm
 
     Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
         If CurrentTB IsNot Nothing Then CurrentTB.ShowReplaceDialog()
-
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
@@ -290,6 +292,13 @@ Public Class MainForm
 
         If SyntaxHyDefinesList IsNot Nothing Then SyntaxHyDefinesList = SyntaxHyDefinesList.Remove(0, 1)
         If SyntaxHyFuncsList IsNot Nothing Then SyntaxHyFuncsList = SyntaxHyFuncsList.Remove(0, 1)
+
+        If t_SyntaxHyDefinesList IsNot Nothing Then t_SyntaxHyDefinesList.Clear() 'Delete the content.
+        If SyntaxHyFuncsList IsNot Nothing Then t_SyntaxHyDefinesList.Clear() 'Delete the content.
+
+        'Collect memory
+        GC.Collect()
+        GC.GetTotalMemory(True)
     End Sub
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
@@ -297,11 +306,8 @@ Public Class MainForm
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
     Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
-        'Dim DeleteProjectExplorer As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
-
         Try
             PublicSyntax.Items.Clear()
-            'ProjectExplorerFrm.ProjectExplorer.Invoke(DeleteProjectExplorer)
             ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
             t_SyntaxHyDefinesList.Clear()
             t_SyntaxHyFuncsList.Clear()
@@ -309,7 +315,7 @@ Public Class MainForm
         End Try
 
         Dim IsAdd As Boolean = True
-        Dim HelpMenuItems = New List(Of String)()
+        Dim HelpMenuItems = New List(Of String)
         Try
             text = text.Replace("#", "")
             Dim list As List(Of ObjectExplorerClass.ExplorerItem) = New List(Of ObjectExplorerClass.ExplorerItem)()
@@ -326,7 +332,7 @@ Public Class MainForm
                     Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        PublicSyntax.Items.Add(item.title)
+                        PublicSyntax.Items.Add(item.title) 'Placed here to add the text before the syntax gets removed. 
                         item.title = item.title.Remove(item.title.IndexOf("("))
                         HelpMenuItems.Add(item.title)
                         t_SyntaxHyFuncsList.Add(item.title)
@@ -364,15 +370,21 @@ Public Class MainForm
                                End Sub)
         Catch ex_332 As Exception
         End Try
+
         For Each Str As String In Includes
             HelpMenuItems.Add(Str)
             t_SyntaxHyFuncsList.Add(Str)
         Next
+
         For Each Str As String In SyntaxOfInc
             PublicSyntax.Items.Add(Str)
         Next
         ReBuildAutoCompleteMenu()
         HelpMenu.SetAutocompleteItems(HelpMenuItems)
+
+        'Collect memory
+        GC.Collect()
+        GC.GetTotalMemory(True)
     End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
@@ -533,19 +545,11 @@ Public Class MainForm
 
     End Sub
 
-    Dim WithEvents ReColorTimer As New Windows.Forms.Timer
-    Public Sub Timer_Tick() Handles ReColorTimer.Tick
-        CurrentTB.OnTextChanged(CurrentTB.Range)
-        ReColorTimer.Stop()
-    End Sub
-
     Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                              ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
                                          End Sub)
-            ReColorTimer.Interval = 300 'Using a timer so that it only refreshes when all the code is done.
-            ReColorTimer.Start()
         End If
     End Sub
 
@@ -682,7 +686,7 @@ Public Class MainForm
     End Sub
 
     Dim IsSavedPositionsSaved As Boolean = False
-    Private Sub SavedPositionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub SavedPositionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SavedPositionsToolStripMenuItem.Click
         If IsSavedPositionsSaved = True Then
             SavedPositions.Close()
             IsSavedPositionsSaved = False
@@ -690,5 +694,10 @@ Public Class MainForm
             SavedPositions.Show(MainDockPanel)
             IsSavedPositionsSaved = True
         End If
+    End Sub
+
+    Private Sub MainForm_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        GC.Collect()
+        GC.GetTotalMemory(False)
     End Sub
 End Class
