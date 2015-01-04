@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePAWN.exe" size="2070016">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePAWN.exe" size="2071040">
       <assemblyIdentity name="ExtremePAWN" version="1.8.3.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/9Irw6COpawwsaQEu62E1igm2xA=</dsig:DigestValue>
+        <dsig:DigestValue>SgTsGiPlLfQMqekYsajY3wTRmqc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

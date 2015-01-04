@@ -59,4 +59,8 @@ Public Class Editor
     Private Sub SplitEditorCode_VisibleRangeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.VisibleRangeChangedDelayed
         SplitEditorCode.OnTextChanged(SplitEditorCode.VisibleRange)
     End Sub
+
+    Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.SelectionChanged
+        MainForm.TextCountLabel.Text = "Count : " + SplitEditorCode.Selection.Chars.Count.ToString
+    End Sub
 End Class
