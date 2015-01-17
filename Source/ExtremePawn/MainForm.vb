@@ -357,7 +357,7 @@ Public Class MainForm
 
     Private Sub AddBookmarkToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AddBookmarkToolStripMenuItem.Click
         If Me.CurrentTB IsNot Nothing Then
-            CurrentTB.Lines.Current.AddMarker(0)
+            CurrentTB.Markers.AddInstanceSet(CurrentTB.Lines.Current, 1)
         End If
     End Sub
 
@@ -647,5 +647,14 @@ Public Class MainForm
     Private Sub MainForm_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         GC.Collect()
         GC.GetTotalMemory(False)
+    End Sub
+
+    Private Sub GotoNextToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoNextToolstripItem.Click
+        Dim line As Line = CurrentTB.Markers.FindNextMarker()
+        MsgBox(line.Text)
+    End Sub
+
+    Private Sub GotoPrevToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoPrevToolstripItem.Click
+        CurrentTB.Markers.FindPreviousMarker()
     End Sub
 End Class

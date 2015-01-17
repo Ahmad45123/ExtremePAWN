@@ -149,7 +149,7 @@ Public Class Functions
 
     'Sub SetDefaultSettings To set the default values.
     Public Sub SetDefaultSettings(ByVal tb As Scintilla)
-        'Nothing for now.
+        tb.ContextMenuStrip = MainForm.RightClickMenu
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.

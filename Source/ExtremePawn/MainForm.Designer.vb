@@ -149,6 +149,8 @@ Partial Class MainForm
         Me.ToolStripButton23 = New System.Windows.Forms.ToolStripButton()
         Me.MainDockPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
         Me.TextCountLabel = New System.Windows.Forms.Label()
+        Me.GotoNextToolstripItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GotoPrevToolstripItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -158,94 +160,94 @@ Partial Class MainForm
         '
         'RightClickMenu
         '
-        Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem, Me.ToolStripSeparator7, Me.CloneInAnotherTabToolStripMenuItem})
+        Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.GotoNextToolstripItem, Me.GotoPrevToolstripItem, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem, Me.ToolStripSeparator7, Me.CloneInAnotherTabToolStripMenuItem})
         Me.RightClickMenu.Name = "ContextMenuStrip1"
-        Me.RightClickMenu.Size = New System.Drawing.Size(183, 270)
+        Me.RightClickMenu.Size = New System.Drawing.Size(206, 336)
         '
         'CopyToolStripMenuItem1
         '
         Me.CopyToolStripMenuItem1.Name = "CopyToolStripMenuItem1"
-        Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.CopyToolStripMenuItem1.Text = "Copy"
         '
         'CutToolStripMenuItem1
         '
         Me.CutToolStripMenuItem1.Name = "CutToolStripMenuItem1"
-        Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.CutToolStripMenuItem1.Text = "Cut"
         '
         'PasteToolStripMenuItem1
         '
         Me.PasteToolStripMenuItem1.Name = "PasteToolStripMenuItem1"
-        Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.PasteToolStripMenuItem1.Text = "Paste"
         '
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(179, 6)
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(202, 6)
         '
         'AddBookmarkToolStripMenuItem
         '
         Me.AddBookmarkToolStripMenuItem.Name = "AddBookmarkToolStripMenuItem"
-        Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.AddBookmarkToolStripMenuItem.Text = "Add Bookmark"
         '
         'RemoveBookmarkToolStripMenuItem
         '
         Me.RemoveBookmarkToolStripMenuItem.Name = "RemoveBookmarkToolStripMenuItem"
-        Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.RemoveBookmarkToolStripMenuItem.Text = "Remove Bookmark"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(179, 6)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(202, 6)
         '
         'FindToolStripMenuItem1
         '
         Me.FindToolStripMenuItem1.Name = "FindToolStripMenuItem1"
-        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.FindToolStripMenuItem1.Text = "Find"
         '
         'ReplaceToolStripMenuItem1
         '
         Me.ReplaceToolStripMenuItem1.Name = "ReplaceToolStripMenuItem1"
-        Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.ReplaceToolStripMenuItem1.Text = "Replace"
         '
         'GotoToolStripMenuItem1
         '
         Me.GotoToolStripMenuItem1.Name = "GotoToolStripMenuItem1"
-        Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+        Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
         Me.GotoToolStripMenuItem1.Text = "Goto"
         '
         'ToolStripMenuItem10
         '
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(179, 6)
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(202, 6)
         '
         'CommentToolStripMenuItem
         '
         Me.CommentToolStripMenuItem.Name = "CommentToolStripMenuItem"
-        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.CommentToolStripMenuItem.Text = "Comment"
         '
         'UnCommentToolStripMenuItem
         '
         Me.UnCommentToolStripMenuItem.Name = "UnCommentToolStripMenuItem"
-        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.UnCommentToolStripMenuItem.Text = "UnComment"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(179, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(202, 6)
         '
         'CloneInAnotherTabToolStripMenuItem
         '
         Me.CloneInAnotherTabToolStripMenuItem.Name = "CloneInAnotherTabToolStripMenuItem"
-        Me.CloneInAnotherTabToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.CloneInAnotherTabToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.CloneInAnotherTabToolStripMenuItem.Text = "Clone in another tab"
         '
         'StatusStrip
@@ -943,6 +945,18 @@ Partial Class MainForm
         Me.TextCountLabel.TabIndex = 24
         Me.TextCountLabel.Text = "Count : 0"
         '
+        'GotoNextToolstripItem
+        '
+        Me.GotoNextToolstripItem.Name = "GotoNextToolstripItem"
+        Me.GotoNextToolstripItem.Size = New System.Drawing.Size(205, 22)
+        Me.GotoNextToolstripItem.Text = "Goto Next Bookmark"
+        '
+        'GotoPrevToolstripItem
+        '
+        Me.GotoPrevToolstripItem.Name = "GotoPrevToolstripItem"
+        Me.GotoPrevToolstripItem.Size = New System.Drawing.Size(205, 22)
+        Me.GotoPrevToolstripItem.Text = "Goto Previous Bookmark"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1085,5 +1099,7 @@ Partial Class MainForm
     Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
     Friend WithEvents SavedPositionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TextCountLabel As System.Windows.Forms.Label
+    Friend WithEvents GotoNextToolstripItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GotoPrevToolstripItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

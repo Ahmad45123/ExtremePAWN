@@ -28,6 +28,7 @@ Partial Class Editor
         '
         'SplitEditorCode
         '
+        Me.SplitEditorCode.Annotations.Visibility = ScintillaNET.AnnotationsVisibility.Boxed
         Me.SplitEditorCode.ConfigurationManager.Language = "cs"
         Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
