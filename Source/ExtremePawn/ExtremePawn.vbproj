@@ -215,7 +215,6 @@
     <Compile Include="Setting.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Styles.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm Items\Editor.resx">

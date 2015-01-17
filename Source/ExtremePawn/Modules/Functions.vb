@@ -21,7 +21,7 @@ Public Class Functions
 
         End If
         Try
-            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), System.Text.Encoding.Default)
+            My.Computer.FileSystem.WriteAllText(MainForm.CurrentTB.Text, TryCast(tab.Tag, String), False)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
                 result = Save(tab)

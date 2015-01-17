@@ -1,5 +1,4 @@
-﻿Imports AutocompleteMenuNS
-Imports System.Text.RegularExpressions
+﻿Imports System.Text.RegularExpressions
 
 Public Class ObjectExplorerClass
     Inherits Form

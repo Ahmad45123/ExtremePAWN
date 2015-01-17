@@ -28,7 +28,7 @@ Partial Class CodeSnipptes
         Me.AddToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SnippetCode = New FastColoredTextBoxNS.FastColoredTextBox()
+        Me.SnippetCode = New ScintillaNET.Scintilla()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -67,36 +67,6 @@ Partial Class CodeSnipptes
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
-        'SnippetCode
-        '
-        Me.SnippetCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SnippetCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
-        Me.SnippetCode.AutoScrollMinSize = New System.Drawing.Size(27, 15)
-        Me.SnippetCode.BackBrush = Nothing
-        Me.SnippetCode.BookmarkColor = System.Drawing.Color.Red
-        Me.SnippetCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2
-        Me.SnippetCode.CharHeight = 15
-        Me.SnippetCode.CharWidth = 8
-        Me.SnippetCode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.SnippetCode.DelayedTextChangedInterval = 1000
-        Me.SnippetCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.SnippetCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2
-        Me.SnippetCode.Font = New System.Drawing.Font("Courier New", 10.0!)
-        Me.SnippetCode.IsReplaceMode = False
-        Me.SnippetCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
-        Me.SnippetCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
-        Me.SnippetCode.Location = New System.Drawing.Point(278, 28)
-        Me.SnippetCode.Name = "SnippetCode"
-        Me.SnippetCode.Paddings = New System.Windows.Forms.Padding(0)
-        Me.SnippetCode.ReadOnly = True
-        Me.SnippetCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
-        Me.SnippetCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
-        Me.SnippetCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SnippetCode.Size = New System.Drawing.Size(342, 469)
-        Me.SnippetCode.TabIndex = 1
-        Me.SnippetCode.Zoom = 100
         '
         'Label1
         '
@@ -140,6 +110,6 @@ Partial Class CodeSnipptes
     Friend WithEvents AddToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DeleteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents SnippetCode As FastColoredTextBoxNS.FastColoredTextBox
+    Public WithEvents SnippetCode As ScintillaNET.Scintilla
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

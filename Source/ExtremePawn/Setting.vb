@@ -3,27 +3,27 @@
     Public KEY_COMPILE As Keys
 
     Private Sub AutoBracket_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoBracket.CheckedChanged
-        If MainForm.CurrentTB Is Nothing Then Exit Sub
-        If AutoBracket.Checked = True Then
-            MainForm.CurrentTB.AutoCompleteBrackets = True
-        Else
-            MainForm.CurrentTB.AutoCompleteBrackets = False
-        End If
+        'If MainForm.CurrentTB Is Nothing Then Exit Sub
+        'If AutoBracket.Checked = True Then
+        '    MainForm.CurrentTB.AutoCompleteBrackets = True
+        'Else
+        '    MainForm.CurrentTB.AutoCompleteBrackets = False
+        'End If
     End Sub
     Private Sub LineNumber_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LineNumber.CheckedChanged
         If MainForm.CurrentTB Is Nothing Then Exit Sub
         If LineNumber.Checked = True Then
-            MainForm.CurrentTB.ShowLineNumbers = True
+            MainForm.CurrentTB.Margins(0).Width = 20
         Else
-            MainForm.CurrentTB.ShowLineNumbers = False
+            MainForm.CurrentTB.Margins(0).Width = 0
         End If
     End Sub
     Private Sub AutoCompletion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoCompletion.CheckedChanged
         If MainForm.CurrentTB Is Nothing Then Exit Sub
         If AutoCompletion.Checked = True Then
-            MainForm.HelpMenu.Enabled = True
+            MainForm.CurrentTB.AutoComplete.CancelAtStart = True
         Else
-            MainForm.HelpMenu.Enabled = False
+            MainForm.CurrentTB.AutoComplete.CancelAtStart = False
         End If
     End Sub
     Private Sub AutoSaving_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaving.CheckedChanged
