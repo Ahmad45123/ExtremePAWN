@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Icons-Land-Vista-Chess-Pawn-Yellow.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="ExtremePAWN" version="1.8.3.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="ExtremePAWN" version="1.8.6.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="ExtremePAWN.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -56,13 +56,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ExtremePAWN.exe" size="2071040">
-      <assemblyIdentity name="ExtremePAWN" version="1.8.3.0" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="ExtremePAWN" version="1.8.6.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>SgTsGiPlLfQMqekYsajY3wTRmqc=</dsig:DigestValue>
+        <dsig:DigestValue>0UwS/4EaS6kmYzKP2K+arMR53qE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
