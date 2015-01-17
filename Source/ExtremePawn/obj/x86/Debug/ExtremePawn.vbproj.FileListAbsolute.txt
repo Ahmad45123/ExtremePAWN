@@ -13,16 +13,6 @@ C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePaw
 C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Help.resources
 C:\Users\Ahmad45123\documents\visual studio 2010\Projects\ExtremePawn\ExtremePawn\obj\x86\Debug\ExtremePawn.Setting.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.exe.config
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.exe.manifest
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.application
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.exe
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.pdb
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.xml
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\AutocompleteMenu.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\FastColoredTextBox.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.DocumentMapFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Editor.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ErrorsFrm.resources
@@ -41,8 +31,3 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Resources.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Setting.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbproj.GenerateResource.Cache
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.exe.manifest
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.application
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.exe
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.xml
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.pdb

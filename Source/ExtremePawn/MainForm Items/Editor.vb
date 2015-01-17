@@ -1,10 +1,9 @@
 ﻿Imports System.Text.RegularExpressions
-Imports FastColoredTextBoxNS
 Imports System.Threading
 
 Public Class Editor
 
-    Public Sub Code_TextChanged(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) Handles SplitEditorCode.TextChanged
+    Public Sub Code_TextChanged(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs)
         Dim range As Range = TryCast(sender, FastColoredTextBox).VisibleRange
         range.ClearStyle(MulinLineGreenStyle)
         range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline)
@@ -56,11 +55,11 @@ Public Class Editor
         End If
     End Sub
 
-    Private Sub SplitEditorCode_VisibleRangeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.VisibleRangeChangedDelayed
+    Private Sub SplitEditorCode_VisibleRangeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         SplitEditorCode.OnTextChanged(SplitEditorCode.VisibleRange)
     End Sub
 
-    Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.SelectionChanged
+    Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         MainForm.TextCountLabel.Text = "Count : " + SplitEditorCode.Selection.Chars.Count.ToString
     End Sub
 End Class

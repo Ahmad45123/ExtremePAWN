@@ -22,52 +22,41 @@ Partial Class Editor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.SplitEditorCode = New FastColoredTextBoxNS.FastColoredTextBox()
-        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Scintilla1 = New ScintillaNET.Scintilla()
+        CType(Me.Scintilla1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'SplitEditorCode
+        'Scintilla1
         '
-        Me.SplitEditorCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
-        Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 15)
-        Me.SplitEditorCode.BackBrush = Nothing
-        Me.SplitEditorCode.BookmarkColor = System.Drawing.Color.Red
-        Me.SplitEditorCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2
-        Me.SplitEditorCode.CharHeight = 15
-        Me.SplitEditorCode.CharWidth = 8
-        Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.SplitEditorCode.DelayedTextChangedInterval = 1000
-        Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitEditorCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2
-        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 10.0!)
-        Me.SplitEditorCode.IsReplaceMode = False
-        Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
-        Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
-        Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
-        Me.SplitEditorCode.Name = "SplitEditorCode"
-        Me.SplitEditorCode.Paddings = New System.Windows.Forms.Padding(0)
-        Me.SplitEditorCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
-        Me.SplitEditorCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
-        Me.SplitEditorCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SplitEditorCode.Size = New System.Drawing.Size(690, 466)
-        Me.SplitEditorCode.TabIndex = 1
-        Me.SplitEditorCode.Zoom = 100
+        Me.Scintilla1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Scintilla1.Location = New System.Drawing.Point(0, 0)
+        Me.Scintilla1.Name = "Scintilla1"
+        Me.Scintilla1.Size = New System.Drawing.Size(690, 466)
+        Me.Scintilla1.Styles.BraceBad.FontName = "Verdan"
+        Me.Scintilla1.Styles.BraceLight.FontName = "Verdan"
+        Me.Scintilla1.Styles.CallTip.FontName = "Segoe "
+        Me.Scintilla1.Styles.ControlChar.FontName = "Verdan"
+        Me.Scintilla1.Styles.Default.BackColor = System.Drawing.SystemColors.Window
+        Me.Scintilla1.Styles.Default.FontName = "Verdan"
+        Me.Scintilla1.Styles.IndentGuide.FontName = "Verdan"
+        Me.Scintilla1.Styles.LastPredefined.FontName = "Verdan"
+        Me.Scintilla1.Styles.LineNumber.FontName = "Verdan"
+        Me.Scintilla1.Styles.Max.FontName = "Verdan"
+        Me.Scintilla1.TabIndex = 0
         '
         'Editor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(690, 466)
-        Me.Controls.Add(Me.SplitEditorCode)
+        Me.Controls.Add(Me.Scintilla1)
         Me.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document
         Me.Font = New System.Drawing.Font("Tahoma", 8.0!)
         Me.Name = "Editor"
         Me.Text = "Editor"
-        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Scintilla1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents SplitEditorCode As FastColoredTextBoxNS.FastColoredTextBox
+    Friend WithEvents Scintilla1 As ScintillaNET.Scintilla
 End Class
