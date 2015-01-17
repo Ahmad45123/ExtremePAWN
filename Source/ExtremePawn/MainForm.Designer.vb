@@ -61,7 +61,6 @@ Partial Class MainForm
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.IdleMaker = New System.Windows.Forms.Timer(Me.components)
         Me.AutoSaver = New System.Windows.Forms.Timer(Me.components)
-        Me.HelpMenu = New AutocompleteMenuNS.AutocompleteMenu()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
@@ -280,15 +279,6 @@ Partial Class MainForm
         'AutoSaver
         '
         Me.AutoSaver.Interval = 300000
-        '
-        'HelpMenu
-        '
-        Me.HelpMenu.AppearInterval = 1000
-        Me.HelpMenu.AutoPopup = False
-        Me.HelpMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.HelpMenu.ImageList = Nothing
-        Me.HelpMenu.Items = New String(-1) {}
-        Me.HelpMenu.TargetControlWrapper = Nothing
         '
         'ToolStrip
         '
@@ -991,7 +981,6 @@ Partial Class MainForm
     Friend WithEvents OpenFileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents IdleMaker As System.Windows.Forms.Timer
     Friend WithEvents AutoSaver As System.Windows.Forms.Timer
-    Friend WithEvents HelpMenu As AutocompleteMenuNS.AutocompleteMenu
     Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
     Friend WithEvents MainMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

@@ -20,9 +20,7 @@
     Private Sub DataGridView1_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseDoubleClick
         If MainForm.CurrentTB IsNot Nothing Then
             Dim item As ObjectExplorerClass.ExplorerItem = ObjectExplorerClass.explorerList(e.RowIndex)
-            MainForm.CurrentTB.GoEnd()
-            MainForm.CurrentTB.SelectionStart = item.position
-            MainForm.CurrentTB.DoSelectionVisible()
+            MainForm.CurrentTB.GoTo.Position(item.position)
             MainForm.CurrentTB.Focus()
         End If
     End Sub

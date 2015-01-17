@@ -14,10 +14,10 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
-Imports FastColoredTextBoxNS
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports WeifenLuo.WinFormsUI.Docking
+Imports ScintillaNET
 
 Public Class MainForm
 
@@ -27,14 +27,14 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
-    Public Property CurrentTB As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
+    Public Property CurrentTB As Scintilla 'Returns the current opened object of FastColoredTextBox
     Public Property CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
-        If persistString = GetType(DocumentMapFrm).ToString Then
-            Return DocumentMapFrm
-        ElseIf persistString = GetType(ErrorsFrm).ToString Then
+        'If persistString = GetType(DocumentMapFrm).ToString Then
+        'Return DocumentMapFrm
+        If persistString = GetType(ErrorsFrm).ToString Then
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
             Return IncludeListFrm
@@ -91,15 +91,15 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
-        Dim Func As String = e.Item.Text
-        Func = Func.Replace("      ", "")
-        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
-        If Not Index = -1 Then
-            Dim Format As String = PublicSyntax.Items.Item(Index)
-            Status.Text = Format
-        End If
-    End Sub
+    'Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
+    '    Dim Func As String = e.Item.Text
+    '    Func = Func.Replace("      ", "")
+    '    Dim Index As Integer = PublicSyntax.FindString(Func, -1)
+    '    If Not Index = -1 Then
+    '        Dim Format As String = PublicSyntax.Items.Item(Index)
+    '        Status.Text = Format
+    '    End If
+    'End Sub
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
         ColorChoice.Show()

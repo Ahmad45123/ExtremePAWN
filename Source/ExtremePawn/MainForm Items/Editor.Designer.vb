@@ -22,41 +22,42 @@ Partial Class Editor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Scintilla1 = New ScintillaNET.Scintilla()
-        CType(Me.Scintilla1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitEditorCode = New ScintillaNET.Scintilla()
+        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Scintilla1
+        'SplitEditorCode
         '
-        Me.Scintilla1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Scintilla1.Location = New System.Drawing.Point(0, 0)
-        Me.Scintilla1.Name = "Scintilla1"
-        Me.Scintilla1.Size = New System.Drawing.Size(690, 466)
-        Me.Scintilla1.Styles.BraceBad.FontName = "Verdan"
-        Me.Scintilla1.Styles.BraceLight.FontName = "Verdan"
-        Me.Scintilla1.Styles.CallTip.FontName = "Segoe "
-        Me.Scintilla1.Styles.ControlChar.FontName = "Verdan"
-        Me.Scintilla1.Styles.Default.BackColor = System.Drawing.SystemColors.Window
-        Me.Scintilla1.Styles.Default.FontName = "Verdan"
-        Me.Scintilla1.Styles.IndentGuide.FontName = "Verdan"
-        Me.Scintilla1.Styles.LastPredefined.FontName = "Verdan"
-        Me.Scintilla1.Styles.LineNumber.FontName = "Verdan"
-        Me.Scintilla1.Styles.Max.FontName = "Verdan"
-        Me.Scintilla1.TabIndex = 0
+        Me.SplitEditorCode.ConfigurationManager.Language = "cs"
+        Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
+        Me.SplitEditorCode.Name = "SplitEditorCode"
+        Me.SplitEditorCode.Size = New System.Drawing.Size(690, 466)
+        Me.SplitEditorCode.Styles.BraceBad.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.BraceLight.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.CallTip.FontName = "Segoe "
+        Me.SplitEditorCode.Styles.ControlChar.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.Default.BackColor = System.Drawing.SystemColors.Window
+        Me.SplitEditorCode.Styles.Default.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.IndentGuide.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.LastPredefined.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.LineNumber.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.Max.FontName = "Verdan"
+        Me.SplitEditorCode.TabIndex = 0
         '
         'Editor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(690, 466)
-        Me.Controls.Add(Me.Scintilla1)
+        Me.Controls.Add(Me.SplitEditorCode)
         Me.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document
         Me.Font = New System.Drawing.Font("Tahoma", 8.0!)
         Me.Name = "Editor"
         Me.Text = "Editor"
-        CType(Me.Scintilla1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Scintilla1 As ScintillaNET.Scintilla
+    Friend WithEvents SplitEditorCode As ScintillaNET.Scintilla
 End Class
