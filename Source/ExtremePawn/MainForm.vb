@@ -290,7 +290,7 @@ Public Class MainForm
                         s = s.Substring(0, i)
                     End If
                     s = s.Trim()
-                    Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
+                    Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = CurrentTB.Lines.FromPosition(r.Index).Number}
                     If regex.IsMatch(item.title, "\b(public|stock)\b") Then
                         item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
                         PublicSyntax.Items.Add(item.title) 'Placed here to add the text before the syntax gets removed. 
@@ -456,13 +456,6 @@ Public Class MainForm
     Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
         Dim Dlg As New DialogCreator
         Dlg.Show()
-    End Sub
-
-    Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
-        If Me.CurrentTB IsNot Nothing Then
-            Dim RowNumber As Integer = ErrorsFrm.ErrorDataGridView.Rows(e.RowIndex).Cells(3).Value
-            CurrentTB.Lines(RowNumber).EnsureVisible()
-        End If
     End Sub
 
     Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click
@@ -651,10 +644,24 @@ Public Class MainForm
 
     Private Sub GotoNextToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoNextToolstripItem.Click
         Dim line As Line = CurrentTB.Markers.FindNextMarker()
-        MsgBox(line.Text)
+        If line IsNot Nothing Then
+            CurrentTB.GoTo.Line(line.Number)
+        End If
     End Sub
 
     Private Sub GotoPrevToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoPrevToolstripItem.Click
-        CurrentTB.Markers.FindPreviousMarker()
+        Dim line As Line = CurrentTB.Markers.FindPreviousMarker()
+        If line IsNot Nothing Then
+            CurrentTB.GoTo.Line(line.Number)
+        End If
+    End Sub
+
+    Private Sub AutoRebuildTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoRebuildTimer.Tick
+        If CurrentTB IsNot Nothing Then
+            Try
+                CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 End Class

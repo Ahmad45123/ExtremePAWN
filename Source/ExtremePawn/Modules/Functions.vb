@@ -2,6 +2,7 @@
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports ScintillaNET
+Imports System.Text
 
 Public Class Functions
     Inherits Form
@@ -19,7 +20,7 @@ Public Class Functions
 
         End If
         Try
-            My.Computer.FileSystem.WriteAllText(tab.Tag, tab.Controls(0).Text, False)
+            My.Computer.FileSystem.WriteAllText(tab.Tag, tab.Controls(0).Text, False, System.Text.Encoding.Default)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
                 result = Save(tab)
@@ -148,6 +149,7 @@ Public Class Functions
     'Sub SetDefaultSettings To set the default values.
     Public Sub SetDefaultSettings(ByVal tb As Scintilla)
         tb.ContextMenuStrip = MainForm.RightClickMenu
+        tb.Encoding = New UTF8Encoding(False)
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.

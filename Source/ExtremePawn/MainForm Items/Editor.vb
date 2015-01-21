@@ -24,6 +24,7 @@ Public Class Editor
                     e.Cancel = True
                 End If
             End If
+            MainForm.CurrentTB = Nothing
         Else
             e.Cancel = True
         End If
