@@ -8,8 +8,6 @@ Public Class Functions
 
     'Functions Save to Save the file.
     Public Function Save(ByVal tab As Editor) As Boolean
-        'CurrentTB.Text.Replace("ï»¿", "") 'This characters are added for same reason somewhere in the script, So we are deleting them [THEY ARE INVISIBLE]
-        Dim tb As Scintilla = TryCast(tab.Controls(0), Scintilla)
         Dim result As Boolean
         If tab.Tag Is Nothing Then
             If MainForm.SaveFileDialog.ShowDialog() <> DialogResult.OK Then
@@ -21,7 +19,7 @@ Public Class Functions
 
         End If
         Try
-            My.Computer.FileSystem.WriteAllText(MainForm.CurrentTB.Text, TryCast(tab.Tag, String), False)
+            My.Computer.FileSystem.WriteAllText(tab.Tag, tab.Controls(0).Text, False)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
                 result = Save(tab)
@@ -30,7 +28,7 @@ Public Class Functions
             result = False
             Return result
         End Try
-        tb.Invalidate()
+        tab.Controls(0).Invalidate()
         result = True
         Return result
     End Function
