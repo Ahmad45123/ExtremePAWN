@@ -129,8 +129,6 @@ Partial Class MainForm
         Me.CodeSnipptesToolStripItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorPickerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DialogMakerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.RefreshAutocomAndExpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
@@ -718,7 +716,7 @@ Partial Class MainForm
         '
         'ToolsStripMenuItem
         '
-        Me.ToolsStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CodeSnipptesToolStripItem, Me.ColorPickerToolStripMenuItem, Me.DialogMakerToolStripMenuItem, Me.ToolStripSeparator11, Me.RefreshAutocomAndExpToolStripMenuItem})
+        Me.ToolsStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CodeSnipptesToolStripItem, Me.ColorPickerToolStripMenuItem, Me.DialogMakerToolStripMenuItem})
         Me.ToolsStripMenuItem.Name = "ToolsStripMenuItem"
         Me.ToolsStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsStripMenuItem.Text = "Tools"
@@ -726,31 +724,20 @@ Partial Class MainForm
         'CodeSnipptesToolStripItem
         '
         Me.CodeSnipptesToolStripItem.Name = "CodeSnipptesToolStripItem"
-        Me.CodeSnipptesToolStripItem.Size = New System.Drawing.Size(195, 22)
+        Me.CodeSnipptesToolStripItem.Size = New System.Drawing.Size(152, 22)
         Me.CodeSnipptesToolStripItem.Text = "Code Snipptes"
         '
         'ColorPickerToolStripMenuItem
         '
         Me.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem"
-        Me.ColorPickerToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.ColorPickerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ColorPickerToolStripMenuItem.Text = "Color Picker"
         '
         'DialogMakerToolStripMenuItem
         '
         Me.DialogMakerToolStripMenuItem.Name = "DialogMakerToolStripMenuItem"
-        Me.DialogMakerToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.DialogMakerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DialogMakerToolStripMenuItem.Text = "Dialog Maker"
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(192, 6)
-        '
-        'RefreshAutocomAndExpToolStripMenuItem
-        '
-        Me.RefreshAutocomAndExpToolStripMenuItem.Name = "RefreshAutocomAndExpToolStripMenuItem"
-        Me.RefreshAutocomAndExpToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.RefreshAutocomAndExpToolStripMenuItem.Text = "Refresh auto-complete"
         '
         'HelpToolStripMenuItem
         '
@@ -1093,8 +1080,6 @@ Partial Class MainForm
     Friend WithEvents ToolStripButton22 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton23 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton24 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents RefreshAutocomAndExpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator12 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CodeSnipptesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CodeSnipptesToolStripItem As System.Windows.Forms.ToolStripMenuItem

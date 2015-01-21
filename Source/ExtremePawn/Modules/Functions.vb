@@ -150,6 +150,7 @@ Public Class Functions
     Public Sub SetDefaultSettings(ByVal tb As Scintilla)
         tb.ContextMenuStrip = MainForm.RightClickMenu
         tb.Encoding = New UTF8Encoding(False)
+        Control.CheckForIllegalCrossThreadCalls = False
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.
@@ -170,19 +171,10 @@ Public Class Functions
                 tb.SplitEditorCode.Text = My.Computer.FileSystem.ReadAllText(fileName, System.Text.Encoding.Default)
                 tb.SplitEditorCode.Tag = fileName
             Else
-                'tb.SplitEditorCode.OpenFile(Application.StartupPath + "\gamemodes\new.pwn")
-                'tb.SplitEditorCode.IsChanged = False
+                tb.SplitEditorCode.Text = My.Computer.FileSystem.ReadAllText(Application.StartupPath + "\gamemodes\new.pwn")
             End If
-
             tb.Focus()
-
-            'If SourceText IsNot Nothing Then
-            'tb.SplitEditorCode.SourceTextBox = SourceText
-            'End If
-
             tb.Show(MainForm.MainDockPanel)
-
-            MainForm.RefreshAutocomAndExpToolStripMenuItem.PerformClick()
 
             Return (tb)
         Catch ex As Exception

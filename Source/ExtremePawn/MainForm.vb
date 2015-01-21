@@ -78,9 +78,6 @@ Public Class MainForm
             ToolStripButton4.PerformClick() 'Save
         ElseIf e.KeyCode = Setting.KEY_COMPILE Then
             ToolStripButton7.PerformClick() 'Compile
-        ElseIf e.Control = True And e.KeyValue = Keys.R Then
-            RefreshAutocomAndExpToolStripMenuItem.PerformClick()
-
         End If
     End Sub
 
@@ -486,14 +483,6 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
-        If CurrentTB IsNot Nothing Then
-            'ThreadPool.QueueUserWorkItem(Sub(o As Object)
-            ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
-            'End Sub)
-        End If
-    End Sub
-
     Private Sub CodeSnipptesToolStripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeSnipptesToolStripItem.Click
         CodeSnipptes.Show()
 
@@ -662,6 +651,10 @@ Public Class MainForm
                 CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
             Catch ex As Exception
             End Try
+
+            ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                             ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
+                                         End Sub)
         End If
     End Sub
 End Class
