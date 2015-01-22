@@ -28,9 +28,15 @@ Partial Class Editor
         '
         'SplitEditorCode
         '
-        Me.SplitEditorCode.Annotations.Visibility = ScintillaNET.AnnotationsVisibility.Boxed
+        Me.SplitEditorCode.AutoComplete.IsCaseSensitive = False
+        Me.SplitEditorCode.AutoComplete.ListString = ""
         Me.SplitEditorCode.ConfigurationManager.Language = "cs"
         Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitEditorCode.Lexing.Lexer = ScintillaNET.Lexer.Null
+        Me.SplitEditorCode.Lexing.LexerName = "automatic"
+        Me.SplitEditorCode.Lexing.LineCommentPrefix = "//"
+        Me.SplitEditorCode.Lexing.StreamCommentPrefix = ""
+        Me.SplitEditorCode.Lexing.StreamCommentSufix = ""
         Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
         Me.SplitEditorCode.Name = "SplitEditorCode"
         Me.SplitEditorCode.Size = New System.Drawing.Size(690, 466)

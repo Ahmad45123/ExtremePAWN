@@ -38,8 +38,6 @@ Public Class MainForm
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
             Return IncludeListFrm
-        ElseIf persistString = GetType(ObjectExplorerFrm).ToString Then
-            Return ObjectExplorerFrm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
             Return ProjectExplorerFrm
         ElseIf persistString = GetType(SavedPositions).ToString Then
@@ -91,16 +89,6 @@ Public Class MainForm
         ToolStripButton4.PerformClick()
 
     End Sub
-
-    'Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
-    '    Dim Func As String = e.Item.Text
-    '    Func = Func.Replace("      ", "")
-    '    Dim Index As Integer = PublicSyntax.FindString(Func, -1)
-    '    If Not Index = -1 Then
-    '        Dim Format As String = PublicSyntax.Items.Item(Index)
-    '        Status.Text = Format
-    '    End If
-    'End Sub
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
         ColorChoice.Show()
@@ -260,84 +248,64 @@ Public Class MainForm
         CurrentTB.Clipboard.Paste()
     End Sub
 
+    Public Shared Function RemoveIndent(ByVal _string As String) As String
+        If (_string = Nothing Or _string = " " Or _string = "") Then
+            Return Nothing
+        End If
+        _string = _string.Trim()
+        Dim stringArray() As String = _string.Split(" ")
+        Dim tempString As String = Nothing
+        For Each stringElement In stringArray
+            If (stringElement <> "") Then
+                tempString += " " + stringElement
+            End If
+        Next
+        tempString = tempString.Trim
+        Return tempString
+    End Function
+
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
     Public PublicSyntax As New ListBox
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
-    Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
+    Public Sub ReBuildAutoComplete(ByVal ctrl As Scintilla)
+        'If CurrentOpenedTab.IsAutoCompleteShown = True Then Exit Sub
+
         Try
+            'Clearing
+            ctrl.AutoComplete.List.Clear()
             PublicSyntax.Items.Clear()
-            CurrentTB.AutoComplete.List.Clear()
-            ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
-        Catch ex As Exception
-        End Try
 
-        Dim IsAdd As Boolean = True
-        'Dim HelpMenuItems = New List(Of String)
-        Try
-            text = text.Replace("#", "")
-            Dim list As List(Of ObjectExplorerClass.ExplorerItem) = New List(Of ObjectExplorerClass.ExplorerItem)()
-            Dim lastClassIndex As Integer = -1
-            Dim regex As Regex = New Regex("^\s*(public|stock|define|include)[^\n]+(\n?\s*{|;)?", RegexOptions.Multiline)
-            For Each r As Match In regex.Matches(text)
-                Try
-                    Dim s As String = r.Value
-                    Dim i As Integer = s.IndexOfAny(New Char() {"=", "{", ";"})
-                    If i >= 0 Then
-                        s = s.Substring(0, i)
-                    End If
-                    s = s.Trim()
-                    Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = CurrentTB.Lines.FromPosition(r.Index).Number}
-                    If regex.IsMatch(item.title, "\b(public|stock)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        PublicSyntax.Items.Add(item.title) 'Placed here to add the text before the syntax gets removed. 
-                        item.title = item.title.Remove(item.title.IndexOf("("))
-                        CurrentTB.AutoComplete.List.Add(item.title)
-                        item.type = ObjectExplorerClass.ExplorerItemType.[Class]
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    ElseIf regex.IsMatch(item.title, "\b(define)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        Dim tst As String() = item.title.Split(" ")
-                        item.title = tst(0)
-                        CurrentTB.AutoComplete.List.Add(item.title)
-                        item.type = ObjectExplorerClass.ExplorerItemType.Property
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    ElseIf regex.IsMatch(item.title, "\b(include)\b") Then
-                        If item.title.Contains(Chr(34)) Then Continue For
-                        item.title = item.title.Replace("<", "")
-                        item.title = item.title.Replace(">", "")
-                        item.title = item.title.Substring(item.title.IndexOf(" "))
-                        item.title = item.title.Replace(" ", "")
-                        Dim action As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Add(item.title)
-                        ProjectExplorerFrm.ProjectExplorer.Invoke(action)
-                        IsAdd = False
-                    End If
-                    If IsAdd = True Then list.Add(item) Else IsAdd = True
-                Catch ex_2BF As Exception
-                End Try
+            'Place stocks/publics/defines
+            For Each Line As Line In ctrl.Lines
+                Dim lineText As String = Regex.Replace(Line.Text, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
+
+                If lineText.StartsWith("#define") Then 'Define
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    Dim define As String() = tempdefineName.Split(" ")
+                    ctrl.AutoComplete.List.Add(define(0))
+                ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    PublicSyntax.Items.Add(tempFunc) 'Placed here to the text before the syntax gets removed. 
+                    If tempFunc.IndexOf("(") = -1 Then Continue For
+                    tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
+                    ctrl.AutoComplete.List.Add(tempFunc)
+                End If
             Next
-            list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-            MyBase.BeginInvoke(Sub()
-                                   ObjectExplorerClass.explorerList = list
-                                   ObjectExplorerFrm.DataGridView1.RowCount = ObjectExplorerClass.explorerList.Count
-                                   ObjectExplorerFrm.DataGridView1.Invalidate()
-                               End Sub)
-        Catch ex_332 As Exception
+
+            'Place includes.
+            For Each Str As String In Includes
+                ctrl.AutoComplete.List.Add(Str)
+            Next
+            For Each Str As String In SyntaxOfInc
+                PublicSyntax.Items.Add(Str)
+            Next
+
+        Catch ex As Exception
+            Beep()
         End Try
-
-        For Each Str As String In Includes
-            CurrentTB.AutoComplete.List.Add(Str)
-        Next
-
-        For Each Str As String In SyntaxOfInc
-            PublicSyntax.Items.Add(Str)
-        Next
-
-        'Collect memory
-        GC.Collect()
-        GC.GetTotalMemory(True)
     End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
@@ -494,17 +462,6 @@ Public Class MainForm
         End If
     End Sub
 
-    Dim IsObjectExplorerShowen As Boolean = False
-    Private Sub ObjectExplToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ObjectExplToolStripMenuItem.Click
-        If IsObjectExplorerShowen = True Then
-            ObjectExplorerFrm.Close()
-            IsObjectExplorerShowen = False
-        Else
-            ObjectExplorerFrm.Show(MainDockPanel)
-            IsObjectExplorerShowen = True
-        End If
-    End Sub
-
     Dim IsProjectExplorerShowen As Boolean = False
     Private Sub ProjectExplorerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProjectExplorerToolStripMenuItem.Click
         If IsProjectExplorerShowen = True Then
@@ -653,7 +610,7 @@ Public Class MainForm
             End Try
 
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
+                                             ReBuildAutoComplete(CurrentTB)
                                          End Sub)
         End If
     End Sub
