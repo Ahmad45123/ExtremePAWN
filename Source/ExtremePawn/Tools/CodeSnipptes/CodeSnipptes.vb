@@ -1,5 +1,4 @@
-﻿Imports FastColoredTextBoxNS
-Imports System.Text.RegularExpressions
+﻿Imports System.Text.RegularExpressions
 
 Public Class CodeSnipptes
     Public Path As String = Application.StartupPath + "/CodeSnipptes/"
@@ -24,33 +23,9 @@ Public Class CodeSnipptes
         Next
     End Sub
 
-    Public Sub Code_TextChanged(ByVal sender As System.Object, ByVal e As FastColoredTextBoxNS.TextChangedEventArgs) Handles SnippetCode.TextChanged
-        Dim range As Range = TryCast(sender, FastColoredTextBox).VisibleRange
-        range.ClearStyle(MulinLineGreenStyle)
-        range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline)
-        range.SetStyle(MulinLineGreenStyle, "(/\*.*?\*/)|(.*\*/)", RegexOptions.Singleline + RegexOptions.RightToLeft)
-
-        e.ChangedRange.SetFoldingMarkers("{", "}") 'Bracket Folding
-        e.ChangedRange.SetFoldingMarkers("///StartFold", "///EndFold") 'Custom Folding
-
-        e.ChangedRange.ClearStyle({BlueItalicStyle, BoldStyle, BlueStyle, TextStyle, GreenStyle, NumberStyle, DefineStyle, FuncStyle})
-
-        e.ChangedRange.SetStyle(GreenStyle, "//.*$", RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(GreenStyle, "\/\*[\s\S]*?\*\/", RegexOptions.Multiline) 'For multiline comments in one line :P
-        e.ChangedRange.SetStyle(BlueItalicStyle, "#.*$", RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(BoldStyle, "\b(public|stock|enum)\s+(?<range>[\w_]+?)\b")
-        e.ChangedRange.SetStyle(BlueStyle, "\b(public|stock|new|enum|return|if|else|for|break|continue|native|bool|int|true|false|switch|case|forward)\b", RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(TextStyle, Chr(34) + ".*" + Chr(34), RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(NumberStyle, "([0-9])", RegexOptions.Multiline)
-
-        'Function/Defines colors
-        e.ChangedRange.SetStyle(DefineStyle, "\b(" + MainForm.SyntaxHyDefinesList + ")\b", RegexOptions.Multiline)
-        e.ChangedRange.SetStyle(FuncStyle, "\b(" + MainForm.SyntaxHyFuncsList + ")\b", RegexOptions.Multiline)
-    End Sub
-
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBox1.SelectedIndexChanged
         Try
-            SnippetCode.OpenFile(Path + ListBox1.SelectedItem + ".snip")
+            SnippetCode.Text = My.Computer.FileSystem.ReadAllText(Path + ListBox1.SelectedItem + ".snip")
         Catch ex As Exception
 
         End Try
@@ -78,7 +53,7 @@ Public Class CodeSnipptes
             Dim codesnip As New CodeSnipptesAdd
             codesnip.Text = "Edit Code Snippet"
             codesnip.TextBox1.Text = ListBox1.SelectedItem.ToString
-            codesnip.SnippetCode.OpenFile(Path + ListBox1.SelectedItem + ".snip")
+            codesnip.SnippetCode.Text = My.Computer.FileSystem.ReadAllText(Path + ListBox1.SelectedItem + ".snip")
             codesnip.ShowDialog()
         End If
     End Sub

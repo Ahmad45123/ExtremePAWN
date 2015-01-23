@@ -14,10 +14,10 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
-Imports FastColoredTextBoxNS
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports WeifenLuo.WinFormsUI.Docking
+Imports ScintillaNET
 
 Public Class MainForm
 
@@ -27,19 +27,17 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
-    Public Property CurrentTB As FastColoredTextBox 'Returns the current opened object of FastColoredTextBox
+    Public Property CurrentTB As Scintilla 'Returns the current opened object of FastColoredTextBox
     Public Property CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
-        If persistString = GetType(DocumentMapFrm).ToString Then
-            Return DocumentMapFrm
-        ElseIf persistString = GetType(ErrorsFrm).ToString Then
+        'If persistString = GetType(DocumentMapFrm).ToString Then
+        'Return DocumentMapFrm
+        If persistString = GetType(ErrorsFrm).ToString Then
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
             Return IncludeListFrm
-        ElseIf persistString = GetType(ObjectExplorerFrm).ToString Then
-            Return ObjectExplorerFrm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
             Return ProjectExplorerFrm
         ElseIf persistString = GetType(SavedPositions).ToString Then
@@ -62,8 +60,12 @@ Public Class MainForm
         Next
 
         'Load Saved Docks
-        m_deserlise = New DeserializeDockContent(AddressOf GetContentFromPersistString)
-        MainDockPanel.LoadFromXml(Application.StartupPath + "/SavedDocks.xml", m_deserlise)
+        Try
+            m_deserlise = New DeserializeDockContent(AddressOf GetContentFromPersistString)
+            MainDockPanel.LoadFromXml(Application.StartupPath + "/SavedDocks.xml", m_deserlise)
+        Catch ex As Exception
+
+        End Try
 
         GC.Collect()
         GC.GetTotalMemory(False)
@@ -74,9 +76,6 @@ Public Class MainForm
             ToolStripButton4.PerformClick() 'Save
         ElseIf e.KeyCode = Setting.KEY_COMPILE Then
             ToolStripButton7.PerformClick() 'Compile
-        ElseIf e.Control = True And e.KeyValue = Keys.R Then
-            RefreshAutocomAndExpToolStripMenuItem.PerformClick()
-
         End If
     End Sub
 
@@ -91,48 +90,38 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub HelpMenu_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles HelpMenu.Selected
-        Dim Func As String = e.Item.Text
-        Func = Func.Replace("      ", "")
-        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
-        If Not Index = -1 Then
-            Dim Format As String = PublicSyntax.Items.Item(Index)
-            Status.Text = Format
-        End If
-    End Sub
-
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
         ColorChoice.Show()
 
     End Sub
 
     Private Sub ToolStripButton12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton12.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.Paste()
+        If CurrentTB IsNot Nothing Then CurrentTB.Clipboard.Paste()
     End Sub
 
     Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton11.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.Cut()
+        If CurrentTB IsNot Nothing Then CurrentTB.Clipboard.Cut()
     End Sub
 
     Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton10.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.Copy()
+        If CurrentTB IsNot Nothing Then CurrentTB.Clipboard.Copy()
     End Sub
 
     Private Sub ToolStripButton9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton9.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.Redo()
+        If CurrentTB IsNot Nothing Then CurrentTB.UndoRedo.Redo()
     End Sub
 
     Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.Undo()
+        If CurrentTB IsNot Nothing Then CurrentTB.UndoRedo.Undo()
     End Sub
 
     Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.ShowFindDialog()
+        If CurrentTB IsNot Nothing Then CurrentTB.FindReplace.ShowFind()
 
     End Sub
 
     Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
-        If CurrentTB IsNot Nothing Then CurrentTB.ShowReplaceDialog()
+        If CurrentTB IsNot Nothing Then CurrentTB.FindReplace.ShowReplace()
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
@@ -200,244 +189,172 @@ Public Class MainForm
     End Sub
 
     Private Sub UndoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UndoToolStripMenuItem.Click
-        CurrentTB.Undo()
-
+        CurrentTB.UndoRedo.Undo()
     End Sub
 
     Private Sub RedoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RedoToolStripMenuItem.Click
-        CurrentTB.Redo()
+        CurrentTB.UndoRedo.Redo()
     End Sub
 
     Private Sub CutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CutToolStripMenuItem.Click
-        CurrentTB.Cut()
+        CurrentTB.Clipboard.Cut()
     End Sub
 
     Private Sub CopyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
-        CurrentTB.Copy()
+        CurrentTB.Clipboard.Copy()
     End Sub
 
     Private Sub PasteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
-        CurrentTB.Paste()
+        CurrentTB.Clipboard.Paste()
     End Sub
 
     Private Sub FindToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem.Click
-        CurrentTB.ShowFindDialog()
+        CurrentTB.FindReplace.ShowFind()
     End Sub
 
     Private Sub ReplaceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReplaceToolStripMenuItem.Click
-        CurrentTB.ShowReplaceDialog()
-
+        CurrentTB.FindReplace.ShowReplace()
     End Sub
 
     Private Sub GoToToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GoToToolStripMenuItem.Click
-        CurrentTB.ShowGoToDialog()
-
+        CurrentTB.GoTo.ShowGoToDialog()
     End Sub
 
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
-        CurrentTB.SelectAll()
-
+        CurrentTB.Selection.SelectAll()
     End Sub
 
     Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
-        CurrentTB.IncreaseIndent()
-
+        'CurrentTB.IncreaseIndent()
     End Sub
 
     Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton15.Click
-        CurrentTB.DecreaseIndent()
-
+        'CurrentTB.DecreaseIndent()
     End Sub
 
     Private Sub ToolStripButton16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton16.Click
-        CurrentTB.DoAutoIndent()
-
+        'CurrentTB.DoAutoIndent()
     End Sub
 
     Private Sub CopyToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem1.Click
-        CurrentTB.Copy()
-
+        CurrentTB.Clipboard.Copy()
     End Sub
 
     Private Sub CutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CutToolStripMenuItem1.Click
-        CurrentTB.Cut()
-
+        CurrentTB.Clipboard.Cut()
     End Sub
-
 
     Private Sub PasteToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem1.Click
-        CurrentTB.Paste()
-
+        CurrentTB.Clipboard.Paste()
     End Sub
 
-
-    'Defines & Funcs Syntax highlighting.
-    Public t_SyntaxHyDefinesList As New List(Of String)
-    Public t_SyntaxHyFuncsList As New List(Of String)
-    Public SyntaxHyDefinesList As String
-    Public SyntaxHyFuncsList As String
-
-    Public Sub ReBuildAutoCompleteMenu()
-        'Empty
-        SyntaxHyDefinesList = Nothing
-        SyntaxHyFuncsList = Nothing
-
-        For Each Str As String In t_SyntaxHyDefinesList
-            SyntaxHyDefinesList = SyntaxHyDefinesList + "|" + Str
+    Public Shared Function RemoveIndent(ByVal _string As String) As String
+        If (_string = Nothing Or _string = " " Or _string = "") Then
+            Return Nothing
+        End If
+        _string = _string.Trim()
+        Dim stringArray() As String = _string.Split(" ")
+        Dim tempString As String = Nothing
+        For Each stringElement In stringArray
+            If (stringElement <> "") Then
+                tempString += " " + stringElement
+            End If
         Next
-
-        For Each Str As String In t_SyntaxHyFuncsList
-            SyntaxHyFuncsList = SyntaxHyFuncsList + "|" + Str
-        Next
-
-        If SyntaxHyDefinesList IsNot Nothing Then SyntaxHyDefinesList = SyntaxHyDefinesList.Remove(0, 1)
-        If SyntaxHyFuncsList IsNot Nothing Then SyntaxHyFuncsList = SyntaxHyFuncsList.Remove(0, 1)
-
-        If t_SyntaxHyDefinesList IsNot Nothing Then t_SyntaxHyDefinesList.Clear() 'Delete the content.
-        If SyntaxHyFuncsList IsNot Nothing Then t_SyntaxHyDefinesList.Clear() 'Delete the content.
-
-        'Collect memory
-        GC.Collect()
-        GC.GetTotalMemory(True)
-    End Sub
+        tempString = tempString.Trim
+        Return tempString
+    End Function
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
     Public PublicSyntax As New ListBox
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
-    Public Sub ReBuildObjectExplorerAndHelpMenu(ByVal text As String)
+    Public Sub ReBuildAutoComplete(ByVal ctrl As Scintilla)
+        If AutoComplete.Visible = True Then Exit Sub
+
         Try
+            'Clearing
+            AutoComplete.SetAutocompleteItems(New List(Of String))
             PublicSyntax.Items.Clear()
-            ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Clear()
-            t_SyntaxHyDefinesList.Clear()
-            t_SyntaxHyFuncsList.Clear()
-        Catch ex As Exception
-        End Try
 
-        Dim IsAdd As Boolean = True
-        Dim HelpMenuItems = New List(Of String)
-        Try
-            text = text.Replace("#", "")
-            Dim list As List(Of ObjectExplorerClass.ExplorerItem) = New List(Of ObjectExplorerClass.ExplorerItem)()
-            Dim lastClassIndex As Integer = -1
-            Dim regex As Regex = New Regex("^\s*(public|stock|define|include)[^\n]+(\n?\s*{|;)?", RegexOptions.Multiline)
-            For Each r As Match In regex.Matches(text)
-                Try
-                    Dim s As String = r.Value
-                    Dim i As Integer = s.IndexOfAny(New Char() {"=", "{", ";"})
-                    If i >= 0 Then
-                        s = s.Substring(0, i)
-                    End If
-                    s = s.Trim()
-                    Dim item As ObjectExplorerClass.ExplorerItem = New ObjectExplorerClass.ExplorerItem() With {.title = s, .position = r.Index}
-                    If regex.IsMatch(item.title, "\b(public|stock)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        PublicSyntax.Items.Add(item.title) 'Placed here to add the text before the syntax gets removed. 
-                        item.title = item.title.Remove(item.title.IndexOf("("))
-                        HelpMenuItems.Add(item.title)
-                        t_SyntaxHyFuncsList.Add(item.title)
-                        item.type = ObjectExplorerClass.ExplorerItemType.[Class]
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    ElseIf regex.IsMatch(item.title, "\b(define)\b") Then
-                        item.title = item.title.Substring(item.title.IndexOf(" ")).Trim()
-                        Dim tst As String() = item.title.Split(" ")
-                        item.title = tst(0)
-                        HelpMenuItems.Add(item.title)
-                        t_SyntaxHyDefinesList.Add(item.title)
-                        item.type = ObjectExplorerClass.ExplorerItemType.Property
-                        list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-                        lastClassIndex = list.Count
-                    ElseIf regex.IsMatch(item.title, "\b(include)\b") Then
-                        If item.title.Contains(Chr(34)) Then Continue For
-                        item.title = item.title.Replace("<", "")
-                        item.title = item.title.Replace(">", "")
-                        item.title = item.title.Substring(item.title.IndexOf(" "))
-                        item.title = item.title.Replace(" ", "")
-                        Dim action As Action = Sub() ProjectExplorerFrm.ProjectExplorer.Nodes(0).Nodes.Add(item.title)
-                        ProjectExplorerFrm.ProjectExplorer.Invoke(action)
-                        IsAdd = False
-                    End If
-                    If IsAdd = True Then list.Add(item) Else IsAdd = True
-                Catch ex_2BF As Exception
-                End Try
+            'Place stocks/publics/defines
+            For Each Line As Line In ctrl.Lines
+                Dim lineText As String = Regex.Replace(Line.Text, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
+
+                If lineText.StartsWith("#define") Then 'Define
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    Dim define As String() = tempdefineName.Split(" ")
+                    AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
+                ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    Dim syntax As String = tempFunc
+                    If tempFunc.IndexOf("(") = -1 Then Continue For
+                    tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
+                    AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
+                    PublicSyntax.Items.Add(syntax)
+                End If
             Next
-            list.Sort(lastClassIndex + 1, list.Count - (lastClassIndex + 1), New ObjectExplorerClass.ExplorerItemComparer())
-            MyBase.BeginInvoke(Sub()
-                                   ObjectExplorerClass.explorerList = list
-                                   ObjectExplorerFrm.DataGridView1.RowCount = ObjectExplorerClass.explorerList.Count
-                                   ObjectExplorerFrm.DataGridView1.Invalidate()
-                               End Sub)
-        Catch ex_332 As Exception
+
+            'Place includes.
+            For i As Integer = 0 To Includes.Count - 1
+                AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
+            Next
+
+            For Each Str As String In SyntaxOfInc
+                PublicSyntax.Items.Add(Str)
+            Next
+
+        Catch ex As Exception
+            Beep()
         End Try
-
-        For Each Str As String In Includes
-            HelpMenuItems.Add(Str)
-            t_SyntaxHyFuncsList.Add(Str)
-        Next
-
-        For Each Str As String In SyntaxOfInc
-            PublicSyntax.Items.Add(Str)
-        Next
-        ReBuildAutoCompleteMenu()
-        HelpMenu.SetAutocompleteItems(HelpMenuItems)
-
-        'Collect memory
-        GC.Collect()
-        GC.GetTotalMemory(True)
     End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
-        CurrentTB.ShowFindDialog()
-
+        CurrentTB.FindReplace.ShowFind()
     End Sub
 
     Private Sub ReplaceToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReplaceToolStripMenuItem1.Click
-        CurrentTB.ShowReplaceDialog()
-
+        CurrentTB.FindReplace.ShowReplace()
     End Sub
 
     Private Sub GotoToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoToolStripMenuItem1.Click
-        CurrentTB.ShowGoToDialog()
-
+        CurrentTB.GoTo.ShowGoToDialog()
     End Sub
 
     Private Sub AddBookmarkToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AddBookmarkToolStripMenuItem.Click
         If Me.CurrentTB IsNot Nothing Then
-            Dim id As Integer = Me.CurrentTB(Me.CurrentTB.Selection.Start.iLine).UniqueId
-            CurrentTB.Bookmarks.Add(id)
+            CurrentTB.Markers.AddInstanceSet(CurrentTB.Lines.Current, 1)
         End If
     End Sub
 
     Private Sub RemoveBookmarkToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RemoveBookmarkToolStripMenuItem.Click
         If Me.CurrentTB IsNot Nothing Then
-            Dim id As Integer = Me.CurrentTB(Me.CurrentTB.Selection.Start.iLine).UniqueId
-            CurrentTB.Bookmarks.Remove(id)
+            CurrentTB.Lines.Current.DeleteMarker(0)
         End If
     End Sub
 
     Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If OpenFileDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Functions.CreateTab(OpenFileDialog.FileName, True)
+            Functions.CreateTab(OpenFileDialog.FileName)
         End If
         IdleMaker.Start()
     End Sub
 
     Private Sub CommentToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CommentToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            CurrentTB.InsertLinePrefix("//")
+            CurrentTB.Lexing.ToggleLineComment()
         End If
     End Sub
 
     Private Sub UnCommentToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UnCommentToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            CurrentTB.RemoveLinePrefix("//")
+            CurrentTB.Lexing.StreamComment()
         End If
     End Sub
 
     Private Sub CreateProjectToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CreateProjectToolStripMenuItem.Click
         Functions.CreateProject()
-
     End Sub
 
     Private Sub LoadProjectToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoadProjectToolStripMenuItem.Click
@@ -506,19 +423,8 @@ Public Class MainForm
         Dlg.Show()
     End Sub
 
-    Private Sub ErrorDataGridView_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
-        If Me.CurrentTB IsNot Nothing Then
-            Dim RowNumber As Integer = ErrorsFrm.ErrorDataGridView.Rows(e.RowIndex).Cells(3).Value
-            Me.CurrentTB.GoEnd()
-            Me.CurrentTB.SelectionStart = CurrentTB.Text.IndexOf(CurrentTB.GetLineText(RowNumber)) - 1
-            Me.CurrentTB.DoSelectionVisible()
-            Me.CurrentTB.Focus()
-        End If
-    End Sub
-
     Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click
         CreateProjectToolStripMenuItem.PerformClick()
-
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
@@ -545,14 +451,6 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub RefreshAutocomAndExpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshAutocomAndExpToolStripMenuItem.Click
-        If CurrentTB IsNot Nothing Then
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildObjectExplorerAndHelpMenu(CurrentTB.Text)
-                                         End Sub)
-        End If
-    End Sub
-
     Private Sub CodeSnipptesToolStripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeSnipptesToolStripItem.Click
         CodeSnipptes.Show()
 
@@ -560,18 +458,7 @@ Public Class MainForm
 
     Private Sub CloneInAnotherTabToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloneInAnotherTabToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            Functions.CreateTab(CurrentTB.Tag, False, CurrentTB)
-        End If
-    End Sub
-
-    Dim IsObjectExplorerShowen As Boolean = False
-    Private Sub ObjectExplToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ObjectExplToolStripMenuItem.Click
-        If IsObjectExplorerShowen = True Then
-            ObjectExplorerFrm.Close()
-            IsObjectExplorerShowen = False
-        Else
-            ObjectExplorerFrm.Show(MainDockPanel)
-            IsObjectExplorerShowen = True
+            Functions.CreateTab(CurrentTB.Tag, CurrentTB)
         End If
     End Sub
 
@@ -597,16 +484,16 @@ Public Class MainForm
         End If
     End Sub
 
-    Dim IsDocumentMapShown As Boolean = False
-    Private Sub DocumentMapToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DocumentMapToolStripMenuItem.Click
-        If IsDocumentMapShown = True Then
-            DocumentMapFrm.Close()
-            IsDocumentMapShown = False
-        Else
-            DocumentMapFrm.Show(MainDockPanel)
-            IsDocumentMapShown = True
-        End If
-    End Sub
+    'Dim IsDocumentMapShown As Boolean = False
+    'Private Sub DocumentMapToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DocumentMapToolStripMenuItem.Click
+    '    If IsDocumentMapShown = True Then
+    '        DocumentMapFrm.Close()
+    '        IsDocumentMapShown = False
+    '    Else
+    '        DocumentMapFrm.Show(MainDockPanel)
+    '        IsDocumentMapShown = True
+    '    End If
+    'End Sub
 
     Dim IsErrorListSHowen As Boolean = False
     Private Sub ErrorListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ErrorListToolStripMenuItem.Click
@@ -699,5 +586,42 @@ Public Class MainForm
     Private Sub MainForm_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         GC.Collect()
         GC.GetTotalMemory(False)
+    End Sub
+
+    Private Sub GotoNextToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoNextToolstripItem.Click
+        Dim line As Line = CurrentTB.Markers.FindNextMarker()
+        If line IsNot Nothing Then
+            CurrentTB.GoTo.Line(line.Number)
+        End If
+    End Sub
+
+    Private Sub GotoPrevToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoPrevToolstripItem.Click
+        Dim line As Line = CurrentTB.Markers.FindPreviousMarker()
+        If line IsNot Nothing Then
+            CurrentTB.GoTo.Line(line.Number)
+        End If
+    End Sub
+
+    Private Sub AutoRebuildTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoRebuildTimer.Tick
+        If CurrentTB IsNot Nothing Then
+            Try
+                CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
+            Catch ex As Exception
+            End Try
+
+            ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                             ReBuildAutoComplete(CurrentTB)
+                                         End Sub)
+        End If
+    End Sub
+
+    Private Sub AutoComplete_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles AutoComplete.Selected
+        Dim Func As String = e.Item.Text
+        Func = Func.Replace("      ", "")
+        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
+        If Not Index = -1 Then
+            Dim Format As String = PublicSyntax.Items.Item(Index)
+            Status.Text = Format
+        End If
     End Sub
 End Class

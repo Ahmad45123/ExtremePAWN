@@ -22,38 +22,37 @@ Partial Class Editor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.SplitEditorCode = New FastColoredTextBoxNS.FastColoredTextBox()
+        Me.SplitEditorCode = New ScintillaNET.Scintilla()
         CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitEditorCode
         '
-        Me.SplitEditorCode.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
-        Me.SplitEditorCode.AutoScrollMinSize = New System.Drawing.Size(27, 15)
-        Me.SplitEditorCode.BackBrush = Nothing
-        Me.SplitEditorCode.BookmarkColor = System.Drawing.Color.Red
-        Me.SplitEditorCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2
-        Me.SplitEditorCode.CharHeight = 15
-        Me.SplitEditorCode.CharWidth = 8
-        Me.SplitEditorCode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.SplitEditorCode.DelayedTextChangedInterval = 1000
-        Me.SplitEditorCode.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
+        Me.SplitEditorCode.AutoComplete.IsCaseSensitive = False
+        Me.SplitEditorCode.AutoComplete.ListString = ""
+        Me.SplitEditorCode.Caret.CurrentLineBackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.SplitEditorCode.Caret.HighlightCurrentLine = True
+        Me.SplitEditorCode.ConfigurationManager.Language = "cs"
         Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitEditorCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2
-        Me.SplitEditorCode.Font = New System.Drawing.Font("Courier New", 10.0!)
-        Me.SplitEditorCode.IsReplaceMode = False
-        Me.SplitEditorCode.LeftBracket = Global.Microsoft.VisualBasic.ChrW(40)
-        Me.SplitEditorCode.LeftBracket2 = Global.Microsoft.VisualBasic.ChrW(123)
+        Me.SplitEditorCode.Lexing.Lexer = ScintillaNET.Lexer.Null
+        Me.SplitEditorCode.Lexing.LexerName = "automatic"
+        Me.SplitEditorCode.Lexing.LineCommentPrefix = "//"
+        Me.SplitEditorCode.Lexing.StreamCommentPrefix = ""
+        Me.SplitEditorCode.Lexing.StreamCommentSufix = ""
         Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
         Me.SplitEditorCode.Name = "SplitEditorCode"
-        Me.SplitEditorCode.Paddings = New System.Windows.Forms.Padding(0)
-        Me.SplitEditorCode.RightBracket = Global.Microsoft.VisualBasic.ChrW(41)
-        Me.SplitEditorCode.RightBracket2 = Global.Microsoft.VisualBasic.ChrW(125)
-        Me.SplitEditorCode.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.SplitEditorCode.Size = New System.Drawing.Size(690, 466)
-        Me.SplitEditorCode.TabIndex = 1
-        Me.SplitEditorCode.Zoom = 100
+        Me.SplitEditorCode.Styles.BraceBad.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.BraceLight.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.CallTip.FontName = "Segoe "
+        Me.SplitEditorCode.Styles.ControlChar.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.Default.BackColor = System.Drawing.SystemColors.Window
+        Me.SplitEditorCode.Styles.Default.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.IndentGuide.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.LastPredefined.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.LineNumber.FontName = "Verdan"
+        Me.SplitEditorCode.Styles.Max.FontName = "Verdan"
+        Me.SplitEditorCode.TabIndex = 0
         '
         'Editor
         '
@@ -69,5 +68,5 @@ Partial Class Editor
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents SplitEditorCode As FastColoredTextBoxNS.FastColoredTextBox
+    Friend WithEvents SplitEditorCode As ScintillaNET.Scintilla
 End Class

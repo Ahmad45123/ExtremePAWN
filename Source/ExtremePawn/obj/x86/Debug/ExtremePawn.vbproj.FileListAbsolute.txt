@@ -19,15 +19,13 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Ex
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.pdb
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ExtremePAWN.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\AutocompleteMenu.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\FastColoredTextBox.dll
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ScintillaNET.dll
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.DocumentMapFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Editor.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ErrorsFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.IncludeListFrm.resources
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ObjectExplorerFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ProjectExplorerFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.SavedPositions.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.CodeSnipptes.resources
@@ -37,7 +35,6 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Functions.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.KeyDetector.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.MainForm.resources
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ObjectExplorerClass.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Resources.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Setting.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbproj.GenerateResource.Cache

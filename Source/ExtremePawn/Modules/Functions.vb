@@ -1,15 +1,14 @@
-﻿Imports FastColoredTextBoxNS
-Imports System.IO
+﻿Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Threading
+Imports ScintillaNET
+Imports System.Text
 
 Public Class Functions
     Inherits Form
 
     'Functions Save to Save the file.
     Public Function Save(ByVal tab As Editor) As Boolean
-        'CurrentTB.Text.Replace("ï»¿", "") 'This characters are added for same reason somewhere in the script, So we are deleting them [THEY ARE INVISIBLE]
-        Dim tb As FastColoredTextBox = TryCast(tab.Controls(0), FastColoredTextBox)
         Dim result As Boolean
         If tab.Tag Is Nothing Then
             If MainForm.SaveFileDialog.ShowDialog() <> DialogResult.OK Then
@@ -21,8 +20,7 @@ Public Class Functions
 
         End If
         Try
-            MainForm.CurrentTB.SaveToFile(TryCast(tab.Tag, String), System.Text.Encoding.Default)
-            tb.IsChanged = False
+            My.Computer.FileSystem.WriteAllText(tab.Tag, tab.Controls(0).Text, False, System.Text.Encoding.Default)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
                 result = Save(tab)
@@ -31,20 +29,17 @@ Public Class Functions
             result = False
             Return result
         End Try
-        tb.Invalidate()
+        tab.Controls(0).Invalidate()
         result = True
         Return result
     End Function
 
     'Function Compile, Self explantory, To compile the file.
-    Public Sub Compile(ByVal CurrentTB As FastColoredTextBox)
+    Public Sub Compile(ByVal CurrentTB As Scintilla)
         Dim NumOfErrors As Integer
         Dim NumOfWarns As Integer
 
-        If CurrentTB.IsChanged = True Then
-            MainForm.ToolStripButton4.PerformClick()
-            CurrentTB.IsChanged = False
-        End If
+        MainForm.ToolStripButton4.PerformClick() 'Save
 
         MainForm.Status.Text = "Compiling"
 
@@ -152,20 +147,14 @@ Public Class Functions
     End Sub
 
     'Sub SetDefaultSettings To set the default values.
-    Public Sub SetDefaultSettings(ByVal tb As FastColoredTextBox)
-        tb.Dock = DockStyle.Fill
-        tb.LeftPadding = 17
+    Public Sub SetDefaultSettings(ByVal tb As Scintilla)
         tb.ContextMenuStrip = MainForm.RightClickMenu
-        tb.BookmarkColor = Color.Red
-        tb.BracketsHighlightStrategy = BracketsHighlightStrategy.Strategy2
-        tb.FindEndOfFoldingBlockStrategy = FindEndOfFoldingBlockStrategy.Strategy2
-        tb.DelayedTextChangedInterval = 1000
-        tb.DelayedEventsInterval = 100
-        MainForm.HelpMenu.SetAutocompleteMenu(tb, MainForm.HelpMenu)
+        tb.Encoding = New UTF8Encoding(False)
+        Control.CheckForIllegalCrossThreadCalls = False
     End Sub
 
     'Function CreateTab to create a new file and add it to the TabStrip.
-    Public Function CreateTab(ByVal fileName As String, Optional ByVal IsBind As Boolean = False, Optional ByVal SourceText As FastColoredTextBox = Nothing)
+    Public Function CreateTab(ByVal fileName As String, Optional ByVal SourceText As Scintilla = Nothing)
         GC.Collect()
         GC.GetTotalMemory(True)
 
@@ -179,30 +168,13 @@ Public Class Functions
             End If
             tb.Tag = fileName
             If fileName <> Nothing Then
-                If IsBind = True Then
-                    tb.SplitEditorCode.OpenFile(fileName, System.Text.Encoding.Default)
-                    tb.SplitEditorCode.Tag = fileName
-                    tb.SplitEditorCode.IsChanged = False
-                    tb.SplitEditorCode.ClearUndo()
-                Else
-                    tb.SplitEditorCode.OpenFile(fileName)
-                End If
+                tb.SplitEditorCode.Text = My.Computer.FileSystem.ReadAllText(fileName, System.Text.Encoding.Default)
+                tb.SplitEditorCode.Tag = fileName
             Else
-                tb.SplitEditorCode.OpenFile(Application.StartupPath + "\gamemodes\new.pwn")
-                tb.SplitEditorCode.IsChanged = False
+                tb.SplitEditorCode.Text = My.Computer.FileSystem.ReadAllText(Application.StartupPath + "\gamemodes\new.pwn")
             End If
-            tb.SplitEditorCode.ClearUndo()
-            tb.SplitEditorCode.IsChanged = False
-
             tb.Focus()
-
-            If SourceText IsNot Nothing Then
-                tb.SplitEditorCode.SourceTextBox = SourceText
-            End If
-
             tb.Show(MainForm.MainDockPanel)
-
-            MainForm.RefreshAutocomAndExpToolStripMenuItem.PerformClick()
 
             Return (tb)
         Catch ex As Exception
@@ -297,16 +269,5 @@ Public Class Functions
         Else
             MsgBox("You don't have a project loaded to add a new file.")
         End If
-    End Sub
-
-    Private Sub InitializeComponent()
-        Me.SuspendLayout()
-        '
-        'Functions
-        '
-        Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Name = "Functions"
-        Me.ResumeLayout(False)
-
     End Sub
 End Class
