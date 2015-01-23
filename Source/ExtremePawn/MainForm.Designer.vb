@@ -162,7 +162,7 @@ Partial Class MainForm
         '
         Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.GotoNextToolstripItem, Me.GotoPrevToolstripItem, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem, Me.ToolStripSeparator7, Me.CloneInAnotherTabToolStripMenuItem})
         Me.RightClickMenu.Name = "ContextMenuStrip1"
-        Me.RightClickMenu.Size = New System.Drawing.Size(206, 314)
+        Me.RightClickMenu.Size = New System.Drawing.Size(209, 336)
         '
         'CopyToolStripMenuItem1
         '
@@ -242,14 +242,14 @@ Partial Class MainForm
         'CommentToolStripMenuItem
         '
         Me.CommentToolStripMenuItem.Name = "CommentToolStripMenuItem"
-        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.CommentToolStripMenuItem.Text = "Comment"
+        Me.CommentToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.CommentToolStripMenuItem.Text = "Toggle Line Comment"
         '
         'UnCommentToolStripMenuItem
         '
         Me.UnCommentToolStripMenuItem.Name = "UnCommentToolStripMenuItem"
-        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.UnCommentToolStripMenuItem.Text = "UnComment"
+        Me.UnCommentToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.UnCommentToolStripMenuItem.Text = "Toggle Stream Comment"
         '
         'ToolStripSeparator7
         '
@@ -259,8 +259,8 @@ Partial Class MainForm
         'CloneInAnotherTabToolStripMenuItem
         '
         Me.CloneInAnotherTabToolStripMenuItem.Name = "CloneInAnotherTabToolStripMenuItem"
-        Me.CloneInAnotherTabToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.CloneInAnotherTabToolStripMenuItem.Text = "Clone in another tab"
+        Me.CloneInAnotherTabToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.CloneInAnotherTabToolStripMenuItem.Text = "Clone in another tab(Dis)"
         '
         'StatusStrip
         '

@@ -343,15 +343,13 @@ Public Class MainForm
 
     Private Sub CommentToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CommentToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            CurrentTB.Lines.Current.Text = "//" + CurrentTB.Lines.Current.Text
+            CurrentTB.Lexing.ToggleLineComment()
         End If
     End Sub
 
     Private Sub UnCommentToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UnCommentToolStripMenuItem.Click
         If CurrentTB IsNot Nothing Then
-            If CurrentTB.Lines.Current.Text.StartsWith("//") Then
-                CurrentTB.Lines.Current.Text = CurrentTB.Lines.Current.Text.Remove(0, 2)
-            End If
+            CurrentTB.Lexing.StreamComment()
         End If
     End Sub
 
