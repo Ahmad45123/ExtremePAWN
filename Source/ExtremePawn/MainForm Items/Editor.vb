@@ -7,8 +7,8 @@ Public Class Editor
         MainForm.CurrentTB = SplitEditorCode
         MainForm.CurrentOpenedTab = Me
 
-        Dim text As String = MainForm.CurrentTB.Text
-        'DocumentMapFrm.DocumentMap.Target = MainForm.CurrentTB
+        'Making the autocomplete.
+        MainForm.AutoComplete.SetAutocompleteMenu(SplitEditorCode, MainForm.AutoComplete)
     End Sub
 
     Private Sub Editor_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
@@ -27,36 +27,7 @@ Public Class Editor
         End If
     End Sub
 
-    Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.SelectionChanged
         MainForm.TextCountLabel.Text = "Count : " + SplitEditorCode.Selection.Length.ToString
-    End Sub
-
-    Private Sub SplitEditorCode_CharAdded(ByVal sender As System.Object, ByVal e As ScintillaNET.CharAddedEventArgs) Handles SplitEditorCode.CharAdded
-        'Ensure the list of autocomplete words contains something
-        If SplitEditorCode.AutoComplete.List.Count < 0 Or SplitEditorCode.CallTip.IsActive = True Then
-            Exit Sub
-        End If
-
-        'Logic to ensure it's shown correctly
-        Dim pos As Integer = SplitEditorCode.NativeInterface.GetCurrentPos()
-        Dim length As Integer = pos - SplitEditorCode.NativeInterface.WordStartPosition(pos, True)
-
-        'Cancel if the length is zero
-        If length = 0 Then
-            Exit Sub
-        End If
-
-        'Show the modal
-        SplitEditorCode.AutoComplete.Show()
-    End Sub
-
-    Private Sub SplitEditorCode_AutoCompleteAccepted(ByVal sender As System.Object, ByVal e As ScintillaNET.AutoCompleteAcceptedEventArgs) Handles SplitEditorCode.AutoCompleteAccepted
-        Dim Func As String = e.Text
-        Func = Func.Replace("      ", "")
-        Dim Index As Integer = MainForm.PublicSyntax.FindString(Func, -1)
-        If Not Index = -1 Then
-            Dim Format As String = MainForm.PublicSyntax.Items.Item(Index)
-            MainForm.Status.Text = Format
-        End If
     End Sub
 End Class

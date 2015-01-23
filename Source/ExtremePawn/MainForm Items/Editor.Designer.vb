@@ -30,6 +30,8 @@ Partial Class Editor
         '
         Me.SplitEditorCode.AutoComplete.IsCaseSensitive = False
         Me.SplitEditorCode.AutoComplete.ListString = ""
+        Me.SplitEditorCode.Caret.CurrentLineBackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.SplitEditorCode.Caret.HighlightCurrentLine = True
         Me.SplitEditorCode.ConfigurationManager.Language = "cs"
         Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitEditorCode.Lexing.Lexer = ScintillaNET.Lexer.Null

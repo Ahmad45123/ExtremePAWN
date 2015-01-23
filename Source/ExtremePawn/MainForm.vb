@@ -269,11 +269,11 @@ Public Class MainForm
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
     Public Sub ReBuildAutoComplete(ByVal ctrl As Scintilla)
-        'If CurrentOpenedTab.IsAutoCompleteShown = True Then Exit Sub
+        If AutoComplete.Visible = True Then Exit Sub
 
         Try
             'Clearing
-            ctrl.AutoComplete.List.Clear()
+            AutoComplete.SetAutocompleteItems(New List(Of String))
             PublicSyntax.Items.Clear()
 
             'Place stocks/publics/defines
@@ -284,21 +284,23 @@ Public Class MainForm
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim define As String() = tempdefineName.Split(" ")
-                    ctrl.AutoComplete.List.Add(define(0))
+                    AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
                 ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
-                    PublicSyntax.Items.Add(tempFunc) 'Placed here to the text before the syntax gets removed. 
+                    Dim syntax As String = tempFunc
                     If tempFunc.IndexOf("(") = -1 Then Continue For
                     tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
-                    ctrl.AutoComplete.List.Add(tempFunc)
+                    AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
+                    PublicSyntax.Items.Add(syntax)
                 End If
             Next
 
             'Place includes.
-            For Each Str As String In Includes
-                ctrl.AutoComplete.List.Add(Str)
+            For i As Integer = 0 To Includes.Count - 1
+                AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
             Next
+
             For Each Str As String In SyntaxOfInc
                 PublicSyntax.Items.Add(Str)
             Next
@@ -612,6 +614,16 @@ Public Class MainForm
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                              ReBuildAutoComplete(CurrentTB)
                                          End Sub)
+        End If
+    End Sub
+
+    Private Sub AutoComplete_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles AutoComplete.Selected
+        Dim Func As String = e.Item.Text
+        Func = Func.Replace("      ", "")
+        Dim Index As Integer = PublicSyntax.FindString(Func, -1)
+        If Not Index = -1 Then
+            Dim Format As String = PublicSyntax.Items.Item(Index)
+            Status.Text = Format
         End If
     End Sub
 End Class
