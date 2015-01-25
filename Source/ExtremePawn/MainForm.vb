@@ -27,8 +27,13 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
+<<<<<<< HEAD
+    Public CurrentTB As Scintilla 'Returns the current opened object of FastColoredTextBox
+    Public CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
+=======
     Public Property CurrentTB As Scintilla 'Returns the current opened object of FastColoredTextBox
     Public Property CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
+>>>>>>> origin/Source
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
@@ -64,7 +69,10 @@ Public Class MainForm
             m_deserlise = New DeserializeDockContent(AddressOf GetContentFromPersistString)
             MainDockPanel.LoadFromXml(Application.StartupPath + "/SavedDocks.xml", m_deserlise)
         Catch ex As Exception
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/Source
         End Try
 
         GC.Collect()
@@ -76,23 +84,33 @@ Public Class MainForm
             ToolStripButton4.PerformClick() 'Save
         ElseIf e.KeyCode = Setting.KEY_COMPILE Then
             ToolStripButton7.PerformClick() 'Compile
+<<<<<<< HEAD
+        ElseIf e.Control And e.KeyValue = Keys.R Then
+            Status.Text = "Forcing refresh."
+            IdleMaker.Start()
+            ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                             ReBuildAutoComplete(CurrentOpenedTab)
+                                         End Sub)
+=======
+>>>>>>> origin/Source
         End If
     End Sub
 
     Private Sub IdleMaker_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IdleMaker.Tick
         IdleMaker.Stop()
         Status.Text = "Idle"
-
     End Sub
 
     Private Sub AutoSaver_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaver.Tick
         ToolStripButton4.PerformClick()
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/Source
     End Sub
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
         ColorChoice.Show()
-
     End Sub
 
     Private Sub ToolStripButton12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton12.Click
@@ -179,7 +197,7 @@ Public Class MainForm
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
-        MsgBox("Developed By Ahmad45123 AKA Johny Mac" + vbCrLf + vbCrLf + "For any suggestions or bug reports, Dont hesitate in emailing me at ahmad.gasser@gmail.com" + vbCrLf + vbCrLf + "Thanks for using this editor.")
+        MsgBox("ExtremePAWN " + Application.ProductVersion + vbCrLf + vbCrLf + "Developed By Ahmad45123 AKA Johny Mac" + vbCrLf + "For any suggestions or bug reports, Dont hesitate in emailing me at ahmad.gasser@gmail.com" + vbCrLf + vbCrLf + "Thanks for using this editor.")
     End Sub
 
     Private Sub FontToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FontToolStripMenuItem.Click
@@ -247,6 +265,8 @@ Public Class MainForm
     Private Sub PasteToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem1.Click
         CurrentTB.Clipboard.Paste()
     End Sub
+<<<<<<< HEAD
+=======
 
     Public Shared Function RemoveIndent(ByVal _string As String) As String
         If (_string = Nothing Or _string = " " Or _string = "") Then
@@ -263,11 +283,30 @@ Public Class MainForm
         tempString = tempString.Trim
         Return tempString
     End Function
+>>>>>>> origin/Source
 
     'Function ReBuildObjectExplorer to rebuild the object explorer contents.
     Public PublicSyntax As New ListBox
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
+<<<<<<< HEAD
+    Dim IsRebuildFinished As Boolean = True
+    Public Sub ReBuildAutoComplete(ByVal openedTab As Editor)
+        If openedTab.AutoComplete.Visible = True Then Exit Sub
+        IsRebuildFinished = False
+
+        Dim text As String = openedTab.SplitEditorCode.Text.Clone
+        Dim textLines As String() = text.Split(vbCrLf)
+
+        Try
+            'Clearing
+            openedTab.AutoComplete.SetAutocompleteItems(New List(Of String))
+            PublicSyntax.Items.Clear()
+
+            'Place stocks/publics/defines
+            For Each Line As String In textLines
+                Dim lineText As String = Regex.Replace(Line, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
+=======
     Public Sub ReBuildAutoComplete(ByVal ctrl As Scintilla)
         If AutoComplete.Visible = True Then Exit Sub
 
@@ -279,35 +318,58 @@ Public Class MainForm
             'Place stocks/publics/defines
             For Each Line As Line In ctrl.Lines
                 Dim lineText As String = Regex.Replace(Line.Text, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
+>>>>>>> origin/Source
 
                 If lineText.StartsWith("#define") Then 'Define
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim define As String() = tempdefineName.Split(" ")
+<<<<<<< HEAD
+                    openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
+=======
                     AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
+>>>>>>> origin/Source
                 ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim syntax As String = tempFunc
                     If tempFunc.IndexOf("(") = -1 Then Continue For
                     tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
+<<<<<<< HEAD
+                    openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
+=======
                     AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
+>>>>>>> origin/Source
                     PublicSyntax.Items.Add(syntax)
                 End If
             Next
 
             'Place includes.
             For i As Integer = 0 To Includes.Count - 1
+<<<<<<< HEAD
+                openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
+=======
                 AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
+>>>>>>> origin/Source
             Next
 
             For Each Str As String In SyntaxOfInc
                 PublicSyntax.Items.Add(Str)
             Next
 
+<<<<<<< HEAD
+            GC.Collect()
+            GC.GetTotalMemory(True)
+
         Catch ex As Exception
             Beep()
         End Try
+        IsRebuildFinished = True
+=======
+        Catch ex As Exception
+            Beep()
+        End Try
+>>>>>>> origin/Source
     End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
@@ -604,6 +666,12 @@ Public Class MainForm
 
     Private Sub AutoRebuildTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoRebuildTimer.Tick
         If CurrentTB IsNot Nothing Then
+<<<<<<< HEAD
+            If IsRebuildFinished = False Then Exit Sub
+
+            ThreadPool.QueueUserWorkItem(Sub(o As Object)
+                                             ReBuildAutoComplete(CurrentOpenedTab)
+=======
             Try
                 CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
             Catch ex As Exception
@@ -611,10 +679,19 @@ Public Class MainForm
 
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                              ReBuildAutoComplete(CurrentTB)
+>>>>>>> origin/Source
                                          End Sub)
         End If
     End Sub
 
+<<<<<<< HEAD
+    Private Sub ScrollBarTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ScrollBarTimer.Tick
+        If CurrentTB Is Nothing Then Exit Sub
+        Try
+            CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
+        Catch ex As Exception
+        End Try
+=======
     Private Sub AutoComplete_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles AutoComplete.Selected
         Dim Func As String = e.Item.Text
         Func = Func.Replace("      ", "")
@@ -623,5 +700,6 @@ Public Class MainForm
             Dim Format As String = PublicSyntax.Items.Item(Index)
             Status.Text = Format
         End If
+>>>>>>> origin/Source
     End Sub
 End Class
