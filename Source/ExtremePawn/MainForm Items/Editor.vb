@@ -6,12 +6,6 @@ Public Class Editor
     Private Sub Editor_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         MainForm.CurrentTB = SplitEditorCode
         MainForm.CurrentOpenedTab = Me
-<<<<<<< HEAD
-=======
-
-        'Making the autocomplete.
-        MainForm.AutoComplete.SetAutocompleteMenu(SplitEditorCode, MainForm.AutoComplete)
->>>>>>> origin/Source
     End Sub
 
     Private Sub Editor_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
@@ -32,7 +26,6 @@ Public Class Editor
 
     Private Sub SplitEditorCode_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SplitEditorCode.SelectionChanged
         MainForm.TextCountLabel.Text = "Count : " + SplitEditorCode.Selection.Length.ToString
-<<<<<<< HEAD
     End Sub
 
     Private Sub AutoComplete_Selected(ByVal sender As System.Object, ByVal e As AutocompleteMenuNS.SelectedEventArgs) Handles AutoComplete.Selected
@@ -41,7 +34,5 @@ Public Class Editor
 
     Private Sub Editor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         AutoComplete.SetAutocompleteMenu(SplitEditorCode, AutoComplete)
-=======
->>>>>>> origin/Source
     End Sub
 End Class

@@ -149,12 +149,7 @@ Partial Class MainForm
         Me.MainDockPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
         Me.TextCountLabel = New System.Windows.Forms.Label()
         Me.AutoRebuildTimer = New System.Windows.Forms.Timer(Me.components)
-<<<<<<< HEAD
         Me.ScrollBarTimer = New System.Windows.Forms.Timer(Me.components)
-=======
-        Me.AutoComplete = New AutocompleteMenuNS.AutocompleteMenu()
-        Me.AutoCompleteImage = New System.Windows.Forms.ImageList(Me.components)
->>>>>>> origin/Source
         Me.RightClickMenu.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -166,138 +161,82 @@ Partial Class MainForm
         '
         Me.RightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem1, Me.CutToolStripMenuItem1, Me.PasteToolStripMenuItem1, Me.ToolStripMenuItem6, Me.AddBookmarkToolStripMenuItem, Me.RemoveBookmarkToolStripMenuItem, Me.GotoNextToolstripItem, Me.GotoPrevToolstripItem, Me.ToolStripMenuItem5, Me.FindToolStripMenuItem1, Me.ReplaceToolStripMenuItem1, Me.GotoToolStripMenuItem1, Me.ToolStripMenuItem10, Me.CommentToolStripMenuItem, Me.UnCommentToolStripMenuItem, Me.ToolStripSeparator7, Me.CloneInAnotherTabToolStripMenuItem})
         Me.RightClickMenu.Name = "ContextMenuStrip1"
-<<<<<<< HEAD
         Me.RightClickMenu.Size = New System.Drawing.Size(209, 314)
-=======
-        Me.RightClickMenu.Size = New System.Drawing.Size(209, 336)
->>>>>>> origin/Source
         '
         'CopyToolStripMenuItem1
         '
         Me.CopyToolStripMenuItem1.Name = "CopyToolStripMenuItem1"
-<<<<<<< HEAD
         Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.CopyToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.CopyToolStripMenuItem1.Text = "Copy"
         '
         'CutToolStripMenuItem1
         '
         Me.CutToolStripMenuItem1.Name = "CutToolStripMenuItem1"
-<<<<<<< HEAD
         Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.CutToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.CutToolStripMenuItem1.Text = "Cut"
         '
         'PasteToolStripMenuItem1
         '
         Me.PasteToolStripMenuItem1.Name = "PasteToolStripMenuItem1"
-<<<<<<< HEAD
         Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.PasteToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.PasteToolStripMenuItem1.Text = "Paste"
         '
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-<<<<<<< HEAD
         Me.ToolStripMenuItem6.Size = New System.Drawing.Size(205, 6)
-=======
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(202, 6)
->>>>>>> origin/Source
         '
         'AddBookmarkToolStripMenuItem
         '
         Me.AddBookmarkToolStripMenuItem.Name = "AddBookmarkToolStripMenuItem"
-<<<<<<< HEAD
         Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.AddBookmarkToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.AddBookmarkToolStripMenuItem.Text = "Add Bookmark"
         '
         'RemoveBookmarkToolStripMenuItem
         '
         Me.RemoveBookmarkToolStripMenuItem.Name = "RemoveBookmarkToolStripMenuItem"
-<<<<<<< HEAD
         Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.RemoveBookmarkToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.RemoveBookmarkToolStripMenuItem.Text = "Remove Bookmark"
         '
         'GotoNextToolstripItem
         '
         Me.GotoNextToolstripItem.Name = "GotoNextToolstripItem"
-<<<<<<< HEAD
         Me.GotoNextToolstripItem.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.GotoNextToolstripItem.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.GotoNextToolstripItem.Text = "Goto Next Bookmark"
         '
         'GotoPrevToolstripItem
         '
         Me.GotoPrevToolstripItem.Name = "GotoPrevToolstripItem"
-<<<<<<< HEAD
         Me.GotoPrevToolstripItem.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.GotoPrevToolstripItem.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.GotoPrevToolstripItem.Text = "Goto Previous Bookmark"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-<<<<<<< HEAD
         Me.ToolStripMenuItem5.Size = New System.Drawing.Size(205, 6)
-=======
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(202, 6)
->>>>>>> origin/Source
         '
         'FindToolStripMenuItem1
         '
         Me.FindToolStripMenuItem1.Name = "FindToolStripMenuItem1"
-<<<<<<< HEAD
         Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.FindToolStripMenuItem1.Text = "Find"
         '
         'ReplaceToolStripMenuItem1
         '
         Me.ReplaceToolStripMenuItem1.Name = "ReplaceToolStripMenuItem1"
-<<<<<<< HEAD
         Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.ReplaceToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.ReplaceToolStripMenuItem1.Text = "Replace"
         '
         'GotoToolStripMenuItem1
         '
         Me.GotoToolStripMenuItem1.Name = "GotoToolStripMenuItem1"
-<<<<<<< HEAD
         Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(208, 22)
-=======
-        Me.GotoToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
->>>>>>> origin/Source
         Me.GotoToolStripMenuItem1.Text = "Goto"
         '
         'ToolStripMenuItem10
         '
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-<<<<<<< HEAD
         Me.ToolStripMenuItem10.Size = New System.Drawing.Size(205, 6)
-=======
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(202, 6)
->>>>>>> origin/Source
         '
         'CommentToolStripMenuItem
         '
@@ -314,11 +253,7 @@ Partial Class MainForm
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-<<<<<<< HEAD
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(205, 6)
-=======
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(202, 6)
->>>>>>> origin/Source
         '
         'CloneInAnotherTabToolStripMenuItem
         '
@@ -1007,30 +942,11 @@ Partial Class MainForm
         'AutoRebuildTimer
         '
         Me.AutoRebuildTimer.Enabled = True
-<<<<<<< HEAD
         Me.AutoRebuildTimer.Interval = 6000
         '
         'ScrollBarTimer
         '
         Me.ScrollBarTimer.Enabled = True
-=======
-        Me.AutoRebuildTimer.Interval = 1000
-        '
-        'AutoComplete
-        '
-        Me.AutoComplete.Colors = CType(resources.GetObject("AutoComplete.Colors"), AutocompleteMenuNS.Colors)
-        Me.AutoComplete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.AutoComplete.ImageList = Me.AutoCompleteImage
-        Me.AutoComplete.Items = New String(-1) {}
-        Me.AutoComplete.TargetControlWrapper = Nothing
-        '
-        'AutoCompleteImage
-        '
-        Me.AutoCompleteImage.ImageStream = CType(resources.GetObject("AutoCompleteImage.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.AutoCompleteImage.TransparentColor = System.Drawing.Color.Transparent
-        Me.AutoCompleteImage.Images.SetKeyName(0, "DefineIcon.ico")
-        Me.AutoCompleteImage.Images.SetKeyName(1, "ObjectIcon.ico")
->>>>>>> origin/Source
         '
         'MainForm
         '
@@ -1174,11 +1090,6 @@ Partial Class MainForm
     Friend WithEvents GotoNextToolstripItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GotoPrevToolstripItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AutoRebuildTimer As System.Windows.Forms.Timer
-<<<<<<< HEAD
     Friend WithEvents ScrollBarTimer As System.Windows.Forms.Timer
-=======
-    Friend WithEvents AutoComplete As AutocompleteMenuNS.AutocompleteMenu
-    Friend WithEvents AutoCompleteImage As System.Windows.Forms.ImageList
->>>>>>> origin/Source
 
 End Class

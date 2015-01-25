@@ -155,12 +155,6 @@ Public Class Functions
 
     'Function CreateTab to create a new file and add it to the TabStrip.
     Public Function CreateTab(ByVal fileName As String, Optional ByVal SourceText As Scintilla = Nothing)
-<<<<<<< HEAD
-=======
-        GC.Collect()
-        GC.GetTotalMemory(True)
-
->>>>>>> origin/Source
         Try
             Dim tb As New Editor
             SetDefaultSettings(tb.SplitEditorCode)
@@ -179,13 +173,10 @@ Public Class Functions
             tb.Focus()
             tb.Show(MainForm.MainDockPanel)
 
-<<<<<<< HEAD
             ThreadPool.QueueUserWorkItem(Sub(o As Object)
                                              MainForm.ReBuildAutoComplete(tb)
                                          End Sub)
 
-=======
->>>>>>> origin/Source
             Return (tb)
         Catch ex As Exception
             If MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand) = DialogResult.Retry Then
