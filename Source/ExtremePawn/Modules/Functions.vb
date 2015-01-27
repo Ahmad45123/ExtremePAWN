@@ -106,10 +106,6 @@ Public Class Functions
             MainForm.Status.Text = "Compiling Failed With " + NumOfErrors.ToString + " Errors And " + NumOfWarns.ToString + " Warnings"
             MainForm.IdleMaker.Start()
         End If
-
-        'If CurrentTB IsNot Nothing Then
-        '    CurrentTB.OnTextChanged() 'Fix for the text being black.
-        'End If
     End Sub
 
     'Functions LoadSettings to load the settings.

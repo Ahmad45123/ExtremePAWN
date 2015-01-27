@@ -28,14 +28,14 @@ Public Class MainForm
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
     'Used to get the current ScntillaControl.
-    Public ReadOnly Property CurrentTB
+    Public ReadOnly Property CurrentTB As Scintilla
         Get
             If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
-            Return DirectCast(MainDockPanel.ActiveContent, Editor).SplitEditorCode
+            Return DirectCast(DirectCast(MainDockPanel.ActiveContent, Editor).SplitEditorCode, Scintilla)
         End Get
     End Property
     'Used to get the current active form.
-    Public ReadOnly Property CurrentOpenedTab
+    Public ReadOnly Property CurrentOpenedTab As Editor
         Get
             If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
             Return DirectCast(MainDockPanel.ActiveContent, Editor)
@@ -239,15 +239,42 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
-        'CurrentTB.IncreaseIndent()
+        For num As Integer = CurrentTB.Selection.Range.StartingLine.Number To CurrentTB.Selection.Range.EndingLine.Number
+            CurrentTB.Lines(num).Indentation += 4
+        Next
     End Sub
 
     Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton15.Click
-        'CurrentTB.DecreaseIndent()
+        For num As Integer = CurrentTB.Selection.Range.StartingLine.Number To CurrentTB.Selection.Range.EndingLine.Number
+            CurrentTB.Lines(num).Indentation -= 4
+        Next
     End Sub
 
     Private Sub ToolStripButton16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton16.Click
-        'CurrentTB.DoAutoIndent()
+        If (CurrentTB.Selection.Range.EndingLine.Number - CurrentTB.Selection.Range.StartingLine.Number) > 50000 Then
+            MsgBox("You cant use this tool for more than 50K+ lines.")
+            Exit Sub
+        End If
+
+        Dim currentIndent As Integer = 0
+        For num As Integer = CurrentTB.Selection.Range.StartingLine.Number To CurrentTB.Selection.Range.EndingLine.Number
+            CurrentTB.Lines(num).Indentation = 0
+            If CurrentTB.Lines(num).Text.Contains("{") Then
+                If CurrentTB.Lines(num).Text.Contains("}") Then
+                    CurrentTB.Lines(num).Indentation = currentIndent
+                    Continue For
+                End If
+                CurrentTB.Lines(num).Indentation = currentIndent
+                currentIndent += 4
+                Continue For
+            ElseIf CurrentTB.Lines(num).Text.Contains("}") Then
+                currentIndent -= 4
+                If currentIndent < 0 Then
+                    currentIndent = 0
+                End If
+            End If
+            CurrentTB.Lines(num).Indentation = currentIndent
+        Next
     End Sub
 
     Private Sub CopyToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem1.Click
