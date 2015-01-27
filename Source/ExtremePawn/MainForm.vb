@@ -27,8 +27,20 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
-    Public CurrentTB As Scintilla 'Returns the current opened object of FastColoredTextBox
-    Public CurrentOpenedTab As Editor 'Returns the current opened window which contains the TB.
+    'Used to get the current ScntillaControl.
+    Public ReadOnly Property CurrentTB
+        Get
+            If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
+            Return DirectCast(MainDockPanel.ActiveContent, Editor).SplitEditorCode
+        End Get
+    End Property
+    'Used to get the current active form.
+    Public ReadOnly Property CurrentOpenedTab
+        Get
+            If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
+            Return DirectCast(MainDockPanel.ActiveContent, Editor)
+        End Get
+    End Property
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
