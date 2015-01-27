@@ -32,22 +32,22 @@ Partial Class Editor
         '
         'SplitEditorCode
         '
-        Me.SplitEditorCode.Annotations.Visibility = ScintillaNET.AnnotationsVisibility.Standard
-        Me.SplitEditorCode.AutoComplete.IsCaseSensitive = False
-        Me.SplitEditorCode.AutoComplete.ListString = ""
-        Me.SplitEditorCode.Caret.CurrentLineBackgroundColor = System.Drawing.Color.LightGray
+        Me.SplitEditorCode.Caret.CurrentLineBackgroundColor = System.Drawing.Color.Gainsboro
         Me.SplitEditorCode.Caret.HighlightCurrentLine = True
         Me.SplitEditorCode.ConfigurationManager.Language = "cpp"
         Me.SplitEditorCode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitEditorCode.Folding.UseCompactFolding = True
         Me.SplitEditorCode.Indentation.ShowGuides = True
         Me.SplitEditorCode.Indentation.SmartIndentType = ScintillaNET.SmartIndent.CPP2
         Me.SplitEditorCode.Indentation.TabWidth = 4
+        Me.SplitEditorCode.IsBraceMatching = True
         Me.SplitEditorCode.Lexing.Lexer = ScintillaNET.Lexer.Cpp
         Me.SplitEditorCode.Lexing.LexerName = "cpp"
         Me.SplitEditorCode.Lexing.LineCommentPrefix = "//"
         Me.SplitEditorCode.Lexing.StreamCommentPrefix = "/*"
         Me.SplitEditorCode.Lexing.StreamCommentSufix = "*/"
         Me.SplitEditorCode.Location = New System.Drawing.Point(0, 0)
+        Me.SplitEditorCode.Margins.Margin2.Width = 12
         Me.SplitEditorCode.Name = "SplitEditorCode"
         Me.SplitEditorCode.Size = New System.Drawing.Size(690, 466)
         Me.SplitEditorCode.Styles.BraceBad.FontName = "Verdan"
