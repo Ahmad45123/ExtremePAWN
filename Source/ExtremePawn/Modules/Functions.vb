@@ -169,9 +169,7 @@ Public Class Functions
             tb.Focus()
             tb.Show(MainForm.MainDockPanel)
 
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             MainForm.ReBuildAutoComplete(tb)
-                                         End Sub)
+            MainForm.ReBuildAutoComplete.RunWorkerAsync()
 
             Return (tb)
         Catch ex As Exception

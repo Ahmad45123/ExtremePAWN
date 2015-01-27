@@ -90,9 +90,8 @@ Public Class MainForm
         ElseIf e.Control And e.KeyValue = Keys.R Then
             Status.Text = "Forcing refresh."
             IdleMaker.Start()
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildAutoComplete(CurrentOpenedTab)
-                                         End Sub)
+            If ReBuildAutoComplete.IsBusy Then Exit Sub
+            ReBuildAutoComplete.RunWorkerAsync()
         End If
     End Sub
 
@@ -293,56 +292,6 @@ Public Class MainForm
     Public PublicSyntax As New ListBox
     Public SyntaxOfInc As New List(Of String)
     Public Includes As New List(Of String)
-    Dim IsRebuildFinished As Boolean = True
-    Public Sub ReBuildAutoComplete(ByVal openedTab As Editor)
-        If openedTab.AutoComplete.Visible = True Then Exit Sub
-        IsRebuildFinished = False
-
-        Dim text As String = openedTab.SplitEditorCode.Text.Clone
-        Dim textLines As String() = text.Split(vbCrLf)
-
-        Try
-            'Clearing
-            openedTab.AutoComplete.SetAutocompleteItems(New List(Of String))
-            PublicSyntax.Items.Clear()
-
-            'Place stocks/publics/defines
-            For Each Line As String In textLines
-                Dim lineText As String = Regex.Replace(Line, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
-
-                If lineText.StartsWith("#define") Then 'Define
-                    If lineText.IndexOf(" ") = -1 Then Continue For
-                    Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
-                    Dim define As String() = tempdefineName.Split(" ")
-                    openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
-                ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
-                    If lineText.IndexOf(" ") = -1 Then Continue For
-                    Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
-                    Dim syntax As String = tempFunc
-                    If tempFunc.IndexOf("(") = -1 Then Continue For
-                    tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
-                    openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
-                    PublicSyntax.Items.Add(syntax)
-                End If
-            Next
-
-            'Place includes.
-            For i As Integer = 0 To Includes.Count - 1
-                openedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
-            Next
-
-            For Each Str As String In SyntaxOfInc
-                PublicSyntax.Items.Add(Str)
-            Next
-
-            GC.Collect()
-            GC.GetTotalMemory(True)
-
-        Catch ex As Exception
-            Beep()
-        End Try
-        IsRebuildFinished = True
-    End Sub
 
     Private Sub FindToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FindToolStripMenuItem1.Click
         CurrentTB.FindReplace.ShowFind()
@@ -542,6 +491,7 @@ Public Class MainForm
 
     Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         MainDockPanel.SaveAsXml(Application.StartupPath + "/SavedDocks.xml")
+        If ReBuildAutoComplete.IsBusy Then ReBuildAutoComplete.CancelAsync()
     End Sub
 
     Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
@@ -617,11 +567,6 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub MainForm_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        GC.Collect()
-        GC.GetTotalMemory(False)
-    End Sub
-
     Private Sub GotoNextToolstripItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GotoNextToolstripItem.Click
         Dim line As Line = CurrentTB.Markers.FindNextMarker()
         If line IsNot Nothing Then
@@ -638,11 +583,8 @@ Public Class MainForm
 
     Private Sub AutoRebuildTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoRebuildTimer.Tick
         If CurrentTB IsNot Nothing Then
-            If IsRebuildFinished = False Then Exit Sub
-
-            ThreadPool.QueueUserWorkItem(Sub(o As Object)
-                                             ReBuildAutoComplete(CurrentOpenedTab)
-                                         End Sub)
+            If ReBuildAutoComplete.IsBusy Then Exit Sub
+            ReBuildAutoComplete.RunWorkerAsync()
         End If
     End Sub
 
@@ -651,6 +593,54 @@ Public Class MainForm
         Try
             CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
         Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ReBuild_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ReBuildAutoComplete.DoWork
+        If CurrentOpenedTab.AutoComplete.Visible = True Then Exit Sub
+
+        Dim text As String = CurrentOpenedTab.SplitEditorCode.Text.Clone
+        Dim textLines As String() = text.Split(vbCrLf)
+
+        Try
+            'Clearing
+            CurrentOpenedTab.AutoComplete.SetAutocompleteItems(New List(Of String))
+            PublicSyntax.Items.Clear()
+
+            'Place stocks/publics/defines
+            For Each Line As String In textLines
+                Dim lineText As String = Regex.Replace(Line, "^\s+|\s+$|\s+(?=\s)", "") 'Remove whitespaces.
+
+                If lineText.StartsWith("#define") Then 'Define
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    Dim define As String() = tempdefineName.Split(" ")
+                    CurrentOpenedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
+                ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
+                    If lineText.IndexOf(" ") = -1 Then Continue For
+                    Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
+                    Dim syntax As String = tempFunc
+                    If tempFunc.IndexOf("(") = -1 Then Continue For
+                    tempFunc = tempFunc.Remove(tempFunc.IndexOf("("))
+                    CurrentOpenedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(tempFunc, 1, tempFunc, "Usage: ", syntax))
+                    PublicSyntax.Items.Add(syntax)
+                End If
+            Next
+
+            'Place includes.
+            For i As Integer = 0 To Includes.Count - 1
+                CurrentOpenedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(Includes(i), 1, Includes(i), "Usage: ", SyntaxOfInc(i)))
+            Next
+
+            For Each Str As String In SyntaxOfInc
+                PublicSyntax.Items.Add(Str)
+            Next
+
+            GC.Collect()
+            GC.GetTotalMemory(True)
+
+        Catch ex As Exception
+            Beep()
         End Try
     End Sub
 End Class
