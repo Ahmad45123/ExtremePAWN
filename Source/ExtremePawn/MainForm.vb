@@ -27,25 +27,12 @@ Public Class MainForm
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
 
-    'Used to get the current ScntillaControl.
-    Public ReadOnly Property CurrentTB As Scintilla
-        Get
-            If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
-            Return DirectCast(DirectCast(MainDockPanel.ActiveContent, Editor).SplitEditorCode, Scintilla)
-        End Get
-    End Property
-    'Used to get the current active form.
-    Public ReadOnly Property CurrentOpenedTab As Editor
-        Get
-            If MainDockPanel.ActiveContent Is Nothing Then Return Nothing
-            Return DirectCast(MainDockPanel.ActiveContent, Editor)
-        End Get
-    End Property
+
+    Public CurrentTB As Scintilla 'Used to get the current ScntillaControl. [Not using ActiveContent as when using a tool, The CurrentTB will be changed.]
+    Public CurrentOpenedTab As Editor 'Used to get the current active form.
 
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
-        'If persistString = GetType(DocumentMapFrm).ToString Then
-        'Return DocumentMapFrm
         If persistString = GetType(ErrorsFrm).ToString Then
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
@@ -54,6 +41,8 @@ Public Class MainForm
             Return ProjectExplorerFrm
         ElseIf persistString = GetType(SavedPositions).ToString Then
             Return SavedPositions
+        ElseIf persistString = GetType(ColorPreview).ToString Then
+            Return ColorPreview
         End If
         Return Nothing
     End Function
@@ -615,7 +604,10 @@ Public Class MainForm
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim define As String() = tempdefineName.Split(" ")
-                    CurrentOpenedTab.AutoComplete.AddItem(New AutocompleteMenuNS.AutocompleteItem(define(0), 0))
+                    Dim item As New AutocompleteMenuNS.AutocompleteItem(define(0), 0)
+                    item.ToolTipTitle = "Define: "
+                    item.ToolTipText = define(1)
+                    CurrentOpenedTab.AutoComplete.AddItem(item)
                 ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
@@ -642,5 +634,16 @@ Public Class MainForm
         Catch ex As Exception
             Beep()
         End Try
+    End Sub
+
+    Public IsColorPreviewShown As Boolean = False
+    Private Sub DefineColorPreviewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineColorPreviewToolStripMenuItem.Click
+        If IsColorPreviewShown = True Then
+            ColorPreview.Close()
+            IsColorPreviewShown = False
+        Else
+            ColorPreview.Show(MainDockPanel)
+            IsColorPreviewShown = True
+        End If
     End Sub
 End Class

@@ -9,6 +9,8 @@ Public Class Editor
             If dialogResult = dialogResult.Yes Then
                 GC.Collect()
                 GC.GetTotalMemory(True)
+                MainForm.CurrentTB = Nothing
+                MainForm.CurrentOpenedTab = Nothing
                 If Not Functions.Save(Me) Then
                     e.Cancel = True
                 End If
@@ -28,5 +30,19 @@ Public Class Editor
 
     Private Sub Editor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         AutoComplete.SetAutocompleteMenu(SplitEditorCode, AutoComplete)
+    End Sub
+
+    Private Sub Editor_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        MainForm.CurrentTB = SplitEditorCode
+        MainForm.CurrentOpenedTab = Me
+    End Sub
+
+    Private Sub AutoComplete_Hovered(sender As Object, e As AutocompleteMenuNS.HoveredEventArgs) Handles AutoComplete.Hovered
+        If e.Item Is Nothing Then Exit Sub
+
+        If e.Item.Text.StartsWith("COLOR_") And e.Item.ToolTipText.StartsWith("0x") And MainForm.IsColorPreviewShown Then
+            Dim str As String = e.Item.ToolTipText.Remove(e.Item.ToolTipText.Count - 2, 2)
+            ColorPreview.SetColor(str)
+        End If
     End Sub
 End Class

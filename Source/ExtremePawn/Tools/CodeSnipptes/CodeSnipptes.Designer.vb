@@ -31,6 +31,7 @@ Partial Class CodeSnipptes
         Me.SnippetCode = New ScintillaNET.Scintilla()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SnippetCode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -48,25 +49,47 @@ Partial Class CodeSnipptes
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 92)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 70)
         '
         'AddToolStripMenuItem
         '
         Me.AddToolStripMenuItem.Name = "AddToolStripMenuItem"
-        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.AddToolStripMenuItem.Text = "Add"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'DeleteToolStripMenuItem
         '
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
+        '
+        'SnippetCode
+        '
+        Me.SnippetCode.ConfigurationManager.Language = "cpp"
+        Me.SnippetCode.Lexing.Lexer = ScintillaNET.Lexer.Cpp
+        Me.SnippetCode.Lexing.LexerName = "cpp"
+        Me.SnippetCode.Lexing.LineCommentPrefix = ""
+        Me.SnippetCode.Lexing.StreamCommentPrefix = ""
+        Me.SnippetCode.Lexing.StreamCommentSufix = ""
+        Me.SnippetCode.Location = New System.Drawing.Point(278, 28)
+        Me.SnippetCode.Name = "SnippetCode"
+        Me.SnippetCode.Size = New System.Drawing.Size(342, 469)
+        Me.SnippetCode.Styles.BraceBad.FontName = "Verdan"
+        Me.SnippetCode.Styles.BraceLight.FontName = "Verdan"
+        Me.SnippetCode.Styles.CallTip.FontName = "Segoe "
+        Me.SnippetCode.Styles.ControlChar.FontName = "Verdan"
+        Me.SnippetCode.Styles.Default.FontName = "Verdan"
+        Me.SnippetCode.Styles.IndentGuide.FontName = "Verdan"
+        Me.SnippetCode.Styles.LastPredefined.FontName = "Verdan"
+        Me.SnippetCode.Styles.LineNumber.FontName = "Verdan"
+        Me.SnippetCode.Styles.Max.FontName = "Verdan"
+        Me.SnippetCode.TabIndex = 4
         '
         'Label1
         '
@@ -85,11 +108,15 @@ Partial Class CodeSnipptes
         Me.TextBox1.Size = New System.Drawing.Size(260, 20)
         Me.TextBox1.TabIndex = 3
         '
+        'ToolTip1
+        '
+        Me.ToolTip1.ToolTipTitle = "Help: "
+        '
         'CodeSnipptes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(632, 518)
+        Me.ClientSize = New System.Drawing.Size(632, 506)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SnippetCode)
@@ -112,4 +139,5 @@ Partial Class CodeSnipptes
     Friend WithEvents DeleteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents SnippetCode As ScintillaNET.Scintilla
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

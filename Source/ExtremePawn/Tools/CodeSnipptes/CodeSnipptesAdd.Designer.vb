@@ -22,13 +22,34 @@ Partial Class CodeSnipptesAdd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.SnippetCode = New ScintillaNET.Scintilla()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.SnippetCode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'SnippetCode
+        '
+        Me.SnippetCode.ConfigurationManager.Language = "cpp"
+        Me.SnippetCode.Lexing.Lexer = ScintillaNET.Lexer.Cpp
+        Me.SnippetCode.Lexing.LexerName = "cpp"
+        Me.SnippetCode.Lexing.LineCommentPrefix = ""
+        Me.SnippetCode.Lexing.StreamCommentPrefix = ""
+        Me.SnippetCode.Lexing.StreamCommentSufix = ""
+        Me.SnippetCode.Location = New System.Drawing.Point(9, 12)
+        Me.SnippetCode.Name = "SnippetCode"
+        Me.SnippetCode.Size = New System.Drawing.Size(689, 483)
+        Me.SnippetCode.Styles.BraceBad.FontName = "Verdan"
+        Me.SnippetCode.Styles.BraceLight.FontName = "Verdan"
+        Me.SnippetCode.Styles.CallTip.FontName = "Segoe "
+        Me.SnippetCode.Styles.ControlChar.FontName = "Verdan"
+        Me.SnippetCode.Styles.Default.FontName = "Verdan"
+        Me.SnippetCode.Styles.IndentGuide.FontName = "Verdan"
+        Me.SnippetCode.Styles.LastPredefined.FontName = "Verdan"
+        Me.SnippetCode.Styles.LineNumber.FontName = "Verdan"
+        Me.SnippetCode.Styles.Max.FontName = "Verdan"
+        Me.SnippetCode.TabIndex = 6
         '
         'Button1
         '

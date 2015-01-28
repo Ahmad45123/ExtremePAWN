@@ -24,17 +24,12 @@ Public Class CodeSnipptes
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBox1.SelectedIndexChanged
+        SnippetCode.IsReadOnly = False
         Try
             SnippetCode.Text = My.Computer.FileSystem.ReadAllText(Path + ListBox1.SelectedItem + ".snip")
+            SnippetCode.IsReadOnly = True
         Catch ex As Exception
-
         End Try
-    End Sub
-
-    Private Sub ListBox1_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBox1.DoubleClick
-        If MainForm.CurrentTB IsNot Nothing Then
-            MainForm.CurrentTB.InsertText(SnippetCode.Text)
-        End If
     End Sub
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
@@ -45,7 +40,6 @@ Public Class CodeSnipptes
         Dim codesnip As New CodeSnipptesAdd
         codesnip.Text = "Add Code Snippet"
         codesnip.ShowDialog()
-
     End Sub
 
     Private Sub EditToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditToolStripMenuItem.Click
@@ -64,6 +58,16 @@ Public Class CodeSnipptes
                 My.Computer.FileSystem.DeleteFile(Path + ListBox1.SelectedItem + ".snip")
                 CodeSnipptes_Load(Me, e)
             End If
+        End If
+    End Sub
+
+    Private Sub ListBox1_MouseEnter(sender As Object, e As EventArgs) Handles ListBox1.MouseEnter
+        ToolTip1.Show("Right click to edit.", ListBox1)
+    End Sub
+
+    Private Sub ListBox1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListBox1.MouseDoubleClick
+        If MainForm.CurrentTB IsNot Nothing Then
+            MainForm.CurrentTB.Snippets.InsertSnippet(New ScintillaNET.Snippet(ListBox1.SelectedItem, My.Computer.FileSystem.ReadAllText(Path + ListBox1.SelectedItem + ".snip")))
         End If
     End Sub
 End Class

@@ -77,9 +77,10 @@ Partial Class ErrorsFrm
         Me.ClientSize = New System.Drawing.Size(682, 108)
         Me.Controls.Add(Me.ErrorDataGridView)
         Me.DockAreas = CType((((WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) _
-                    Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) _
-                    Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom), WeifenLuo.WinFormsUI.Docking.DockAreas)
+            Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) _
+            Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom), WeifenLuo.WinFormsUI.Docking.DockAreas)
         Me.Font = New System.Drawing.Font("Tahoma", 8.0!)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ErrorsFrm"
         Me.Text = "Compile Errors"
         CType(Me.ErrorDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

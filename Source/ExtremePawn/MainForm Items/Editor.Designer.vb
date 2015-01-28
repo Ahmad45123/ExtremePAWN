@@ -86,6 +86,7 @@ Partial Class Editor
         Me.Controls.Add(Me.SplitEditorCode)
         Me.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document
         Me.Font = New System.Drawing.Font("Tahoma", 8.0!)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Editor"
         Me.Text = "Editor"
         CType(Me.SplitEditorCode, System.ComponentModel.ISupportInitialize).EndInit()

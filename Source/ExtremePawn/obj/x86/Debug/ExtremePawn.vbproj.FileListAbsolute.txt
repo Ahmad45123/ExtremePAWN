@@ -22,7 +22,6 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Au
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\ScintillaNET.dll
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Editor.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ErrorsFrm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.IncludeListFrm.resources
@@ -44,3 +43,4 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePawn\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.pdb
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbprojResolveAssemblyReference.cache
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.ColorPreview.resources
