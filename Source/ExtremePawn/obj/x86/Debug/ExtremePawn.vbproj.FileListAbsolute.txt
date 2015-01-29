@@ -37,10 +37,11 @@ C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debu
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.KeyDetector.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.MainForm.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Resources.resources
-C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Setting.resources
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePawn.vbproj.GenerateResource.Cache
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.exe.manifest
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.application
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.exe
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.xml
 C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.pdb
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\bin\Debug\ExtremeINI.dll
+C:\Users\Ahmad45123\Documents\GitHub\ExtremePAWN\Source\ExtremePawn\obj\x86\Debug\ExtremePAWN.Settings.resources

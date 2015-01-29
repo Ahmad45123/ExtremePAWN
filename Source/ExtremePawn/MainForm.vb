@@ -74,7 +74,7 @@ Public Class MainForm
     Private Sub MainForm_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         If e.Control = True And e.KeyValue = Keys.S Then
             ToolStripButton4.PerformClick() 'Save
-        ElseIf e.KeyCode = Setting.KEY_COMPILE Then
+        ElseIf e.KeyCode = Settings.KEY_COMPILE Then
             ToolStripButton7.PerformClick() 'Compile
         ElseIf e.Control And e.KeyValue = Keys.R Then
             Status.Text = "Forcing refresh."
@@ -173,7 +173,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ExitToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem1.Click
-        Setting.ShowDialog()
+        Settings.ShowDialog()
     End Sub
 
     Private Sub ExitToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem2.Click
@@ -486,17 +486,17 @@ Public Class MainForm
     Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
         If CurrentOpenedTab IsNot Nothing Then
             If MsgBox("Are you sure ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                If Setting.TextBox1.Text = "None" Or Setting.TextBox2.Text = "None" Then
+                If Settings.SAMPClient.Text = "None" Or Settings.SAMPServerDir.Text = "None" Then
                     MsgBox("Please head to settings and set SAMP server's path and SAMP client's.")
                 Else
                     'Prepare
                     Dim ServerPort As Integer = 0 'Server Port
                     Dim AMXFile As String = Path.ChangeExtension(CurrentOpenedTab.Tag, ".amx")
                     Dim SAMPSrvr As String
-                    If Setting.TextBox1.Text.EndsWith("\") Or Setting.TextBox1.Text.EndsWith("/") Then
-                        SAMPSrvr = Setting.TextBox1.Text.Remove(Setting.TextBox1.Text.Count - 1, 1)
+                    If Settings.SAMPServerDir.Text.EndsWith("\") Or Settings.SAMPServerDir.Text.EndsWith("/") Then
+                        SAMPSrvr = Settings.SAMPServerDir.Text.Remove(Settings.SAMPServerDir.Text.Count - 1, 1)
                     Else
-                        SAMPSrvr = Setting.TextBox1.Text
+                        SAMPSrvr = Settings.SAMPServerDir.Text
                     End If
 
                     Dim objReader As New System.IO.StreamReader(SAMPSrvr + "\server.cfg") 'Read the settings
@@ -527,7 +527,7 @@ Public Class MainForm
                         Dim game As New Process 'Run the game.
                         With game
                             .StartInfo.UseShellExecute = False
-                            .StartInfo.FileName = Setting.TextBox2.Text
+                            .StartInfo.FileName = Settings.SAMPClient.Text
                             .StartInfo.Arguments = "localhost:" + ServerPort.ToString
                             .Start()
                             .WaitForExit()

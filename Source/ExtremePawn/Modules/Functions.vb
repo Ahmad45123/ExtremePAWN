@@ -46,8 +46,8 @@ Public Class Functions
         Dim FileName As String = System.IO.Path.GetFileName(MainForm.CurrentOpenedTab.Tag.ToString)
         Dim path As String = System.IO.Path.GetDirectoryName(MainForm.CurrentOpenedTab.Tag.ToString)
 
-        Dim Args As String = Setting.AgrumentsTxt.Text.Replace("[FILE]", FileName)
-        Dim pawncc As String = Setting.PawnccPath.Text.Replace("[APP]", Application.StartupPath)
+        Dim Args As String = Settings.AgrumentsTxt.Text.Replace("[FILE]", FileName)
+        Dim pawncc As String = Settings.PawnccPath.Text.Replace("[APP]", Application.StartupPath)
 
         Dim consoleApp As New Process
         With consoleApp
@@ -110,36 +110,19 @@ Public Class Functions
 
     'Functions LoadSettings to load the settings.
     Public Sub LoadSettings()
-        If My.Computer.FileSystem.FileExists(Application.StartupPath + "\Settings.ini") Then
-            Dim objReader As New System.IO.StreamReader(Application.StartupPath + "\Settings.ini")
-            Do While objReader.Peek() <> -1
-                Dim Line As String
-                Line = objReader.ReadLine()
-                Dim Parts() As String
-                Parts = Line.Split("=".ToCharArray, 2)
-                If Parts(0) = "Args" Then
-                    Setting.AgrumentsTxt.Text = Parts(1)
-                ElseIf Parts(0) = "PawnCC" Then
-                    Setting.PawnccPath.Text = Parts(1)
-                ElseIf Parts(0) = "SAMPSrvrFldr" Then
-                    Setting.TextBox1.Text = Parts(1)
-                ElseIf Parts(0) = "SAMPClient" Then
-                    Setting.TextBox2.Text = Parts(1)
-                ElseIf Parts(0) = "AutoSaving" Then
-                    If Parts(1) = "True" Then Setting.AutoSaving.Checked = True Else Setting.AutoSaving.Checked = False
-                ElseIf Parts(0) = "AutoComplete" Then
-                    If Parts(1) = "True" Then Setting.AutoCompletion.Checked = True Else Setting.AutoCompletion.Checked = False
-                ElseIf Parts(0) = "LineNumber" Then
-                    If Parts(1) = "True" Then Setting.LineNumber.Checked = True Else Setting.LineNumber.Checked = False
-                ElseIf Parts(0) = "AutoBracket" Then
-                    If Parts(1) = "True" Then Setting.AutoBracket.Checked = True Else Setting.AutoBracket.Checked = False
-                ElseIf Parts(0) = "CompileKey" Then
-                    Dim Cnv As New KeysConverter
-                    Setting.KEY_COMPILE = Cnv.ConvertFromString(Parts(1))
-                    Setting.Label4.Text = Parts(1)
-                End If
-            Loop
-        End If
+        Settings.AutoSaving.Checked = Convert.ToBoolean(SettingsHandler.GetSetting("AutoSave"))
+        Settings.LineNumber.Checked = Convert.ToBoolean(SettingsHandler.GetSetting("LineNumber"))
+        Settings.AutoCompletion.Checked = Convert.ToBoolean(SettingsHandler.GetSetting("AutoComplete"))
+        Settings.SAMPServerDir.Text = Convert.ToString(SettingsHandler.GetSetting("SAMPServer"))
+        Settings.SAMPClient.Text = Convert.ToString(SettingsHandler.GetSetting("SAMPClient"))
+        Settings.AgrumentsTxt.Text = Convert.ToString(SettingsHandler.GetSetting("CompilerArgs"))
+        Settings.PawnccPath.Text = Convert.ToString(SettingsHandler.GetSetting("PawnCCPath"))
+
+        'Loading the key
+        Dim Cnv As New KeysConverter
+        Dim dta As String = Convert.ToString(SettingsHandler.GetSetting("CompileKey"))
+        Settings.KEY_COMPILE = Cnv.ConvertFromString(dta)
+        Settings.CompileLabel.Text = dta
     End Sub
 
     'Sub SetDefaultSettings To set the default values.

@@ -88,6 +88,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AutocompleteMenu.dll</HintPath>
     </Reference>
+    <Reference Include="ExtremeINI">
+      <HintPath>..\ExtremeINI.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -154,6 +157,13 @@
     <Compile Include="MainForm Items\SavedPositions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\SettingsHandler.vb" />
+    <Compile Include="Settings.Designer.vb">
+      <DependentUpon>Settings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\CodeSnipptes\CodeSnipptesAdd.Designer.vb">
       <DependentUpon>CodeSnipptesAdd.vb</DependentUpon>
     </Compile>
@@ -210,12 +220,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Setting.Designer.vb">
-      <DependentUpon>Setting.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Setting.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm Items\ColorPreview.resx">
@@ -235,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm Items\SavedPositions.resx">
       <DependentUpon>SavedPositions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\CodeSnipptes\CodeSnipptes.resx">
       <DependentUpon>CodeSnipptes.vb</DependentUpon>
@@ -262,9 +269,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Setting.resx">
-      <DependentUpon>Setting.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
