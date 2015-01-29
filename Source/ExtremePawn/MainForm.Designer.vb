@@ -124,6 +124,7 @@ Partial Class MainForm
         Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SavedPositionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineColorPreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CodeSnipptesToolStripItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorPickerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -674,7 +675,7 @@ Partial Class MainForm
         '
         'ViewToolStripMenuItem
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IncludeListToolStripMenuItem, Me.ErrorListToolStripMenuItem, Me.ProjectExplorerToolStripMenuItem, Me.SavedPositionsToolStripMenuItem, Me.DefineColorPreviewToolStripMenuItem})
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IncludeListToolStripMenuItem, Me.ErrorListToolStripMenuItem, Me.ProjectExplorerToolStripMenuItem, Me.SavedPositionsToolStripMenuItem, Me.DefineColorPreviewToolStripMenuItem, Me.ObjectExplorerToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
@@ -708,6 +709,12 @@ Partial Class MainForm
         Me.DefineColorPreviewToolStripMenuItem.Name = "DefineColorPreviewToolStripMenuItem"
         Me.DefineColorPreviewToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.DefineColorPreviewToolStripMenuItem.Text = "Define ColorPreview"
+        '
+        'ObjectExplorerToolStripMenuItem
+        '
+        Me.ObjectExplorerToolStripMenuItem.Name = "ObjectExplorerToolStripMenuItem"
+        Me.ObjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ObjectExplorerToolStripMenuItem.Text = "Object Explorer"
         '
         'ToolsStripMenuItem
         '
@@ -948,6 +955,7 @@ Partial Class MainForm
         'ScrollBarTimer
         '
         Me.ScrollBarTimer.Enabled = True
+        Me.ScrollBarTimer.Interval = 300
         '
         'ReBuildAutoComplete
         '
@@ -1097,5 +1105,6 @@ Partial Class MainForm
     Friend WithEvents ScrollBarTimer As System.Windows.Forms.Timer
     Friend WithEvents ReBuildAutoComplete As System.ComponentModel.BackgroundWorker
     Friend WithEvents DefineColorPreviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ObjectExplorerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -34,15 +34,23 @@ Public Class MainForm
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
         If persistString = GetType(ErrorsFrm).ToString Then
+            IsErrorListSHowen = True
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
+            IsIncludeListShowen = True
             Return IncludeListFrm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
+            IsProjectExplorerShowen = True
             Return ProjectExplorerFrm
         ElseIf persistString = GetType(SavedPositions).ToString Then
+            IsSavedPositionsSaved = True
             Return SavedPositions
         ElseIf persistString = GetType(ColorPreview).ToString Then
+            IsColorPreviewShown = True
             Return ColorPreview
+        ElseIf persistString = GetType(Object_Explorer).ToString Then
+            IsObjectExplorerShown = True
+            Return Object_Explorer
         End If
         Return Nothing
     End Function
@@ -579,6 +587,8 @@ Public Class MainForm
 
     Private Sub ScrollBarTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ScrollBarTimer.Tick
         If CurrentTB Is Nothing Then Exit Sub
+        If CurrentTB.IsDisposed Then Exit Sub
+
         Try
             CurrentTB.Margins(0).Width = CurrentTB.Lines.VisibleLines(CurrentTB.Lines.VisibleCount).Number.ToString.Count * 10
         Catch ex As Exception
@@ -604,6 +614,7 @@ Public Class MainForm
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim define As String() = tempdefineName.Split(" ")
+                    If define.Count = 1 Then Continue For
                     Dim item As New AutocompleteMenuNS.AutocompleteItem(define(0), 0)
                     item.ToolTipTitle = "Define: "
                     item.ToolTipText = define(1)
@@ -644,6 +655,17 @@ Public Class MainForm
         Else
             ColorPreview.Show(MainDockPanel)
             IsColorPreviewShown = True
+        End If
+    End Sub
+
+    Public IsObjectExplorerShown As Boolean = False
+    Private Sub ObjectExplorerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ObjectExplorerToolStripMenuItem.Click
+        If IsObjectExplorerShown = True Then
+            Object_Explorer.Close()
+            IsObjectExplorerShown = False
+        Else
+            Object_Explorer.Show(MainDockPanel)
+            IsObjectExplorerShown = True
         End If
     End Sub
 End Class

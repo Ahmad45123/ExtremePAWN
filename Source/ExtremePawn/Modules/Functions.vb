@@ -149,10 +149,11 @@ Public Class Functions
             Else
                 tb.SplitEditorCode.Text = My.Computer.FileSystem.ReadAllText(Application.StartupPath + "\gamemodes\new.pwn")
             End If
-            tb.Focus()
             tb.Show(MainForm.MainDockPanel)
+            tb.Focus()
 
             MainForm.ReBuildAutoComplete.RunWorkerAsync()
+            If MainForm.IsObjectExplorerShown = True Then Object_Explorer.RebuildMenuToolStripMenuItem.PerformClick()
 
             Return (tb)
         Catch ex As Exception

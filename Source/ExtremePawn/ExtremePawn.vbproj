@@ -145,6 +145,18 @@
     <Compile Include="MainForm Items\IncludeListFrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer\Object Explorer.Designer.vb">
+      <DependentUpon>Object Explorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer\Object Explorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer\ObjectExplorerSettings.Designer.vb">
+      <DependentUpon>ObjectExplorerSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm Items\ObjectExplorer\ObjectExplorerSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm Items\ProjectExplorerFrm.Designer.vb">
       <DependentUpon>ProjectExplorerFrm.vb</DependentUpon>
     </Compile>
@@ -233,6 +245,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm Items\IncludeListFrm.resx">
       <DependentUpon>IncludeListFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ObjectExplorer\Object Explorer.resx">
+      <DependentUpon>Object Explorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm Items\ObjectExplorer\ObjectExplorerSettings.resx">
+      <DependentUpon>ObjectExplorerSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm Items\ProjectExplorerFrm.resx">
       <DependentUpon>ProjectExplorerFrm.vb</DependentUpon>

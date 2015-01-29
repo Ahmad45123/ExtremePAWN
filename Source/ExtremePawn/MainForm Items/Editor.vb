@@ -11,6 +11,7 @@ Public Class Editor
                 GC.GetTotalMemory(True)
                 MainForm.CurrentTB = Nothing
                 MainForm.CurrentOpenedTab = Nothing
+                Dispose(True)
                 If Not Functions.Save(Me) Then
                     e.Cancel = True
                 End If
