@@ -64,4 +64,8 @@
             End If
         End If
     End Sub
+
+    Private Sub AddHint_MouseClick(sender As Object, e As MouseEventArgs) Handles EditHint.MouseClick, AddHint.MouseClick
+        ToolTip1.Show("NOTE: This uses Regex, Meaning you'll have to use \( and \) for brackets." + vbCrLf + "[FUNC] -> Will refer to the name which will be visible in list." + vbCrLf + "[*] -> Will refer to any text and/or number.", sender, e.X, e.Y, 2000)
+    End Sub
 End Class

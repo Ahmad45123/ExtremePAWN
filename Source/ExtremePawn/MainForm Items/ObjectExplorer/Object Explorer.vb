@@ -27,13 +27,17 @@ Public Class Object_Explorer
         If ParentNodes IsNot Nothing Then ParentNodes.Clear()
 
         For Each item As ObjectExplorerGroup In lstObjectExplorer
-            Dim pattern As String = item.TextHint.Replace("[FUNC]", "[a-zA-z]*")
+            'Replacing symbols with there others.
+            Dim pattern As String = item.TextHint
+            pattern = pattern.Replace("[FUNC]", "[a-zA-z]*")
+            pattern = pattern.Replace("[*]", "[a-zA-z0-9]*")
+
             Dim treeItem As New TreeNode(item.Title)
             ParentNodes.Add(item.Title)
 
             Dim match As Match = Regex.Match(objectText, pattern)
             Do While match.Success
-                Dim matchStr As String = match.Value.Replace(item.TextHint.Replace("[FUNC]", ""), "")
+                Dim matchStr As String = match.Value.Replace(item.TextHint.Remove(item.TextHint.IndexOf("[FUNC]")), "")
                 Dim childNode As New TreeNode(matchStr)
                 childNode.Tag = match.Index 'This will store only the char pos and not line num.
                 treeItem.Nodes.Add(childNode)
