@@ -40,9 +40,15 @@ Public Class Editor
     Private Sub AutoComplete_Hovered(sender As Object, e As AutocompleteMenuNS.HoveredEventArgs) Handles AutoComplete.Hovered
         If e.Item Is Nothing Then Exit Sub
 
-        If e.Item.Text.StartsWith("COLOR_") And e.Item.ToolTipText.StartsWith("0x") And MainForm.IsColorPreviewShown Then
+        If e.Item.ToolTipText.StartsWith("0x") Then
             Dim str As String = e.Item.ToolTipText.Remove(e.Item.ToolTipText.Count - 2, 2)
-            ColorPreview.SetColor(str)
+            ColorPreview.SetColor(Str)
+        ElseIf e.Item.ToolTipText.StartsWith(Chr(34) + "{") Then
+            Dim str As String = e.Item.ToolTipText.Replace(Chr(34), "")
+            str = str.Replace("{", "")
+            str = str.Replace("}", "")
+            str = "#" + str
+            ColorPreview.SetColor(Str)
         End If
     End Sub
 End Class
