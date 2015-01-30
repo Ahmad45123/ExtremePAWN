@@ -74,6 +74,29 @@ Public Class Object_Explorer
             MainForm.CurrentTB.Caret.EnsureVisible()
         End If
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If TextBox1.Text = "" Then
+            If ReBuildWorker.IsBusy = False Then ReBuildWorker.RunWorkerAsync()
+            Exit Sub
+        End If
+
+        Dim RemovalList As New List(Of TreeNode)
+        For Each ment As TreeNode In TreeList.Nodes
+            For Each childNode As TreeNode In ment.Nodes
+                If childNode Is Nothing Then Continue For
+
+                If Not childNode.Text.StartsWith(TextBox1.Text) Then
+                    RemovalList.Add(childNode)
+                End If
+            Next
+        Next
+
+        For Each node As TreeNode In RemovalList
+            TreeList.Nodes.Remove(node)
+        Next
+        TreeList.ExpandAll()
+    End Sub
 End Class
 
 Public Class ObjectExplorerGroup
