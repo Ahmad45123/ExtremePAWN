@@ -153,7 +153,6 @@ Public Class Functions
             tb.Focus()
 
             MainForm.ReBuildAutoComplete.RunWorkerAsync()
-            If MainForm.IsObjectExplorerShown = True Then Object_Explorer.RebuildMenuToolStripMenuItem.PerformClick()
 
             Return (tb)
         Catch ex As Exception

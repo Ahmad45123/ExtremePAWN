@@ -36,6 +36,8 @@ Public Class Editor
     Private Sub Editor_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         MainForm.CurrentTB = SplitEditorCode
         MainForm.CurrentOpenedTab = Me
+
+        If MainForm.IsObjectExplorerShown = True Then Object_Explorer.RebuildMenuToolStripMenuItem.PerformClick()
     End Sub
 
     Private Sub AutoComplete_Hovered(sender As Object, e As AutocompleteMenuNS.HoveredEventArgs) Handles AutoComplete.Hovered

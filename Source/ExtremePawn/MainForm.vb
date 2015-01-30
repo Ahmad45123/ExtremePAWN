@@ -89,6 +89,7 @@ Public Class MainForm
             IdleMaker.Start()
             If ReBuildAutoComplete.IsBusy Then Exit Sub
             ReBuildAutoComplete.RunWorkerAsync()
+            If IsObjectExplorerShown = True Then Object_Explorer.RebuildMenuToolStripMenuItem.PerformClick()
         End If
     End Sub
 
