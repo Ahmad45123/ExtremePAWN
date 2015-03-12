@@ -7,14 +7,17 @@ Public Class Editor
         Dim dialogResult As DialogResult = MessageBox.Show("Do you want to save " + Me.TabText + " ?", "Save", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk)
         If dialogResult <> dialogResult.Cancel Then
             If dialogResult = dialogResult.Yes Then
-                GC.Collect()
-                GC.GetTotalMemory(True)
+                If Not Functions.Save(Me) Then
+                    e.Cancel = True
+                Else
+                    MainForm.CurrentTB = Nothing
+                    MainForm.CurrentOpenedTab = Nothing
+                    Dispose(True)
+                End If
+            Else
                 MainForm.CurrentTB = Nothing
                 MainForm.CurrentOpenedTab = Nothing
                 Dispose(True)
-                If Not Functions.Save(Me) Then
-                    e.Cancel = True
-                End If
             End If
         Else
             e.Cancel = True

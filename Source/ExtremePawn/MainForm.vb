@@ -1,5 +1,4 @@
 ﻿'Copyright (C) 2014  Ahmad45123
-
 'This program is free software: you can redistribute it and/or modify
 'it under the terms of the GNU General Public License as published by
 'the Free Software Foundation, either version 3 of the License, or
@@ -20,13 +19,8 @@ Imports WeifenLuo.WinFormsUI.Docking
 Imports ScintillaNET
 
 Public Class MainForm
-
-    'Used for populating a TreeView from another thread
-    Public Delegate Sub Add(ByVal i As Integer)
-
     'Project System
     Public CurrentProjectPath As String = Nothing 'Will be nothing if there is no project loaded.
-
 
     Public CurrentTB As Scintilla 'Used to get the current ScntillaControl. [Not using ActiveContent as when using a tool, The CurrentTB will be changed.]
     Public CurrentOpenedTab As Editor 'Used to get the current active form.
@@ -34,22 +28,16 @@ Public Class MainForm
     Dim m_deserlise As DeserializeDockContent
     Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
         If persistString = GetType(ErrorsFrm).ToString Then
-            IsErrorListSHowen = True
             Return ErrorsFrm
         ElseIf persistString = GetType(IncludeListFrm).ToString Then
-            IsIncludeListShowen = True
             Return IncludeListFrm
         ElseIf persistString = GetType(ProjectExplorerFrm).ToString Then
-            IsProjectExplorerShowen = True
             Return ProjectExplorerFrm
         ElseIf persistString = GetType(SavedPositions).ToString Then
-            IsSavedPositionsSaved = True
             Return SavedPositions
         ElseIf persistString = GetType(ColorPreview).ToString Then
-            IsColorPreviewShown = True
             Return ColorPreview
         ElseIf persistString = GetType(Object_Explorer).ToString Then
-            IsObjectExplorerShown = True
             Return Object_Explorer
         End If
         Return Nothing
@@ -493,7 +481,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
-        If CurrentOpenedTab IsNot Nothing Then
+        If CurrentOpenedTab IsNot Nothing And CurrentTB IsNot Nothing Then
             If MsgBox("Are you sure ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 If Settings.SAMPClient.Text = "None" Or Settings.SAMPServerDir.Text = "None" Then
                     MsgBox("Please head to settings and set SAMP server's path and SAMP client's.")
@@ -521,7 +509,10 @@ Public Class MainForm
                     Loop
                     objReader.Close()
 
-                    ToolStripButton7.PerformClick() 'Compile
+                    If Functions.Compile(CurrentTB) = False Then
+                        MsgBox("Compile failed.")
+                        Exit Sub
+                    End If
 
                     Try
                         My.Computer.FileSystem.CopyFile(AMXFile, SAMPSrvr + "/gamemodes/" + Path.GetFileName(AMXFile), True) 'Copy the amx file.
@@ -533,6 +524,10 @@ Public Class MainForm
                             .Start()
                         End With
 
+                        If server.HasExited = True Then
+                            MsgBox("The server has exited immediatly for some reason, Please check it.")
+                            Exit Sub
+                        End If
                         Dim game As New Process 'Run the game.
                         With game
                             .StartInfo.UseShellExecute = False
@@ -546,7 +541,7 @@ Public Class MainForm
                             server.CloseMainWindow() 'Dont KILL...
                         End If
                     Catch ex As Exception
-                        MsgBox("An error has occured, Check for any compile errors.")
+                        MsgBox("An error has occured." + vbCrLf + vbCrLf + ex.Message, vbCritical)
                     End Try
 
                 End If

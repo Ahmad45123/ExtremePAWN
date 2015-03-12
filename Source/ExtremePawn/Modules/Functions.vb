@@ -3,6 +3,7 @@ Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports ScintillaNET
 Imports System.Text
+Imports System.ComponentModel
 
 Public Class Functions
     Inherits Form
@@ -16,7 +17,7 @@ Public Class Functions
                 Return result
             End If
             tab.TabText = Path.GetFileName(MainForm.SaveFileDialog.FileName)
-            tab.Tag = MainForm.SaveFileDialog.FileName
+            tab.SplitEditorCode.Tag = MainForm.SaveFileDialog.FileName
 
         End If
         Try
@@ -35,7 +36,9 @@ Public Class Functions
     End Function
 
     'Function Compile, Self explantory, To compile the file.
-    Public Sub Compile(ByVal CurrentTB As Scintilla)
+    Public Function Compile(ByVal CurrentTB As Scintilla)
+        MainForm.Enabled = False
+
         Dim NumOfErrors As Integer
         Dim NumOfWarns As Integer
 
@@ -43,8 +46,14 @@ Public Class Functions
 
         MainForm.Status.Text = "Compiling"
 
-        Dim FileName As String = System.IO.Path.GetFileName(MainForm.CurrentOpenedTab.Tag.ToString)
-        Dim path As String = System.IO.Path.GetDirectoryName(MainForm.CurrentOpenedTab.Tag.ToString)
+        If CurrentTB.Tag Is Nothing Then
+            MainForm.Enabled = True
+            MsgBox("The current file is not saved, Please save it first.")
+            Return False
+        End If
+
+        Dim FileName As String = System.IO.Path.GetFileName(CurrentTB.Tag.ToString)
+        Dim path As String = System.IO.Path.GetDirectoryName(CurrentTB.Tag.ToString)
 
         Dim Args As String = Settings.AgrumentsTxt.Text.Replace("[FILE]", FileName)
         Dim pawncc As String = Settings.PawnccPath.Text.Replace("[APP]", Application.StartupPath)
@@ -102,11 +111,15 @@ Public Class Functions
         If NumOfErrors = 0 Then
             MainForm.Status.Text = "Successfully Compiled With 0 Errors And " + NumOfWarns.ToString + " Warnings"
             MainForm.IdleMaker.Start()
+            MainForm.Enabled = True
+            Return True
         Else
             MainForm.Status.Text = "Compiling Failed With " + NumOfErrors.ToString + " Errors And " + NumOfWarns.ToString + " Warnings"
             MainForm.IdleMaker.Start()
+            MainForm.Enabled = True
+            Return False
         End If
-    End Sub
+    End Function
 
     'Functions LoadSettings to load the settings.
     Public Sub LoadSettings()
