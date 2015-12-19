@@ -610,11 +610,17 @@ Public Class MainForm
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempdefineName As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
                     Dim define As String() = tempdefineName.Split(" ")
-                    If define.Count = 1 Then Continue For
-                    Dim item As New AutocompleteMenuNS.AutocompleteItem(define(0), 0)
-                    item.ToolTipTitle = "Define: "
-                    item.ToolTipText = define(1)
-                    CurrentOpenedTab.AutoComplete.AddItem(item)
+                    If define.Count = 1 Then
+                        Dim item As New AutocompleteMenuNS.AutocompleteItem(define(0), 0)
+                        item.ToolTipTitle = "Define: "
+                        item.ToolTipText = "Null"
+                        CurrentOpenedTab.AutoComplete.AddItem(item)
+                    Else
+                        Dim item As New AutocompleteMenuNS.AutocompleteItem(define(0), 0)
+                        item.ToolTipTitle = "Define: "
+                        item.ToolTipText = define(1)
+                        CurrentOpenedTab.AutoComplete.AddItem(item)
+                    End If
                 ElseIf lineText.StartsWith("public") Or lineText.StartsWith("stock") Then
                     If lineText.IndexOf(" ") = -1 Then Continue For
                     Dim tempFunc As String = lineText.Substring(lineText.IndexOf(" ")).Trim()
@@ -639,7 +645,6 @@ Public Class MainForm
             GC.GetTotalMemory(True)
 
         Catch ex As Exception
-            Beep()
         End Try
     End Sub
 
